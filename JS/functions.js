@@ -395,7 +395,7 @@ function displayMain(layer,layer2,effective,keyStore){
             layer2[game.gaming==2?1:0].noErase()
             layer2[game.gaming==2?1:0].fill(255)
             layer2[game.gaming==2?1:0].textSize(20)
-            layer2[game.gaming==2?1:0].text(`Money: ${game.money}/${game.players*(4+2*max(0,game.diff-2))}`,100,25)
+            layer2[game.gaming==2?1:0].text(`Money: ${game.money}/${game.players*[5,5,7,8][game.diff]}`,100,25)
             let sec=floor((game.limit%3600)/60)
             layer2[game.gaming==2?1:0].text(`Time: ${floor(game.limit/3600)}:${sec<10?'0'+sec:sec}`,100,55)
             layer2[0].text(`Lives: ${game.lives}/${ceil(game.gaming/2)}`,100,85)
@@ -648,7 +648,7 @@ function generateLevel(level,layer){
                                     drops.push([game.tileset[0]/2+(effectiveB+d*16)*game.tileset[0],game.tileset[1]/2+(a+c*16+offset)*game.tileset[1]])
                                 break
                                 case ';':
-                                    if(floor(random(0,10))==0){
+                                    if(floor(random(0,game.diff==3?8:10))==0){
                                         let waves=types.mission[floor(random(0,types.mission.length))].wave
                                         let wave=waves[floor(random(0,waves.length))]
                                         let named=wave[floor(random(0,wave.length))][0]

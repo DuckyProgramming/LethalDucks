@@ -918,7 +918,7 @@ class wall{
                         }
                     }else if(a==1&&!c.inactive&&inBoxBox(this.bounder,c)
                         &&!(this.type==5&&(this.exploded))
-                        &&!(this.type==8&&(this.recharge>0||c.weapon.uses>=c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*game.ammoMult||c.weapon.uses<=0))
+                        &&!(this.type==8&&(this.recharge>0||c.weapon.uses>=(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*game.ammoMult)||c.weapon.uses<=0))
                         &&!(this.type==9&&(this.recharge>0||c.life>=c.base.life))
                         &&!((this.type==10||this.type==14)&&(c.id>0&&c.id<=game.gaming))
                         &&!(this.type==11)
@@ -1060,13 +1060,11 @@ class wall{
                                             case 6:
                                                 c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
                                                 c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                                c.vel
                                                 c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
                                             break
                                             case 7:
                                                 c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
                                                 c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                                c.vel
                                                 c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
                                             break
                                         }
