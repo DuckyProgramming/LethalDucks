@@ -61,17 +61,22 @@ class player{
         this.jumping=false
         this.attacking=false
         this.carryMoney=0
-        this.inactive=this.id==0&&game.level==11
+        this.inactive=(this.id==0||this.id!=game.hunt&&game.hunt>0)&&game.level==11
 
         if(this.id>0&&game.randomizer){
             this.life*=2
             this.base.life*=2
             this.collect.life*=2
         }
-        if(this.id>0&&game.diff==0){
+        if(this.id>0&&game.diff==0&&!(game.hunt!=this.id&&game.hunt>0)){
             this.life*=1.5
             this.base.life*=1.5
             this.collect.life*=1.5
+        }
+        if(this.id>0&&game.hunt!=this.id&&game.hunt>0){
+            this.life*=0.25
+            this.base.life*=0.25
+            this.collect.life*=0.25
         }
         /*if(this.id==0){
             this.critBuff=999999
@@ -502,10 +507,15 @@ class player{
             }
             this.setColor()
         }
-        if(this.id>0&&game.diff==0){
+        if(this.id>0&&game.diff==0&&!(game.hunt!=this.id&&game.hunt>0)){
             this.life*=1.5
             this.base.life*=1.5
             this.collect.life*=1.5
+        }
+        if(this.id>0&&game.hunt!=this.id&&game.hunt>0){
+            this.life*=0.25
+            this.base.life*=0.25
+            this.collect.life*=0.25
         }
     }
     newWeaponSet(type){
@@ -531,10 +541,15 @@ class player{
             }
             this.setColor()
         }
-        if(this.id>0&&game.diff==0){
+        if(this.id>0&&game.diff==0&&!(game.hunt!=this.id&&game.hunt>0)){
             this.life*=1.5
             this.base.life*=1.5
             this.collect.life*=1.5
+        }
+        if(this.id>0&&game.hunt!=this.id&&game.hunt>0){
+            this.life*=0.25
+            this.base.life*=0.25
+            this.collect.life*=0.25
         }
     }
     respawn(){
@@ -562,10 +577,15 @@ class player{
             }
             this.setColor()
         }
-        if(this.id>0&&game.diff==0){
+        if(this.id>0&&game.diff==0&&!(game.hunt!=this.id&&game.hunt>0)){
             this.life*=1.5
             this.base.life*=1.5
             this.collect.life*=1.5
+        }
+        if(this.id>0&&game.hunt!=this.id&&game.hunt>0){
+            this.life*=0.25
+            this.base.life*=0.25
+            this.collect.life*=0.25
         }
         this.life=this.base.life
         this.collect.life=this.life
@@ -948,14 +968,20 @@ class player{
 	}
     update(){
         if(this.inactive){
-            for(let a=0,la=game.gaming;a<la;a++){
-                if(
-                    abs(this.position.x-entities.players[a].position.x)<300&&
-                    abs(this.position.y-entities.players[a].position.y)<150&&
-                    floor((this.position.x-game.tileset[0]/2)/(16*game.tileset[0]))==floor((entities.players[a].position.x-game.tileset[0]/2)/(16*game.tileset[0]))&&
-                    floor((this.position.y-game.tileset[1]/2)/(16*game.tileset[1]))==floor((entities.players[a].position.y-game.tileset[1]/2)/(16*game.tileset[1]))
-                ){
+            if(this.id>0){
+                if(game.limit<=27000){
                     this.inactive=false
+                }
+            }else{
+                for(let a=0,la=game.gaming;a<la;a++){
+                    if(
+                        abs(this.position.x-entities.players[a].position.x)<300&&
+                        abs(this.position.y-entities.players[a].position.y)<150&&
+                        floor((this.position.x-game.tileset[0]/2)/(16*game.tileset[0]))==floor((entities.players[a].position.x-game.tileset[0]/2)/(16*game.tileset[0]))&&
+                        floor((this.position.y-game.tileset[1]/2)/(16*game.tileset[1]))==floor((entities.players[a].position.y-game.tileset[1]/2)/(16*game.tileset[1]))
+                    ){
+                        this.inactive=false
+                    }
                 }
             }
         }else{
@@ -1547,10 +1573,10 @@ class player{
                     this.stats.deaths++
                 }else{
                     this.die.timer++
-                    if(this.die.timer>180&&game.classicRespawn&&!game.past){
+                    if(this.die.timer>180&&(game.classicRespawn&&!game.past||game.hunt!=this.id&&game.hunt>0)){
                         this.respawn()
                     }
-                    if(this.die.timer>180&&game.lives>0&&!game.past&&this.attacking){
+                    if(this.die.timer>180&&game.lives>0&&!game.past&&this.attacking&&!(game.hunt!=this.id&&game.hunt>0)){
                         this.respawn()
                         game.lives--
                     }

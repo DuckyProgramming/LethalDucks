@@ -1,7 +1,7 @@
 game={level:11,players:0,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,index:0,spawnDiff:1,ammoMult:2,tileset:[0,0],edge:[0,0],
-money:0,limit:21600,lives:0,diff:1,
+money:0,limit:0,lives:0,diff:1,hunt:0,
 classicRespawn:false,invis:false,pvp:true,randomizer:false,randomSpawn:false,past:false}
-menu={players:1,gaming:1,level:11,diff:1}
+menu={players:1,gaming:1,level:11,diff:1,hunt:0}
 dev={sight:false,flash:false}
 types={
   mission:[
@@ -4237,7 +4237,7 @@ rooms=[
     "#               #",
     "#               #",
     "#               #",
-    "######        ###",
+    "######      #####",
     "#               #",
     "#        ]>     #",
     "#         ]>    #",

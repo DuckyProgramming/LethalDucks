@@ -360,45 +360,53 @@ function displayMain(layer,layer2,effective,keyStore){
             }
         }else{
             for(let a=0,la=layer2.length;a<la;a++){
-                layer2[a].background(0)
-                layer2[a].erase()
-                layer2[a].beginShape()
-                layer2[a].vertex(
-                    (entities.players[a].position.x-effective[a][0])/keyStore[a]+layer2[a].width*0.5-65*sin(entities.players[a].direction.main*5/3),
-                    (entities.players[a].position.y-effective[a][1])/keyStore[a]+layer2[a].height/2-160
-                )
-                layer2[a].vertex(
-                    (entities.players[a].position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,layer2[a].width*0.5+130,layer2[a].width),
-                    (entities.players[a].position.y-effective[a][1])/keyStore[a]+layer2[a].height/2-160-100*sin(entities.players[a].direction.main*5/3)
-                )
-                layer2[a].vertex(
-                    (entities.players[a].position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,layer2[a].width*0.5+130,layer2[a].width),
-                    (entities.players[a].position.y-effective[a][1])/keyStore[a]+layer2[a].height/2+160+100*sin(entities.players[a].direction.main*5/3)
-                )
-                layer2[a].vertex(
-                    (entities.players[a].position.x-effective[a][0])/keyStore[a]+layer2[a].width*0.5-65*sin(entities.players[a].direction.main*5/3),
-                    (entities.players[a].position.y-effective[a][1])/keyStore[a]+layer2[a].height/2+160
-                )
-                layer2[a].vertex(
-                    (entities.players[a].position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,0,layer2[a].width*0.5-130),
-                    (entities.players[a].position.y-effective[a][1])/keyStore[a]+layer2[a].height/2+160-100*sin(entities.players[a].direction.main*5/3)
-                )
-                layer2[a].vertex(
-                    (entities.players[a].position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,0,layer2[a].width*0.5-130),
-                    (entities.players[a].position.y-effective[a][1])/keyStore[a]+layer2[a].height/2-160+100*sin(entities.players[a].direction.main*5/3)
-                )
-                layer2[a].endShape()
+                if(game.hunt>0&&a!=game.hunt-1&&game.limit>27000){
+                    layer2[a].clear()
+                }else{
+                    layer2[a].background(0)
+                    layer2[a].erase()
+                    layer2[a].beginShape()
+                    layer2[a].vertex(
+                        (entities.players[a].position.x-effective[a][0])/keyStore[a]+layer2[a].width*0.5-65*sin(entities.players[a].direction.main*5/3),
+                        (entities.players[a].position.y-effective[a][1])/keyStore[a]+layer2[a].height/2-160
+                    )
+                    layer2[a].vertex(
+                        (entities.players[a].position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,layer2[a].width*0.5+130,layer2[a].width),
+                        (entities.players[a].position.y-effective[a][1])/keyStore[a]+layer2[a].height/2-160-100*sin(entities.players[a].direction.main*5/3)
+                    )
+                    layer2[a].vertex(
+                        (entities.players[a].position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,layer2[a].width*0.5+130,layer2[a].width),
+                        (entities.players[a].position.y-effective[a][1])/keyStore[a]+layer2[a].height/2+160+100*sin(entities.players[a].direction.main*5/3)
+                    )
+                    layer2[a].vertex(
+                        (entities.players[a].position.x-effective[a][0])/keyStore[a]+layer2[a].width*0.5-65*sin(entities.players[a].direction.main*5/3),
+                        (entities.players[a].position.y-effective[a][1])/keyStore[a]+layer2[a].height/2+160
+                    )
+                    layer2[a].vertex(
+                        (entities.players[a].position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,0,layer2[a].width*0.5-130),
+                        (entities.players[a].position.y-effective[a][1])/keyStore[a]+layer2[a].height/2+160-100*sin(entities.players[a].direction.main*5/3)
+                    )
+                    layer2[a].vertex(
+                        (entities.players[a].position.x-effective[a][0])/keyStore[a]+map(0.5+0.5*sin(entities.players[a].direction.main*5/3),0,1,0,layer2[a].width*0.5-130),
+                        (entities.players[a].position.y-effective[a][1])/keyStore[a]+layer2[a].height/2-160+100*sin(entities.players[a].direction.main*5/3)
+                    )
+                    layer2[a].endShape()
+                }
             }
             if(game.limit>0){
                 game.limit--
             }
-            layer2[game.gaming==2?1:0].noErase()
-            layer2[game.gaming==2?1:0].fill(255)
-            layer2[game.gaming==2?1:0].textSize(20)
-            layer2[game.gaming==2?1:0].text(`Money: ${game.money}/${game.players*[5,5,7,8][game.diff]}`,100,25)
+            layer2[[0,0,1,1,1][game.gaming]].noErase()
+            layer2[[0,0,1,1,1][game.gaming]].fill(255)
+            layer2[[0,0,1,1,1][game.gaming]].textSize(20)
+            layer2[[0,0,1,1,1][game.gaming]].text(`Money: ${game.money}/${(game.hunt>0?1:game.gaming)*[5,5,7,8][game.diff]}`,100,25)
             let sec=floor((game.limit%3600)/60)
-            layer2[game.gaming==2?1:0].text(`Time: ${floor(game.limit/3600)}:${sec<10?'0'+sec:sec}`,100,55)
-            layer2[0].text(`Lives: ${game.lives}/${ceil(game.gaming/2)}`,100,85)
+            layer2[[0,0,1,1,1][game.gaming]].text(`Time: ${floor(game.limit/3600)}:${sec<10?'0'+sec:sec}`,100,55)
+            if(game.hunt>0&&game.limit>27000){
+                let secB=floor(((game.limit-27000)%3600)/60)
+                layer2[[0,0,1,1,1][game.gaming]].text(`Headstart: ${floor((game.limit-27000)/3600)}:${secB<10?'0'+secB:secB}`,250,55)
+            }
+            layer2[[0,0,1,1,1][game.gaming]].text(`Lives: ${game.lives}/${ceil((game.hunt>0?1:game.gaming)/2)}`,100,85)
         }
     }
     let key=[]
@@ -457,20 +465,20 @@ function displayMain(layer,layer2,effective,keyStore){
         }else{
             image(
                 layer[0],
-                width/4,height/4,width/2,height/2
+                width*3/4,height/4,width/2,height/2
             )
             image(
                 layer2[0],
-                width/4,height/4,width/2,height/2
+                width*3/4,height/4,width/2,height/2
             )
             if(game.gaming>=2){
                 image(
                     layer[1],
-                    width*3/4,height/4,width/2,height/2
+                    width/4,height/4,width/2,height/2
                 )
                 image(
                     layer2[1],
-                    width*3/4,height/4,width/2,height/2
+                    width/4,height/4,width/2,height/2
                 )
             }
             if(game.gaming>=3){
@@ -602,6 +610,9 @@ function generateLevel(level,layer){
                 let reject=[]
                 let flip=floor(random(0,2))
                 if(!(c==0&&d>=(mapDimensions[0]-3)/2&&d<=(mapDimensions[0]+1)/2)){
+                    if(floor(random(0,5))==0){
+                        entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+(1.5+d*16)*game.tileset[0],game.tileset[1]/2+(1.5+c*16+offset)*game.tileset[1],game.tileset[0],game.tileset[1],22))
+                    }
                     for(let a=0,la=level.length-(c==lc-1?0:1);a<la;a++){
                         for(let b=0,lb=level[a].length-(d==ld-1||d==(mapDimensions[0]-5)/2&&c==0?0:1);b<lb;b++){
                             let effectiveB=flip==0?b:b==0||b==16?b:16-b
@@ -661,13 +672,13 @@ function generateLevel(level,layer){
                 }
             }
         }
-        extra=drops.length-game.gaming*(game.diff==0?10:7)
+        extra=drops.length-(game.hunt>0?1:game.gaming)*(game.diff==0?10:7)
         if(extra>0){
-            for(let a=0,la=extra*(1-(0.15+0.15*game.gaming)*(game.diff==0?1.3:1));a<la;a++){
+            for(let a=0,la=extra*(1-(0.15+0.15*(game.hunt>0?1:game.gaming))*(game.diff==0?1.3:1));a<la;a++){
                 drops.splice(floor(random(0,drops.length)),1)
             }
         }
-        for(let a=0,la=game.gaming*(game.diff==0?10:7);a<la;a++){
+        for(let a=0,la=(game.hunt>0?1:game.gaming)*(game.diff==0?10:7);a<la;a++){
             if(drops.length>0){
                 let index=floor(random(0,drops.length))
                 for(let b=0,lb=[1,1,1,2,2,3,4,1,2,3][a]%(game.diff==0?10:7);b<lb;b++){
@@ -1039,5 +1050,6 @@ function initialGraphics(){
     //graphics.main.push(createGraphics(4500,1800))
     for(let a=0,la=graphics.main.length;a<la;a++){
         setupLayer(graphics.main[a])
+        graphics.main[a].index=a
     }
 }

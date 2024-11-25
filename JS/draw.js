@@ -3,26 +3,26 @@ function mainloop(layer){
     background(150)
     switch(stage.scene){
         case 'menu':
-            for(let a=0,la=4;a<la;a++){
-                for(let b=0,lb=2;b<lb;b++){
-                    if(b==0&&menu.gaming==a+1||b==1&&menu.diff==a){
+            for(let a=0,la=3;a<la;a++){
+                for(let b=0,lb=a==2?5:4;b<lb;b++){
+                    if(a==0&&menu.gaming==b+1||a==1&&menu.diff==b||a==2&&menu.hunt==b){
                         fill(100,200,100)
                     }else{
                         fill(100)
                     }
-                    rect(((a+0.5)/la*0.6+0.2)*width,120+b*70,200,60,10)
+                    rect(width/2-lb*100+100+b*200,120+a*70,180,60,10)
                 }
             }
             fill(100)
-            rect(0.5*width,280,200,60,10)
+            rect(0.5*width,360,180,60,10)
             fill(0)
-            for(let a=0,la=4;a<la;a++){
-                for(let b=0,lb=2;b<lb;b++){
+            for(let a=0,la=3;a<la;a++){
+                for(let b=0,lb=a==2?5:4;b<lb;b++){
                     textSize(20)
-                    text(b==0?`${a+1} Gaming`:b==1?`${['Easy','Medium','Hard','Expert'][a]}`:``,((a+0.5)/la*0.6+0.2)*width,80+b*70+(b>=2?20:0)+(b>=3?20:0)+(b>=4?20:0)+40)
+                    text([`${b+1} Gaming`,`${['Easy','Medium','Hard','Expert'][b]}`,`${['Standard','Hunt Player 1','Hunt Player 2','Hunt Player 3','Hunt Player 4'][b]}`][a],width/2-lb*100+100+b*200,120+a*70)
                 }
             }
-            text('Begin',0.5*width,280)
+            text('Begin',0.5*width,360)
         break
         case 'main':
             let effective=[]

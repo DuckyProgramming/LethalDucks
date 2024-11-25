@@ -7,7 +7,7 @@ class wall{
         this.type=type
         this.collide=[entities.projectiles,entities.players]
         this.redundant=[false,false,false,false,false,false,false,false]
-        this.standard=this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16
+        this.standard=this.type!=5&&this.type!=7&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=19&&this.type!=22
         this.velocity={x:0,y:0}
         this.boundary=[]
         this.exploded=false
@@ -107,6 +107,9 @@ class wall{
                     }
                 }
             break
+            case 22:
+                this.spin=sin(this.position.x/6+this.position.y/10)*20
+            break
         }
     }
     checkHorizontal(){
@@ -190,6 +193,9 @@ class wall{
                     [],
                     [[{x:this.position.x-this.width/2,y:this.position.y-this.height/2},{x:this.position.x+this.width/2,y:this.position.y+this.height/2}]],
                 ]
+            break
+            case 22:
+                this.boundary=[[],[],[],[],[],[],[],[]]
             break
             default:
                 this.boundary=[
@@ -620,6 +626,16 @@ class wall{
                     this.width/2+0.5,this.height/2+0.5
                 )
             break
+            case 22:
+                if(layer.index!=game.hunt-1||game.hunt==0){
+                    layer.rotate(this.spin)
+                    layer.fill(180,180,90)
+                    layer.stroke(150,150,120)
+                    layer.strokeWeight(1)
+                    layer.textSize(15)
+                    layer.text(`Z${floor((this.position.x-game.tileset[0]/2)/(16*game.tileset[0]))} - ${floor((this.position.y-game.tileset[1]/2)/(16*game.tileset[1]))}`,0,0)
+                }
+            break
         }
         //layer.stroke(255,150,50)
         //layer.noFill()
@@ -776,7 +792,7 @@ class wall{
             for(let a=0,la=this.collide.length;a<la;a++){
                 for(let b=0,lb=this.collide[a].length;b<lb;b++){
                     let c=this.collide[a][b]
-                    if(a==0&&inBoxBox(this.bounder,c)&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=19&&(
+                    if(a==0&&inBoxBox(this.bounder,c)&&this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=19&&this.type!=22&&(
                         c.type==5||c.type==8||c.type==17||c.type==28||c.type==29||
                         c.type==30||c.type==34||c.type==35||c.type==42||c.type==51||
                         c.type==52||c.type==60||c.type==61||c.type==62||c.type==65||
@@ -878,7 +894,7 @@ class wall{
                             }
                         }
                     }else if(a==0&&inBoxBox(this.bounder,c)&&c.active&&
-                        this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=19
+                        this.type!=5&&this.type!=8&&this.type!=9&&this.type!=10&&this.type!=11&&this.type!=12&&this.type!=14&&this.type!=16&&this.type!=19&&this.type!=22
                     ){
                         let d=collideBoxBox(this,c)
                         if(d>=0&&!this.redundant[d]||c.timer==0&&inBoxBox(this,c)
