@@ -33,7 +33,7 @@ function mouseClicked(){
                 game.diff=menu.diff
                 game.hunt=menu.hunt
                 game.ammoMult=game.level==11?1:2
-                game.lives=game.level==11?ceil((game.hunt>0?1:game.gaming)/2):0
+                game.lives=game.level==11?ceil((game.hunt>0?4:game.gaming)/2):0
                 game.limit=game.hunt>0?28800:21600
                 entities.players=[]
                 initialGraphics()

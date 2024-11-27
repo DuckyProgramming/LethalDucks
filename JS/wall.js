@@ -940,7 +940,7 @@ class wall{
                         &&!(this.type==11)
                         &&!(this.type==12&&(this.recharge>0))
                         &&!(this.type==16&&(this.recharge>0||(c.id==0&&game.level==11)))
-                        &&!(this.type==19&&(this.recharge>0||c.id==0||c.carryMoney>=2))
+                        &&!(this.type==19&&(this.recharge>0||c.id==0||c.carryMoney>=2||c.id!=game.hunt&&game.hunt>0))
                     ){
                         let d=collideBoxBox(this,c)
                         if(d>=0){

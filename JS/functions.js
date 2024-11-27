@@ -406,7 +406,7 @@ function displayMain(layer,layer2,effective,keyStore){
                 let secB=floor(((game.limit-27000)%3600)/60)
                 layer2[[0,0,1,1,1][game.gaming]].text(`Headstart: ${floor((game.limit-27000)/3600)}:${secB<10?'0'+secB:secB}`,250,55)
             }
-            layer2[[0,0,1,1,1][game.gaming]].text(`Lives: ${game.lives}/${ceil((game.hunt>0?1:game.gaming)/2)}`,100,85)
+            layer2[[0,0,1,1,1][game.gaming]].text(`Lives: ${game.lives}/${ceil((game.hunt>0?4:game.gaming)/2)}`,100,85)
         }
     }
     let key=[]
@@ -591,10 +591,9 @@ function generateLevel(level,layer){
                 }
             }
         }
-        let index=0
         for(let c=0,lc=game.players;c<lc;c++){
-            index--
-            entities.players.push(new player(layer,game.edge[0]/2-200+c*20,900,c+1,0,[],true,0,index))
+            entities.players.push(new player(layer,game.edge[0]/2-200+c*20,900,c+1,0,[],true,0,game.index))
+            game.index++
             entities.players[entities.players.length-1].weaponType=-1
         }
         for(let c=0,lc=mapDimensions[1];c<lc;c++){
@@ -664,6 +663,7 @@ function generateLevel(level,layer){
                                         let wave=waves[floor(random(0,waves.length))]
                                         let named=wave[floor(random(0,wave.length))][0]
                                         entities.players.push(new player(layer,game.tileset[0]/2+(effectiveB+d*16)*game.tileset[0],game.tileset[1]/2+(a+c*16+offset)*game.tileset[1],0,0,[],true,findName(named,types.player),game.index))
+                                        game.index++
                                     }
                                 break
                             }
