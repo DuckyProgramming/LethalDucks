@@ -733,7 +733,7 @@ class wall{
             break
         }
         layer.pop()
-        layer.stroke(50,50+this.type*100,200)
+        /*layer.stroke(50,50+this.type*100,200)
         layer.strokeWeight(4)
         for(let a=0,la=this.boundary.length;a<la;a++){
             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
@@ -744,7 +744,7 @@ class wall{
                     this.position.y+this.boundary[a][b][1].y+(a==0?-2:a==1?2:-2)-this.position.y
                 )
             }
-        }
+        }*/
     }
     update(){
         this.time++
