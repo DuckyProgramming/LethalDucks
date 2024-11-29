@@ -400,6 +400,29 @@ class wall{
                                 }
                             }
                         }
+                        for(let g=4,lg=8;g<lg;g++){
+                            if(this.boundary[g].length>0&&c.boundary[g].length>0&&abs(this.width/this.height-c.width/c.height)<0.01){
+                                for(let e=0,le=this.boundary[g].length;e<le;e++){
+                                    for(let f=0,lf=c.boundary[g].length;f<lf;f++){
+                                        if(abs(this.boundary[g][e][d].x-c.boundary[g][f][1-d].x)<1&&abs(this.boundary[g][e][d].y-c.boundary[g][f][1-d].y)<1&&c.boundary[g][f][d].y>this.boundary[g][e][d].y){
+                                            this.boundary[g][e][d].x=c.boundary[g][f][d].x
+                                            this.boundary[g][e][d].y=c.boundary[g][f][d].y
+                                            c.boundary[g].splice(f,1)
+                                            f--
+                                            lf--
+                                            this.checkBar()
+                                        }else if(abs(this.boundary[g][e][d].x-c.boundary[g][f][d].x)<1&&abs(this.boundary[g][e][d].y-c.boundary[g][f][d].y)<1&&c.boundary[g][f][1-d].y>this.boundary[g][e][d].y){
+                                            this.boundary[g][e][d].x=c.boundary[g][f][1-d].x
+                                            this.boundary[g][e][d].y=c.boundary[g][f][1-d].y
+                                            c.boundary[g].splice(f,1)
+                                            f--
+                                            lf--
+                                            this.checkBar()
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -423,6 +446,7 @@ class wall{
                 }
             }
         }
+        this.internalBounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0],height:bounds[3]-bounds[2]}
         this.bounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0]+50,height:bounds[3]-bounds[2]+50}
         /*this.neighbors=[]
         for(let a=0,la=entities.walls.length;a<la;a++){
@@ -709,7 +733,7 @@ class wall{
             break
         }
         layer.pop()
-        /*layer.stroke(50,50+this.type*100,200)
+        layer.stroke(50,50+this.type*100,200)
         layer.strokeWeight(4)
         for(let a=0,la=this.boundary.length;a<la;a++){
             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
@@ -720,7 +744,7 @@ class wall{
                     this.position.y+this.boundary[a][b][1].y+(a==0?-2:a==1?2:-2)-this.position.y
                 )
             }
-        }*/
+        }
     }
     update(){
         this.time++
@@ -768,8 +792,12 @@ class wall{
                 }
             break
             case 8: case 9: case 12: case 16: case 19:
-                if(this.recharge>0&&game.level!=11){
-                    this.recharge--
+                if(this.recharge>0){
+                    if(game.level==11){
+                        this.remove=true
+                    }else{
+                        this.recharge--
+                    }
                 }
             break
             case 13:
@@ -851,7 +879,7 @@ class wall{
                                     }
                                 break
                                 case 4:
-                                    c.position.y=this.position.y-this.height/2-c.height/2+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                    c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                     incident=atan2(game.tileset[0],-game.tileset[1])
                                     vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
                                     if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
@@ -862,7 +890,7 @@ class wall{
                                     }
                                 break
                                 case 5:
-                                    c.position.y=this.position.y-this.height/2-c.height/2+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                    c.position.y=this.position.y-this.height/2-c.height/2+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                     incident=atan2(-game.tileset[0],-game.tileset[1])
                                     vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
                                     if(abs(incident-vecBall[0])<180||abs(incident-vecBall[0]-360)<180||abs(incident-vecBall[0]+360)<180){
@@ -873,8 +901,7 @@ class wall{
                                     }
                                 break
                                 case 6:
-                                    c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                    c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                    c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*min((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                     c.velocity.y=0
                                     incident=atan2(-game.tileset[0],game.tileset[1])
                                     vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
@@ -886,8 +913,7 @@ class wall{
                                     }
                                 break
                                 case 7:
-                                    c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                    c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                    c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*min((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                     c.velocity.y=0
                                     incident=atan2(game.tileset[0],game.tileset[1])
                                     vecBall=[atan2(-c.velocity.x,-c.velocity.y),sqrt(c.velocity.x**2+c.velocity.y**2)]
@@ -897,6 +923,14 @@ class wall{
                                         c.position.x+=c.velocity.x*0.1
                                         c.position.y+=c.velocity.y*0.1
                                     }
+                                break
+                                case 8:
+                                    c.position.x=this.internalBounder.position.x+this.internalBounder.width/2+c.width/2+0.1
+                                    c.velocity.x*=-1
+                                break
+                                case 9:
+                                    c.position.x=this.internalBounder.position.x-this.internalBounder.width/2-c.width/2+0.1
+                                    c.velocity.x*=-1
                                 break
                             }
                             if(c.type==30||c.type==60||c.type==65){
@@ -1065,8 +1099,8 @@ class wall{
                                 }
                             break
                             case 4:
-                                c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                c.velocity.y=0
+                                c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                c.velocity.y=c.velocity.x*this.height/this.width
                                 c.jump.time+=5
                                 if(c.parachute){
                                     c.parachute=false
@@ -1077,8 +1111,8 @@ class wall{
                                 c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
                             break
                             case 5:
-                                c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                c.velocity.y=0
+                                c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                c.velocity.y=-c.velocity.x*this.height/this.width
                                 c.jump.time+=5
                                 if(c.parachute){
                                     c.parachute=false
@@ -1089,12 +1123,22 @@ class wall{
                                 c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
                             break
                             case 6:
-                                c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*min((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                c.velocity.y=-c.velocity.x*this.height/this.width
                                 c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
                             break
                             case 7:
-                                c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*min((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                c.velocity.y=c.velocity.x*this.height/this.width
                                 c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
+                            break
+                            case 8:
+                                c.position.x=this.internalBounder.position.x+this.internalBounder.width/2+c.width/2+0.1
+                                c.velocity.x=0
+                            break
+                            case 9:
+                                c.position.x=this.internalBounder.position.x-this.internalBounder.width/2-c.width/2+0.1
+                                c.velocity.x=0
                             break
                         }
                         /*if(d>=0&&d<=3&&!repeat){
