@@ -1673,7 +1673,7 @@ class player{
                 break
                 case 'EngineerSpawner':
                     if(this.time%300==0){
-                        entities.players.push(new player(layer,this.position.x,this.position.y,0,0,[],true,findName(['Pistol','Shotgun','RocketLauncher','Flamethrower','MachineGun','Baller','Punch','Medic'][floor(random(0,8))],types.player),game.index))
+                        entities.players.push(new player(this.layer,this.position.x,this.position.y,0,0,[],true,findName(['Pistol','Shotgun','RocketLauncher','Flamethrower','MachineGun','Baller','Punch','Medic'][floor(random(0,8))],types.player),game.index))
                         game.index++
                     }
                 break

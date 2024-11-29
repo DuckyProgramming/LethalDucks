@@ -56,7 +56,7 @@ class wall{
                     }
                 }else if(game.level==11){
                     this.balls=[]
-                    for(let a=0,la=(this.width-10)*(this.height-10)/2000;a<la;a++){
+                    for(let a=random(0,1),la=(this.width-10)*(this.height-10)/2000;a<la;a++){
                         let pos=(a*0.205%1)
                         this.balls.push([-this.width/2+pos*(this.width-10)+5,random(-this.height/2+5+(this.height-10)*pos,this.height/2-5),random(15,45),random(0,1),random(0,360),floor(random(4,7))])
                     }
@@ -71,7 +71,7 @@ class wall{
                     }
                 }else if(game.level==11){
                     this.balls=[]
-                    for(let a=0,la=(this.width-10)*(this.height-10)/2000;a<la;a++){
+                    for(let a=random(0,1),la=(this.width-10)*(this.height-10)/2000;a<la;a++){
                         let pos=(a*0.205%1)
                         this.balls.push([-this.width/2+pos*(this.width-10)+5,random(-this.height/2+5+(this.height-10)*(1-pos),this.height/2-5),random(15,45),random(0,1),random(0,360),floor(random(4,7))])
                     }
@@ -86,7 +86,7 @@ class wall{
                     }
                 }else if(game.level==11){
                     this.balls=[]
-                    for(let a=0,la=(this.width-10)*(this.height-10)/2000;a<la;a++){
+                    for(let a=random(0,1),la=(this.width-10)*(this.height-10)/2000;a<la;a++){
                         let pos=(a*0.205%1)
                         this.balls.push([-this.width/2+pos*(this.width-10)+5,random(-this.height/2+5,-this.height/2+5+(this.height-10)*(1-pos)),random(15,45),random(0,1),random(0,360),floor(random(4,7))])
                     }
@@ -101,7 +101,7 @@ class wall{
                     }
                 }else if(game.level==11){
                     this.balls=[]
-                    for(let a=0,la=(this.width-10)*(this.height-10)/2000;a<la;a++){
+                    for(let a=random(0,1),la=(this.width-10)*(this.height-10)/2000;a<la;a++){
                         let pos=(a*0.205%1)
                         this.balls.push([-this.width/2+pos*(this.width-10)+5,random(-this.height/2+5,-this.height/2+5+(this.height-10)*pos),random(15,45),random(0,1),random(0,360),floor(random(4,7))])
                     }
