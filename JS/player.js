@@ -35,6 +35,8 @@ class player{
         this.DoT={damage:0,active:0}
         this.die={timer:0,killer:0}
         this.stats={kills:0,deaths:0}
+        this.hearing=[false,false,false,false,false,false,false,false]
+        this.hearingTick=0
         this.invincible=0
         if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'||game.randomizer){
             this.copy=floor(random(0,game.players))
@@ -74,9 +76,9 @@ class player{
             this.collect.life*=1.5
         }
         if(this.id>0&&game.hunt!=this.id&&game.hunt>0){
-            this.life*=0.25
-            this.base.life*=0.25
-            this.collect.life*=0.25
+            this.life*=0.5
+            this.base.life*=0.5
+            this.collect.life*=0.5
         }
         /*if(this.id==0){
             this.critBuff=999999
@@ -140,7 +142,18 @@ class player{
     }
     displayInfo(layer){
         layer.push()
-        layer.translate(this.position.x+this.offset.position.x,this.position.y-42.5*this.playerData.sizeBuff+this.offset.position.y)
+        layer.translate(this.position.x+this.offset.position.x,this.position.y)
+        if(this.id>0&&this.hearingTick>0&&layer.index==this.id-1){
+            layer.stroke(200,this.fade*this.hearingTick/30)
+            layer.strokeWeight(8*this.size)
+            layer.noFill()
+            for(let a=0,la=this.hearing.length;a<la;a++){
+                if(this.hearing[a]){
+                    layer.arc(0,0,100*this.size,100*this.size,(a-0.5)/la*360+10-90,(a+0.5)/la*360-10-90)
+                }
+            }
+        }
+        layer.translate(0,-42.5*this.playerData.sizeBuff+this.offset.position.y)
         layer.noStroke()
         layer.fill(150,this.fade*this.infoAnim.life)
         layer.rect(0,0,30,4,2)
@@ -225,13 +238,21 @@ class player{
         if(this.id>0&&game.past){
             layer.text(`Wins: ${game.wins[this.id-1]}`,0,-35-42.5*this.playerData.sizeBuff)
             layer.text(this.playerData.name,0,-18.5-42.5*this.playerData.sizeBuff)
-        }else if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSelf'||this.playerData.name=='RapidSpy'){
-            layer.text(`Kills: ${entities.players[this.copy].stats.kills}\nDeaths: ${entities.players[this.copy].stats.deaths}\nWeapon: ${entities.players[this.copy].weaponType==-1?`None`:entities.players[this.copy].weaponData.name}`,0,-35-42.5*this.playerData.sizeBuff)
+        }else if(this.playerData.name=='Spy'||this.playerData.name=='SpyHealSeklf'||this.playerData.name=='RapidSpy'){
+            if(game.level==11&&game.hunt>0&&entities.players[this.copy].id!=game.hunt){
+                layer.text(`${entities.players[this.copy].weaponType==-1?`No Weapon`:entities.players[this.copy].weaponData.name}`,0,-33-40*this.playerData.sizeBuff)
+            }else if(game.level==11){
+                layer.text(`Money: ${entities.players[this.copy].carryMoney}\n${entities.players[this.copy].weaponType==-1?`No Weapon`:entities.players[this.copy].weaponData.name}`,0,-33-40*this.playerData.sizeBuff)
+            }else{
+                layer.text(`Kills: ${entities.players[this.copy].stats.kills}\nDeaths: ${entities.players[this.copy].stats.deaths}\nWeapon: ${entities.players[this.copy].weaponType==-1?`None`:entities.players[this.copy].weaponData.name}`,0,-35-42.5*this.playerData.sizeBuff)
+            }
         }else if(game.randomizer&&this.id>0){
             layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}`,0,-38-42.5*this.playerData.sizeBuff)
             layer.text(this.playerData.name,0,-18.5-42.5*this.playerData.sizeBuff)
         }else if(this.id>0){
-            if(game.level==11){
+            if(game.level==11&&game.hunt>0&&this.id!=game.hunt){
+                layer.text(`${this.weaponType==-1?`No Weapon`:this.weaponData.name}`,0,-33-40*this.playerData.sizeBuff)
+            }else if(game.level==11){
                 layer.text(`Money: ${this.carryMoney}\n${this.weaponType==-1?`No Weapon`:this.weaponData.name}`,0,-33-40*this.playerData.sizeBuff)
             }else{
                 layer.text(`Kills: ${this.stats.kills}\nDeaths: ${this.stats.deaths}\nWeapon: ${this.weaponType==-1?`None`:this.weaponData.name}`,0,-35-42.5*this.playerData.sizeBuff)
@@ -505,17 +526,17 @@ class player{
                 this.base.life*=2
                 this.collect.life*=2
             }
+            if(this.id>0&&game.diff==0&&!(game.hunt!=this.id&&game.hunt>0)){
+                this.life*=1.5
+                this.base.life*=1.5
+                this.collect.life*=1.5
+            }
+            if(this.id>0&&game.hunt!=this.id&&game.hunt>0){
+                this.life*=0.5
+                this.base.life*=0.5
+                this.collect.life*=0.5
+            }
             this.setColor()
-        }
-        if(this.id>0&&game.diff==0&&!(game.hunt!=this.id&&game.hunt>0)){
-            this.life*=1.5
-            this.base.life*=1.5
-            this.collect.life*=1.5
-        }
-        if(this.id>0&&game.hunt!=this.id&&game.hunt>0){
-            this.life*=0.25
-            this.base.life*=0.25
-            this.collect.life*=0.25
         }
     }
     newWeaponSet(type){
@@ -539,17 +560,17 @@ class player{
                 this.base.life*=2
                 this.collect.life*=2
             }
+            if(this.id>0&&game.diff==0&&!(game.hunt!=this.id&&game.hunt>0)){
+                this.life*=1.5
+                this.base.life*=1.5
+                this.collect.life*=1.5
+            }
+            if(this.id>0&&game.hunt!=this.id&&game.hunt>0){
+                this.life*=0.5
+                this.base.life*=0.5
+                this.collect.life*=0.5
+            }
             this.setColor()
-        }
-        if(this.id>0&&game.diff==0&&!(game.hunt!=this.id&&game.hunt>0)){
-            this.life*=1.5
-            this.base.life*=1.5
-            this.collect.life*=1.5
-        }
-        if(this.id>0&&game.hunt!=this.id&&game.hunt>0){
-            this.life*=0.25
-            this.base.life*=0.25
-            this.collect.life*=0.25
         }
     }
     respawn(){
@@ -569,23 +590,24 @@ class player{
             this.fade=0
             this.size=0.5*this.playerData.sizeBuff
             this.base.life=100*this.playerData.lifeBuff
+            this.life=this.base.life
             this.offset={position:{x:0,y:12*this.playerData.sizeBuff}}
             if(this.id>0){
                 this.life*=2
                 this.base.life*=2
                 this.collect.life*=2
             }
+            if(this.id>0&&game.diff==0&&!(game.hunt!=this.id&&game.hunt>0)){
+                this.life*=1.5
+                this.base.life*=1.5
+                this.collect.life*=1.5
+            }
+            if(this.id>0&&game.hunt!=this.id&&game.hunt>0){
+                this.life*=0.5
+                this.base.life*=0.5
+                this.collect.life*=0.5
+            }
             this.setColor()
-        }
-        if(this.id>0&&game.diff==0&&!(game.hunt!=this.id&&game.hunt>0)){
-            this.life*=1.5
-            this.base.life*=1.5
-            this.collect.life*=1.5
-        }
-        if(this.id>0&&game.hunt!=this.id&&game.hunt>0){
-            this.life*=0.25
-            this.base.life*=0.25
-            this.collect.life*=0.25
         }
         this.life=this.base.life
         this.collect.life=this.life
@@ -978,7 +1000,7 @@ class player{
                         abs(this.position.x-entities.players[a].position.x)<300&&
                         abs(this.position.y-entities.players[a].position.y)<150&&
                         floor((this.position.x-game.tileset[0]/2)/(16*game.tileset[0]))==floor((entities.players[a].position.x-game.tileset[0]/2)/(16*game.tileset[0]))&&
-                        floor((this.position.y-game.tileset[1]/2)/(16*game.tileset[1]))==floor((entities.players[a].position.y-game.tileset[1]/2)/(16*game.tileset[1]))
+                        floor((this.position.y-game.tileset[1]*15.5)/(16*game.tileset[1]))==floor((entities.players[a].position.y-game.tileset[1]*15.5)/(16*game.tileset[1]))
                     ){
                         this.inactive=false
                     }
@@ -1393,6 +1415,21 @@ class player{
                     }
                 }
             }else if(this.control==0){
+                if(game.time%60==0){
+                    this.hearingTick=15
+                    this.hearing=[false,false,false,false,false,false,false,false]
+                    for(let a=0,la=entities.players.length;a<la;a++){
+                        if(entities.players[a].id!=this.id&&!entities.players[a].inactive){
+                            let distance=dist(entities.players[a].position.x,entities.players[a].position.y,this.position.x,this.position.y)
+                            if(distance>80&&distance<640){
+                                this.hearing[floor(((atan2(entities.players[a].position.x-this.position.x,this.position.y-entities.players[a].position.y)+382.5)%360)/45)]=true
+                            }
+                        }
+                    }
+                }
+                if(this.hearingTick>0){
+                    this.hearingTick--
+                }
                         if(this.life>0&&game.past){
                 this.inputs.push([inputs.keys[this.id-1][0],inputs.keys[this.id-1][1],inputs.keys[this.id-1][2],inputs.keys[this.id-1][3]])
                         }
@@ -1569,6 +1606,21 @@ class player{
                         if(entities.players[a].id==this.die.killer){
                             entities.players[a].stats.kills=round(entities.players[a].stats.kills*10+(game.pvp&&this.id==0?(this.size>2.25*0.5?2:this.size>1.5*0.5?0.4:0.2):(this.size>2.25*0.5?10:this.size>1.5*0.5?2:1))*10)/10
                         }
+                    }
+                    if(this.id==0&&(this.playerData.lifeBuff>=4||floor(random(0,4))==0)){
+                        entities.walls[1].push(new wall(graphics.main,this.position.x,this.position.y,game.tileset[1]*0.4,game.tileset[1]*0.4,19))
+                        entities.walls[1][entities.walls[1].length-1].formBoundary()
+                        entities.walls[1][entities.walls[1].length-1].set()
+                        entities.walls[1][entities.walls[1].length-1].formBounder()
+                    }
+                    if(this.id>0&&this.carryMoney>0){
+                        for(let a=0,la=this.carryMoney;a<la;a++){
+                            entities.walls[1].push(new wall(graphics.main,this.position.x+10-la*10+a*20,this.position.y,game.tileset[1]*0.4,game.tileset[1]*0.4,19))
+                            entities.walls[1][entities.walls[1].length-1].formBoundary()
+                            entities.walls[1][entities.walls[1].length-1].set()
+                            entities.walls[1][entities.walls[1].length-1].formBounder()
+                        }
+                        this.carryMoney=0
                     }
                     this.stats.deaths++
                 }else{

@@ -345,7 +345,6 @@ class wall{
                 }
             }
         }
-        this.set()
     }
     checkBar(){
         for(let a=0,la=entities.walls.length;a<la;a++){
@@ -425,6 +424,21 @@ class wall{
             }
         }
         this.bounder={position:{x:bounds[0]/2+bounds[1]/2,y:bounds[2]/2+bounds[3]/2},width:bounds[1]-bounds[0]+50,height:bounds[3]-bounds[2]+50}
+        /*this.neighbors=[]
+        for(let a=0,la=entities.walls.length;a<la;a++){
+            for(let b=0,lb=entities.walls[a].length;b<lb;b++){
+                let c=entities.walls[a][b]
+                if(
+                    (c.boundary[4].length>0||c.boundary[5].length>0||c.boundary[6].length>0||c.boundary[7].length>0)&&
+                    c.position.x+c.width/2>=this.position.x-this.width/2&&
+                    c.position.x-c.width/2<=this.position.x+this.width/2&&
+                    c.position.y+c.height/2>=this.position.y-this.height/2&&
+                    c.position.y-c.height/2<=this.position.y+this.height/2
+                ){
+                    this.neighbors.push(c)
+                }
+            }
+        }*/
     }
     display(layer){
         layer.push()
@@ -627,13 +641,13 @@ class wall{
                 )
             break
             case 22:
-                if(layer.index!=game.hunt-1||game.hunt==0){
+                if(layer.index!=game.hunt-1||game.hunt==0||game.gaming<=2){
                     layer.rotate(this.spin)
                     layer.fill(180,180,90)
                     layer.stroke(150,150,120)
                     layer.strokeWeight(1)
                     layer.textSize(15)
-                    layer.text(`Z${floor((this.position.x-game.tileset[0]/2)/(16*game.tileset[0]))} - ${floor((this.position.y-game.tileset[1]/2)/(16*game.tileset[1]))}`,0,0)
+                    layer.text(`Z${floor((this.position.x-game.tileset[0]/2)/(16*game.tileset[0]))+1} - ${floor((this.position.y-game.tileset[1]*15.5)/(16*game.tileset[1]))+1}`,0,0)
                 }
             break
         }
@@ -650,7 +664,7 @@ class wall{
         layer.translate(this.position.x,this.position.y)
         layer.noStroke()
         switch(this.type){
-            case 1:
+            case 1: case 17: case 18: case 20: case 21:
                 if(game.level==6){
                     for(let a=0,la=this.balls.length;a<la;a++){
                         layer.fill(
@@ -697,7 +711,7 @@ class wall{
         layer.pop()
         /*layer.stroke(50,50+this.type*100,200)
         layer.strokeWeight(4)
-        for(let a=0,la=4;a<la;a++){
+        for(let a=0,la=this.boundary.length;a<la;a++){
             for(let b=0,lb=this.boundary[a].length;b<lb;b++){
                 layer.line(
                     this.position.x+this.boundary[a][b][0].x+(a==2?-2:a==3?2:2)-this.position.x,
@@ -940,156 +954,156 @@ class wall{
                         &&!(this.type==11)
                         &&!(this.type==12&&(this.recharge>0))
                         &&!(this.type==16&&(this.recharge>0||(c.id==0&&game.level==11)))
-                        &&!(this.type==19&&(this.recharge>0||c.id==0||c.carryMoney>=2||c.id!=game.hunt&&game.hunt>0))
+                        &&!(this.type==19&&(this.recharge>0||c.id==0||c.carryMoney>=2||c.id!=game.hunt&&game.hunt>0||c.life<=0))
                     ){
-                        let d=collideBoxBox(this,c)
-                        if(d>=0){
-                            switch(this.type){
-                                case 5:
-                                    this.exploded=true
-                                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y+this.height/2,16,0,-1,100,2,false,-1))
-                                break
-                                case 8:
-                                    this.recharge=1800
-                                    c.weapon.uses=min(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*game.ammoMult,c.weapon.uses+ceil(c.weaponData.uses*game.ammoMult/2))
-                                break
-                                case 9:
-                                    this.recharge=1800
-                                    c.life=min(c.base.life,c.life+c.base.life/(c.weaponType==11||c.weaponType==13||c.weaponType==14||c.weaponType==62||c.weaponType==66?1:2))
-                                break
-                                case 10:
-                                    c.manage[2]=true
-                                    c.target.position.x=this.position.x+game.tileset[0]
-                                break
-                                case 11:
-                                    c.defendBuff=5
-                                break
-                                case 12:
-                                    this.recharge=1800
-                                    c.critBuff=600
-                                break
-                                case 14:
-                                    c.manage[2]=true
-                                    c.target.position.x=this.position.x-game.tileset[0]
-                                break
-                                case 16:
-                                    this.recharge=1800
-                                    c.newWeaponSet(this.weapon)
-                                    this.weapon=floor(random(0,20))==0?floor(random(36,40)):floor(random(0,9))+floor(random(0,1.5))*floor(random(1,4))*9
-                                break
-                                case 19:
-                                    this.recharge=1800
-                                    c.carryMoney++
-                                break
-                                default:
-                                    if(!this.redundant[d]){
-                                        switch(d){
-                                            case 0:
-                                                c.position.y=this.position.y+this.height/2+c.height/2+0.1
-                                                c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1
-                                                c.velocity.y=0
-                                            break
-                                            case 1:
-                                                c.position.y=this.position.y-this.height/2-c.height/2-0.1
-                                                c.previous.position.y=this.position.y-this.height/2-c.height/2-0.1
-                                                c.velocity.y=0
-                                                c.jump.time=5
-                                                if((c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol'||c.playerData.name=='PlayerPistolVulnerable'||c.playerData.name=='PlayerPistolConfuse'||c.playerData.name=='PlayerMedicDoubleJump')&&c.weapon.uses>0){
-                                                    c.jump.double=1
-                                                }
-                                                switch(this.type){
-                                                    case 2:
-                                                        c.bounceTime=15
-                                                    break
-                                                    case 3:
-                                                        c.velocity.y=-10
-                                                        c.takeDamage(20)
-                                                        c.collect.time=max(c.collect.time,30)
-                                                    break
-                                                    case 4:
-                                                        if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
-                                                            this.reload=600
-                                                            for(let e=0,le=12;e<le;e++){
-                                                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-157.5,-112.5),-1,100,180,false,-1))
-                                                                let mult=random(1.25,2.5)
-                                                                entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
-                                                                entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
-                                                            }
-                                                        }
-                                                    break
-                                                    case 15:
-                                                        if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
-                                                            this.reload=600
-                                                        }
-                                                    break
-                                                }
-                                                if(c.parachute){
-                                                    c.parachute=false
-                                                    if(!game.pvp){
-                                                        c.stuckTime=60
-                                                    }
-                                                }
-                                            break
-                                            case 2:
-                                                c.position.x=this.position.x+this.width/2+c.width/2+0.1
-                                                c.previous.position.x=this.position.x+this.width/2+c.width/2+0.1
-                                                c.velocity.x=0
-                                            break
-                                            case 3:
-                                                c.position.x=this.position.x-this.width/2-c.width/2-0.1
-                                                c.previous.position.x=this.position.x-this.width/2-c.width/2-0.1
-                                                c.velocity.x=0
-                                                switch(this.type){
-                                                    case 13: case 15:
-                                                        if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
-                                                            this.reload=600
-                                                        }
-                                                    break
-                                                }
-                                            break
-                                            case 4:
-                                                c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                                c.previous.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                                c.velocity.y=0
-                                                c.jump.time+=5
-                                                if(c.parachute){
-                                                    c.parachute=false
-                                                    if(!game.pvp){
-                                                        c.stuckTime=60
-                                                    }
-                                                }
-                                                c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
-                                            break
-                                            case 5:
-                                                c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                                c.previous.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                                c.velocity.y=0
-                                                c.jump.time+=5
-                                                if(c.parachute){
-                                                    c.parachute=false
-                                                    if(!game.pvp){
-                                                        c.stuckTime=60
-                                                    }
-                                                }
-                                                c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
-                                            break
-                                            case 6:
-                                                c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                                c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
-                                                c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
-                                            break
-                                            case 7:
-                                                c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                                c.previous.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
-                                                c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
-                                            break
-                                        }
-                                    }
-                                break
-                            }
-                        }
+                        this.collideSingle(c,false)
                     }
                 }
+            }
+        }
+    }
+    collideSingle(c,repeat){
+        let d=collideBoxBox(this,c)
+        if(d>=0){
+            switch(this.type){
+                case 5:
+                    this.exploded=true
+                    entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y+this.height/2,16,0,-1,100,2,false,-1))
+                break
+                case 8:
+                    this.recharge=1800
+                    c.weapon.uses=min(c.weaponData.uses==1?c.weaponData.uses:c.weaponData.uses*game.ammoMult,c.weapon.uses+ceil(c.weaponData.uses*game.ammoMult/2))
+                break
+                case 9:
+                    this.recharge=1800
+                    c.life=min(c.base.life,c.life+c.base.life/(c.weaponType==11||c.weaponType==13||c.weaponType==14||c.weaponType==62||c.weaponType==66?1:2))
+                break
+                case 10:
+                    c.manage[2]=true
+                    c.target.position.x=this.position.x+game.tileset[0]
+                break
+                case 11:
+                    c.defendBuff=5
+                break
+                case 12:
+                    this.recharge=1800
+                    c.critBuff=600
+                break
+                case 14:
+                    c.manage[2]=true
+                    c.target.position.x=this.position.x-game.tileset[0]
+                break
+                case 16:
+                    this.recharge=1800
+                    c.newWeaponSet(this.weapon)
+                    this.weapon=floor(random(0,20))==0?floor(random(36,40)):floor(random(0,9))+floor(random(0,1.5))*floor(random(1,4))*9
+                break
+                case 19:
+                    this.recharge=1800
+                    c.carryMoney++
+                break
+                default:
+                    if(!this.redundant[d]){
+                        switch(d){
+                            case 0:
+                                c.position.y=this.position.y+this.height/2+c.height/2+0.1
+                                c.velocity.y=0
+                            break
+                            case 1:
+                                c.position.y=this.position.y-this.height/2-c.height/2-0.1
+                                c.velocity.y=0
+                                c.jump.time=5
+                                if((c.playerData.name=='PlayerPistol'||c.playerData.name=='PlayerPushPistol'||c.playerData.name=='PlayerPistolVulnerable'||c.playerData.name=='PlayerPistolConfuse'||c.playerData.name=='PlayerMedicDoubleJump')&&c.weapon.uses>0){
+                                    c.jump.double=1
+                                }
+                                switch(this.type){
+                                    case 2:
+                                        c.bounceTime=15
+                                    break
+                                    case 3:
+                                        c.velocity.y=-10
+                                        c.takeDamage(20)
+                                        c.collect.time=max(c.collect.time,30)
+                                    break
+                                    case 4:
+                                        if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
+                                            this.reload=600
+                                            for(let e=0,le=12;e<le;e++){
+                                                entities.projectiles.push(new projectile(graphics.main[0],this.position.x,this.position.y-this.height/2,60,random(-157.5,-112.5),-1,100,180,false,-1))
+                                                let mult=random(1.25,2.5)
+                                                entities.projectiles[entities.projectiles.length-1].velocity.x*=mult
+                                                entities.projectiles[entities.projectiles.length-1].velocity.y*=mult
+                                            }
+                                        }
+                                    break
+                                    case 15:
+                                        if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
+                                            this.reload=600
+                                        }
+                                    break
+                                }
+                                if(c.parachute){
+                                    c.parachute=false
+                                    if(!game.pvp){
+                                        c.stuckTime=60
+                                    }
+                                }
+                            break
+                            case 2:
+                                c.position.x=this.position.x+this.width/2+c.width/2+0.1
+                                c.velocity.x=0
+                            break
+                            case 3:
+                                c.position.x=this.position.x-this.width/2-c.width/2-0.1
+                                c.velocity.x=0
+                                switch(this.type){
+                                    case 13: case 15:
+                                        if(this.reload==0&&c.id>0&&c.life>0&&c.attacking){
+                                            this.reload=600
+                                        }
+                                    break
+                                }
+                            break
+                            case 4:
+                                c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                c.velocity.y=0
+                                c.jump.time+=5
+                                if(c.parachute){
+                                    c.parachute=false
+                                    if(!game.pvp){
+                                        c.stuckTime=60
+                                    }
+                                }
+                                c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
+                            break
+                            case 5:
+                                c.position.y=this.position.y-this.height/2-c.height/2-0.1+this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                c.velocity.y=0
+                                c.jump.time+=5
+                                if(c.parachute){
+                                    c.parachute=false
+                                    if(!game.pvp){
+                                        c.stuckTime=60
+                                    }
+                                }
+                                c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
+                            break
+                            case 6:
+                                c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0,1)
+                                c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
+                            break
+                            case 7:
+                                c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*constrain((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0,1)
+                                c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
+                            break
+                        }
+                        /*if(d>=0&&d<=3&&!repeat){
+                            for(let e=0,le=this.neighbors.length;e<le;e++){
+                                this.neighbors[e].collideSingle(c,true)
+                            }
+                        }*/
+                    }
+                break
             }
         }
     }
