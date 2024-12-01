@@ -404,14 +404,14 @@ class wall{
                             if(this.boundary[g].length>0&&c.boundary[g].length>0&&abs(this.width/this.height-c.width/c.height)<0.01){
                                 for(let e=0,le=this.boundary[g].length;e<le;e++){
                                     for(let f=0,lf=c.boundary[g].length;f<lf;f++){
-                                        if(abs(this.boundary[g][e][d].x-c.boundary[g][f][1-d].x)<1&&abs(this.boundary[g][e][d].y-c.boundary[g][f][1-d].y)<1&&c.boundary[g][f][d].y>this.boundary[g][e][d].y){
+                                        if(abs(this.boundary[g][e][d].x-c.boundary[g][f][1-d].x)<1&&abs(this.boundary[g][e][d].y-c.boundary[g][f][1-d].y)<1&&(c.boundary[g][f][d].y>this.boundary[g][e][d].y&&g<6||c.boundary[g][f][d].y<this.boundary[g][e][d].y&&g>=6)){
                                             this.boundary[g][e][d].x=c.boundary[g][f][d].x
                                             this.boundary[g][e][d].y=c.boundary[g][f][d].y
                                             c.boundary[g].splice(f,1)
                                             f--
                                             lf--
                                             this.checkBar()
-                                        }else if(abs(this.boundary[g][e][d].x-c.boundary[g][f][d].x)<1&&abs(this.boundary[g][e][d].y-c.boundary[g][f][d].y)<1&&c.boundary[g][f][1-d].y>this.boundary[g][e][d].y){
+                                        }else if(abs(this.boundary[g][e][d].x-c.boundary[g][f][d].x)<1&&abs(this.boundary[g][e][d].y-c.boundary[g][f][d].y)<1&&(c.boundary[g][f][1-d].y>this.boundary[g][e][d].y&&g<6||c.boundary[g][f][1-d].y<this.boundary[g][e][d].y&&g>=6)){
                                             this.boundary[g][e][d].x=c.boundary[g][f][1-d].x
                                             this.boundary[g][e][d].y=c.boundary[g][f][1-d].y
                                             c.boundary[g].splice(f,1)
@@ -988,7 +988,7 @@ class wall{
                         &&!(this.type==11)
                         &&!(this.type==12&&(this.recharge>0))
                         &&!(this.type==16&&(this.recharge>0||(c.id==0&&game.level==11)))
-                        &&!(this.type==19&&(this.recharge>0||c.id==0||c.carryMoney>=2||c.id!=game.hunt&&game.hunt>0||c.life<=0))
+                        &&!(this.type==19&&(this.recharge>0||c.id==0||c.carryMoney>=2&&game.hunt!=-1||c.id!=game.hunt&&game.hunt>0||c.life<=0))
                     ){
                         this.collideSingle(c,false)
                     }
@@ -1123,12 +1123,12 @@ class wall{
                                 c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
                             break
                             case 6:
-                                c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*min((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
+                                c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((c.position.x-c.width/2-this.position.x+this.width/2)/this.width,0)
                                 c.velocity.y=-c.velocity.x*this.height/this.width
                                 c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
                             break
                             case 7:
-                                c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*min((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
+                                c.position.y=this.position.y+this.height/2+c.height/2+0.1-this.height*max((this.position.x+this.width/2-c.position.x-c.width/2)/this.width,0)
                                 c.velocity.y=c.velocity.x*this.height/this.width
                                 c.velocity.x*=1-this.height/this.width*(game.level==11?0.1:0.2)
                             break

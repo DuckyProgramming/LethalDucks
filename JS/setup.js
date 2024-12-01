@@ -10,7 +10,7 @@ function mouseClicked(){
     switch(stage.scene){
         case 'menu':
             for(let a=0,la=3;a<la;a++){
-                for(let b=0,lb=a==2?5:4;b<lb;b++){
+                for(let b=0,lb=a==2?6:4;b<lb;b++){
                     if(inPointBox({position:inputs.mouse},{position:{x:width/2-lb*100+100+b*200,y:120+a*70},width:180,height:60})){
                         switch(a){
                             case 0:
@@ -20,7 +20,7 @@ function mouseClicked(){
                                 menu.diff=b
                             break
                             case 2:
-                                menu.hunt=b
+                                menu.hunt=b==5?-1:b
                             break
                         }
                     }
@@ -32,7 +32,7 @@ function mouseClicked(){
                 game.level=menu.level
                 game.diff=menu.diff
                 game.hunt=menu.hunt
-                game.ammoMult=game.level==11?1:2
+                game.ammoMult=game.level==11&&game.hunt!=-1?1:2
                 game.lives=game.level==11?ceil((game.hunt>0?4:game.gaming)/2):0
                 game.limit=game.hunt>0?28800:21600
                 entities.players=[]

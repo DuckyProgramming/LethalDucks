@@ -1000,7 +1000,12 @@ class player{
                         abs(this.position.x-entities.players[a].position.x)<300&&
                         abs(this.position.y-entities.players[a].position.y)<150&&
                         floor((this.position.x-game.tileset[0]/2)/(16*game.tileset[0]))==floor((entities.players[a].position.x-game.tileset[0]/2)/(16*game.tileset[0]))&&
-                        floor((this.position.y-game.tileset[1]*15.5)/(16*game.tileset[1]))==floor((entities.players[a].position.y-game.tileset[1]*15.5)/(16*game.tileset[1]))
+                        floor((this.position.y-game.tileset[1]*15.5)/(16*game.tileset[1]))==floor((entities.players[a].position.y-game.tileset[1]*15.5)/(16*game.tileset[1]))||
+                        game.hunt==-1&&
+                        abs(this.position.x-entities.players[a].position.x)<900&&
+                        abs(this.position.y-entities.players[a].position.y)<450&&
+                        abs(floor((this.position.x-game.tileset[0]/2)/(16*game.tileset[0]))-floor((entities.players[a].position.x-game.tileset[0]/2)/(16*game.tileset[0])))<1&&
+                        abs(floor((this.position.y-game.tileset[1]*15.5)/(16*game.tileset[1]))-floor((entities.players[a].position.y-game.tileset[1]*15.5)/(16*game.tileset[1])))<1
                     ){
                         this.inactive=false
                     }
@@ -1135,7 +1140,7 @@ class player{
                         }else{
                             let targets=[]
                             this.target.position.x=this.position.x
-                            this.target.position.y=game.edge[1]*0.1
+                            this.target.position.y=this.position.y
                             this.manage[1]=false
                             for(let a=0,la=entities.players.length;a<la;a++){
                                 if((this.id==0&&entities.players[a].id!=0||this.id!=0&&entities.players[a].id==0||game.pvp&&this.id!=entities.players[a].id)&&abs(this.position.x-entities.players[a].position.x)<500&&abs(this.position.y-entities.players[a].position.y)<abs(this.position.x-entities.players[a].position.x)/10+25&&entities.players[a].life>0){
@@ -1240,8 +1245,8 @@ class player{
                                             }
                                         }
                                     }else{
-                                        this.target.position.x=game.edge[0]*random(0.2,0.8)
-                                        this.target.position.y=game.edge[1]/10
+                                        this.target.position.x=this.position.x
+                                        this.target.position.y=this.position.y
                                     }
                                 }
                             }
@@ -1435,11 +1440,11 @@ class player{
                         }
                 if(inputs.keys[this.id-1][0]&&!inputs.keys[this.id-1][1]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=-54
-                    this.velocity.x-=(this.weaponType==-1?(game.level==11?1:1.6):game.level==11?min(1,this.weaponData.speed):this.weaponData.speed)*this.playerData.speedBuff*(this.id>0&&game.randomizer?2:1)*(this.carryMoney>0?max(0.2,1-this.carryMoney*0.1):1)*(game.level==11?0.9:1)
+                    this.velocity.x-=(this.weaponType==-1?(game.level==11?1:1.6):game.level==11?min(1,this.weaponData.speed):this.weaponData.speed)*this.playerData.speedBuff*(this.id>0&&game.randomizer?2:1)*(this.carryMoney>0&&game.hunt!=-1?max(0.2,1-this.carryMoney*0.1):1)*(game.level==11?0.9:1)
                     this.runAnim(1/30)
                 }else if(inputs.keys[this.id-1][1]&&!inputs.keys[this.id-1][0]&&this.life>0&&this.stunTime<=0&&this.stuckTime<=0){
                     this.direction.goal=54
-                    this.velocity.x+=(this.weaponType==-1?(game.level==11?1:1.6):game.level==11?min(1,this.weaponData.speed):this.weaponData.speed)*this.playerData.speedBuff*(this.id>0&&game.randomizer?2:1)*(this.carryMoney>0?max(0.2,1-this.carryMoney*0.1):1)*(game.level==11?0.9:1)
+                    this.velocity.x+=(this.weaponType==-1?(game.level==11?1:1.6):game.level==11?min(1,this.weaponData.speed):this.weaponData.speed)*this.playerData.speedBuff*(this.id>0&&game.randomizer?2:1)*(this.carryMoney>0&&game.hunt!=-1?max(0.2,1-this.carryMoney*0.1):1)*(game.level==11?0.9:1)
                     this.runAnim(1/30)
                 }else if(this.animSet.loop<1&&this.animSet.loop>0){
                     this.runAnim(1/30)
@@ -1613,7 +1618,7 @@ class player{
                         entities.walls[1][entities.walls[1].length-1].set()
                         entities.walls[1][entities.walls[1].length-1].formBounder()
                     }
-                    if(this.id>0&&this.carryMoney>0){
+                    if(this.id>0&&this.carryMoney>0&&game.hunt!=-1){
                         for(let a=0,la=this.carryMoney;a<la;a++){
                             entities.walls[1].push(new wall(graphics.main,this.position.x+10-la*10+a*20,this.position.y,game.tileset[1]*0.4,game.tileset[1]*0.4,19))
                             entities.walls[1][entities.walls[1].length-1].formBoundary()
@@ -1628,9 +1633,13 @@ class player{
                     if(this.die.timer>180&&(game.classicRespawn&&!game.past||game.hunt!=this.id&&game.hunt>0)){
                         this.respawn()
                     }
-                    if(this.die.timer>180&&game.lives>0&&!game.past&&this.attacking&&!(game.hunt!=this.id&&game.hunt>0)){
+                    if(this.die.timer>180&&game.lives>0&&!game.past&&this.attacking&&!(game.hunt!=this.id&&game.hunt>0)&&game.hunt!=-1){
                         this.respawn()
                         game.lives--
+                    }
+                    if(this.die.timer>180&&game.lives>0&&!game.past&&game.hunt==-1&&this.carryMoney>=10){
+                        this.respawn()
+                        this.carryMoney-=10
                     }
                     if(this.die.timer>=90&&(!game.classicRespawn&&!game.past&&!game.pvp||game.level==11)){
                         for(let a=0,la=entities.players.length;a<la;a++){
@@ -1738,9 +1747,13 @@ class player{
                 this.velocity.x*=game.pvp?0.99:0.5
                 this.velocity.y*=this.jumping?0.9:2/3
             }
-            if(this.carryMoney>0&&(this.position.y<450||this.position.y<930&&this.position.x>game.edge[0]/2-705&&this.position.x<game.edge[0]/2+705)){
+            if(this.carryMoney>0&&game.hunt!=-1&&(this.position.y<450||this.position.y<930&&this.position.x>game.edge[0]/2-705&&this.position.x<game.edge[0]/2+705)){
                 game.money+=this.carryMoney
                 this.carryMoney=0
+            }
+            if(game.hunt==-1&&(this.position.x<game.center-game.storm||this.position.x>game.center+game.storm)){
+                this.takeDamage(0.25)
+                this.collect.time=max(this.collect.time,30)
             }
             if(this.id==0){
                 if(game.invis){

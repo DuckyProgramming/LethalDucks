@@ -426,7 +426,7 @@ function tripletColor(color1,color2,color3,key){
 //key
 function displayMain(layer,layer2,effective,keyStore){
     if(game.level==11){
-        if(dev.flash){
+        if(dev.flash||game.hunt==-1){
             for(let a=0,la=layer2.length;a<la;a++){
                 layer2[a].clear()
             }
@@ -584,6 +584,10 @@ function generateLevel(level,layer){
     if(game.level==11){
         let offset=15
         game.edge=[30*(16*mapDimensions[0]+1),30*(16*mapDimensions[1]+1+offset)]
+        if(game.hunt==-1){
+            game.storm=game.edge[0]
+            game.center=random(0,game.edge[0])
+        }
         let mapD=[]
         let active=[]
         for(let a=0,la=mapDimensions[1];a<la;a++){
@@ -665,19 +669,26 @@ function generateLevel(level,layer){
             }
         }
         for(let c=0,lc=game.players;c<lc;c++){
-            entities.players.push(new player(layer,game.edge[0]/2-200+c*20,900,c+1,0,[],true,0,game.index))
+            if(game.hunt==-1){
+                entities.players.push(new player(layer,c%2==0?255:game.edge[0]-255,c%2<=1?705:game.edge[1]-255,c+1,0,[],true,0,game.index))
+            }else{
+                entities.players.push(new player(layer,game.edge[0]/2-200+c*20,900,c+1,0,[],true,0,game.index))
+            }
             game.index++
             entities.players[entities.players.length-1].weaponType=-1
         }
         for(let c=0,lc=mapDimensions[1];c<lc;c++){
             for(let d=0,ld=mapDimensions[0];d<ld;d++){
-                let level=rooms[floor(random(0,rooms.length))]
+                let level=rooms[floor(random(1,rooms.length))]
                 while(
                     ((level[0][0]=='3'||level[0][0]=='4'||level[0][0]=='5')&&c<lc-1&&(mapD[c+1][d][1]||mapD[c+1][d][2]))||
                     ((level[0][0]=='4')&&(d>0&&mapD[c][d-1][3]||d<ld-1&&mapD[c][d+1][4]))||
                     ((level[0][0]=='5')&&c>0&&mapD[c-1][d][0])
                 ){
-                    level=rooms[floor(random(0,rooms.length))]
+                    level=rooms[floor(random(1,rooms.length))]
+                }
+                if((c==0||c==lc-1)&&(d==0||d==ld-1)&&game.hunt==-1){
+                    level=rooms[0]
                 }
                 let reject=[]
                 let flip=floor(random(0,2))
@@ -732,6 +743,9 @@ function generateLevel(level,layer){
                                 break
                                 case ';':
                                     spawns.push([game.tileset[0]/2+(effectiveB+d*16)*game.tileset[0],game.tileset[1]/2+(a+c*16+offset)*game.tileset[1]])
+                                break
+                                case ')':
+                                    entities.walls[1].push(new wall(graphics.main,game.tileset[0]/2+(effectiveB+d*16)*game.tileset[0],game.tileset[1]/2+(a+c*16+offset)*game.tileset[1],game.tileset[0]*0.6,game.tileset[1]*0.6,16))
                                 break
                             }
                         }
