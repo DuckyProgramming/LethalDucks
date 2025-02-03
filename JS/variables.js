@@ -1,8 +1,13 @@
-game={level:11,players:0,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,index:0,spawnDiff:1,ammoMult:2,tileset:[0,0],edge:[0,0],
+game={
+  level:11,players:0,wins:[0,0,0,0],time:0,gaming:1,mission:0,stack:[],sendTime:0,
+  index:0,projectileIndex:0,
+  spawnDiff:1,ammoMult:2,tileset:[0,0],edge:[0,0],
 money:0,limit:0,lives:0,diff:1,hunt:0,storm:0,center:0,
 classicRespawn:false,invis:false,pvp:true,randomizer:false,randomSpawn:false,past:false}
+listing=[[],[],[]]
 menu={players:1,gaming:1,level:11,diff:1,hunt:0}
 dev={sight:false,flash:false}
+constants={trig:[[],[]]}
 types={
   mission:[
     {
@@ -11,6 +16,7 @@ types={
       difficulty:0,
       wave:[
         [
+          ['BigMultiHyperMedic',10],
           ['Pistol',6],
           ['Flamethrower',4],
         ],[
@@ -43,6 +49,7 @@ types={
           ['HyperMedic',1],
         ],
       ],
+        //[['MedicShield',10]],
     },{
       name:`Duck Infiltration`,
       sendTime:30,
@@ -92,7 +99,7 @@ types={
     },{
       name:`Duck Wrecking`,
       sendTime:30,
-      difficulty:1,
+      difficulty:0,
       wave:[
         [
           ['FastPunch',3],
@@ -126,7 +133,7 @@ types={
     },{
       name:`Duck Shaker`,
       sendTime:30,
-      difficulty:2,
+      difficulty:1,
       wave:[
         [
           ['Pistol',4],
@@ -194,7 +201,7 @@ types={
     },{
       name:`Duck Deletion`,
       sendTime:30,
-      difficulty:2,
+      difficulty:1,
       wave:[
         [
           ['Flamethrower',8],
@@ -299,7 +306,7 @@ types={
     },{
       name:`Broken Ducks`,
       sendTime:30,
-      difficulty:2,
+      difficulty:1,
       wave:[
         [
           ['Pistol',2],
@@ -421,7 +428,7 @@ types={
       difficulty:2,
       wave:[
         [
-          ['ShotgunBurst',3],
+          ['ShotgunChain',3],
           ['BigFlipPistol',2],
           ['BigFlamethrower',1],
           ['HyperMedic',4],
@@ -451,7 +458,7 @@ types={
           ['PullPistol',4],
           ['HyperPistol',5],
           ['EngineerWeak',2],
-          ['BigShotgunBurst',2],
+          ['BigShotgunChain',2],
           ['BigRadiusRocketLauncher',1],
           ['FastPunchHealSelf',2],
         ],[
@@ -464,7 +471,7 @@ types={
           ['BigSpamCritRocketLauncher',1],        
           ['BigMedic',1],
           ['RapidCritBaller',10],
-          ['BigCritRapidBaller',2],
+          ['BigRapidCritBaller',2],
         ],[
           ['BigRocketLauncherHealSelf',1],
           ['CritMachineGun',6],
@@ -496,7 +503,7 @@ types={
       difficulty:3,
       wave:[
         [
-          ['BigLongBaller',2],
+          ['BigLongBaller',6],
           ['HeavyPunch',8],
           ['Flamethrower',4],
           ['RemoverSniper',2],
@@ -578,7 +585,7 @@ types={
       ],
     },{
       name:`Duck Mutilation`,
-      sendTime:150,
+      sendTime:45,
       difficulty:2,
       wave:[
         [
@@ -598,16 +605,16 @@ types={
           ['Sniper',2],
           ['Spy',3],
         ],[
-          ['Flamethrower',18],
+          ['Flamethrower',6],
           ['BigRapidSlowRocketLauncher',2],
           ['HyperMedic',4],
-          ['MachineGun',10],
+          ['MachineGun',5],
           ['Flamethrower',4],
-          ['Pistol',15],
+          ['Pistol',5],
           ['Tank',2],
           ['BigMachineGun',2],
           ['HyperMedic',6],
-          ['PushPistol',15],
+          ['PushPistol',5],
           ['Sniper',3],
           ['Spy',3],
         ],
@@ -648,12 +655,12 @@ types={
         ],[
           ['Flamethrower',5],
           ['SpreadSniper',5],
-          ['BigBombBaller',1],
+          ['BigGrenadier',1],
           ['HyperMedic',4],
           ['Tank',2],
           ['RocketLauncherHeal',4],
           ['SniperHealSelf',2],
-          ['ShotgunBurst',2],
+          ['ShotgunChain',2],
         ],[
           ['BarrageBoss',1],
           ['PistolJump',5],
@@ -713,7 +720,7 @@ types={
         ],[
           ['BigCritRocketLauncherBuff',1],
           ['Shotgun',8],
-          ['BigShotgunBurst',1],
+          ['BigShotgunChain',1],
           ['MachineGun',4],
           ['Flamethrower',4],
           ['Baller',4],
@@ -818,7 +825,7 @@ types={
         ],[
           ['FlameRocketLauncher',3],
           ['RapidSpreadSniper',4],
-          ['BigShotgunBurst',1],
+          ['BigShotgunChain',1],
           ['DamageOverTimePunch',4],
           ['BigMachineGunStop',1],
           ['RocketLauncherHeal',2],
@@ -892,7 +899,7 @@ types={
           ['Baller',3],
         ],[
           ['Tank',1],
-          ['BigShotgunBurst',1],
+          ['BigShotgunChain',1],
           ['CritApplyMedic',1],
           ['FlameRocketLauncher',3],
           ['HeavyPunch',3],
@@ -938,7 +945,7 @@ types={
           ['CritSpreadSniper',4],
           ['ShortHyperMedic',2],
           ['BigSpamRocketLauncher',1],
-          ['BigCritRapidBaller',1],
+          ['BigRapidCritBaller',1],
           ['BigMedic',1],
           ['RemoverSniper',2],
           ['CritMachineGun',5],
@@ -1009,7 +1016,7 @@ types={
         ],[
           ['CritFastPunch',4],
           ['BigSpamCritRocketLauncher',2],
-          ['BigShotgunBurst',2],
+          ['BigShotgunChain',2],
           ['CritMachineGun',3],
           ['Baller',10],
           ['RocketLauncherBuff',10],
@@ -1047,7 +1054,7 @@ types={
           ['BigPushPistol',1],
           ['PushPistol',3],
           ['FastPunch',3],
-          ['BigShotgunBurst',1],
+          ['BigShotgunChain',1],
           ['Punch',2],
           ['RocketLauncher',3],
           ['Flamethrower',2],
@@ -1195,7 +1202,7 @@ types={
           ['BigRocketLauncher',1],
           ['SpreadSniper',4],
           ['BigCritPistolJump',1],
-          ['ShotgunBurst',4],
+          ['ShotgunChain',4],
           ['RocketLauncherHeal',2],
           ['Baller',2],
           ['Pistol',2],
@@ -1223,7 +1230,7 @@ types={
           ['BigMedic',1],
           ['Baller',3],
           ['Flamethrower',3],
-          ['ShotgunBurst',3],
+          ['ShotgunChain',3],
         ],[
           ['BigCritPushierRocketLauncher',1],
           ['BigSpamRocketLauncher',1],
@@ -1235,7 +1242,7 @@ types={
           ['Engineer',1],
           ['Baller',1],
           ['PushPistol',1],
-          ['ShotgunBurst',1],
+          ['ShotgunChain',1],
           ['Flamethrower',1],
           ['RocketLauncher',1],
         ],[
@@ -1433,7 +1440,7 @@ types={
           ['BigFastPistol',2],
           ['RapidCritBaller',5],
           ['FairyBallerBoss',1],
-          ['TinyPistolStopVulnerable',6],
+          ['TinyPistolVulnerable',6],
           ['HyperMedic',3],
           ['BigRapidFlameBaller',1],
           ['Spy',4],
@@ -1501,12 +1508,12 @@ types={
           ['Spy',3],
         ],[
           ['Tank',2],
-          ['BigCritRapidBaller',6],
+          ['BigRapidCritBaller',6],
           ['DeflectorMachineGun',8],
           ['Flamethrower',4],
           ['HyperMedic',4],
           ['BarragePelletBaller',6],
-          ['CritDamageOverTimeSpreadSniper',6],
+          ['DamageOverTimeSpreadSniper',6],
           ['BigMachineGunStop',2],
           ['HeavyTank',1],
           ['CritPistol',8],
@@ -1566,6 +1573,1311 @@ types={
           ['Spy',4],
         ],
       ],
+    },{
+      name:`Perfected Ducks`,
+      sendTime:45,
+      difficulty:3,
+      wave:[
+        [
+          ['RapidRadiusRocketLauncher',5],
+          ['BigMachineGun',1],
+          ['HyperMedic',5],
+          ['Pistol',9],
+          ['SpreadSniper',6],
+          ['Baller',6],
+          ['BigPushPistol',1],
+          ['BigRocketLauncher',2],
+          ['RocketLauncherBuff',3],
+          ['Grenadier',4],
+          ['MachineGun',5],
+          ['BigLongCritFlamethrower',2],
+          ['BigFlamethrower',1],
+          ['Engineer',1],
+          ['Sniper',2],
+          ['Spy',2],
+        ],[
+          ['BigSpamMachineGun',2],
+          ['HyperMedic',3],
+          ['Flamethrower',5],
+          ['LongFlamethrower',2],
+          ['LongPunch',4],
+          ['BigCritShotgun',1],
+          ['BigRocketLauncherBuff',1],
+          ['ShotgunChain',3],
+          ['RocketLauncherDefendBuff',2],
+          ['SpreadSniper',2],
+          ['BigFastPistol',2],
+          ['BigMachineGun',1],
+          ['Baller',4],
+          ['BigBaller',1],
+          ['BigFlamethrower',1],
+          ['RapidRadiusRocketLauncher',4],
+          ['DeflectorMachineGun',2],
+          ['BigBarrageCritRocketLauncher',2],
+          ['LongPunchJump',3],
+          ['LongPushFlamethrower',6],
+          ['ParaPistol',6],
+          ['Engineer',1],
+          ['Sniper',2],
+          ['Spy',2],
+        ],[
+          ['CritFlamethrower',4],
+          ['BigFastPunch',1],
+          ['Pistol',4],
+          ['HeavyTank',1],
+          ['BigFlamethrower',1],
+          ['BigMedic',1],
+          ['BigSpamCritRocketLauncher',2],
+          ['Shotgun',6],
+          ['BigHeavyPushPistol',2],
+          ['CritPullPistol',3],
+          ['RapidRadiusRocketLauncher',3],
+          ['BigCritDeflectorMachineGun',1],
+          ['BigMedic',1],
+          ['BigCritBaller',2],
+          ['BigFlamethrower',2],
+          ['BigDeflectorMachineGun',2],
+          ['BigRocketLauncherHealSelf',6],
+          ['BigLongFlamethrower',1],
+          ['HyperPistol',3],
+          ['CritFlamethrower',3],
+          ['ParaPistol',4],
+          ['Engineer',1],
+          ['Sniper',2],
+          ['Spy',2],
+        ],
+      ],
+    },{
+      name:`Dusted Ducks`,
+      sendTime:30,
+      difficulty:2,
+      wave:[
+        [
+          ['BigMachineGun',1],
+          ['HyperMedic',1],
+          ['PistolVulnerable',4],
+          ['BigMachineGunStop',1],
+          ['HyperMedic',1],
+          ['LongPunch',4],
+          ['BigMachineGun',1],
+          ['RocketLauncherBuff',2],
+          ['HyperMedic',2],
+          ['HeavyPunch',2],
+          ['BigDamageOverTimeMachineGun',1],
+          ['HyperMedic',1],
+          ['Flamethrower',3],
+          ['BigDeflectorMachineGun',1],
+          ['HyperMedic',1],
+          ['BigShotgun',1],
+          ['HyperMedic',1],
+          ['Baller',2],
+          ['BigMachineGunFocus',1],
+        ],[
+          ['Baller',5],
+          ['BigRocketLauncher',1],
+          ['MedicShield',1],
+          ['LightTank',1],
+          ['HeavyPunchStop',6],
+          ['BigHeavyPistol',2],
+          ['BigRocketLauncherBuff',1],
+          ['MedicShield',1],
+          ['MachineGunFocus',3],
+          ['Medic',3],
+          ['Baller',3],
+          ['BigBarrageRocketLauncher',1],
+          ['BigMedic',1],
+          ['FastPistol',3],
+        ],[
+          ['BigRocketLauncherHeal',1],
+          ['HyperMedic',1],
+          ['BigHeavyDamageOverTimeSpreadSniper',2],
+          ['Flamethrower',6],
+          ['HyperMedic',3],
+          ['MachineGun',6],
+          ['HyperMedic',3],
+          ['BigCritFastPunch',1],
+          ['HyperMedic',1],
+          ['BigCritRapidRocketLauncher',1],
+          ['HyperMedic',4],
+          ['Spy',3],
+        ],[
+          ['BigBarrageBaller',2],
+          ['BigMedic',2],
+          ['CritApplyMedic',1],
+          ['Pistol',4],
+          ['BigFlamethrower',1],
+          ['RocketLauncher',4],
+          ['CritApplyMedic',4],
+          ['BigFlamethrower',1],
+          ['BigCritApplyMedic',1],
+          ['BigDeflectorMachineGun',1],
+          ['CritApplyMedic',2],
+          ['HeavyPushPunch',7],
+          ['Sniper',1],
+          ['MedicShield',1],
+        ],[
+          ['BigBaller',2],
+          ['BigHeavyPistol',2],
+          ['CritPistol',5],
+          ['BigCritRapidRocketLauncher',1],
+          ['BigMedic',1],
+          ['BigFastPistol',3],
+          ['PistolingTank',2],
+          ['MachineGun',2],
+          ['RocketLauncher',2],
+          ['Flamethrower',2],
+          ['BigSpamRocketLauncher',1],
+          ['RemoverSniper',2],
+          ['Spy',3],
+        ],[
+          ['Flamethrower',6],
+          ['BigCritRapidMachineGun',2],
+          ['BigMedic',2],
+          ['MedicShield',2],
+          ['HyperMedic',2],
+          ['FastPunchJump',3],
+          ['BigFastPunchJump',1],
+          ['BigCritBaller',1],
+          ['RapidPunch',12],
+          ['HeavySniper',2],
+          ['BigSniper',1],
+          ['BigCritApplyMedic',1],
+        ],
+      ],
+    },{
+      name:`Duck Recursion`,
+      sendTime:30,
+      difficulty:3,
+      wave:[
+        [
+          ['ParaRocketLauncher',20],
+          ['Sniper',4],
+          ['HeavyTank',1],
+          ['CritPunch',4],
+          ['PlusMedic',4],
+        ],[
+          ['Pistol',8],
+          ['HeavyPunch',4],
+          ['Baller',4],
+          ['RocketLauncher',2],
+          ['Flamethrower',2],
+          ['SpreadSniper',4],
+          ['FastPunch',4],
+          ['PlusMedic',4],
+          ['BigSpamRocketLauncher',1],
+          ['ParaRocketLauncher',12],
+          ['Sniper',2],
+        ],[
+          ['SpreadSniper',4],
+          ['RocketLauncher',5],
+          ['BigFastPunch',1],
+          ['PlusMedic',1],
+          ['Pistol',6],
+          ['Baller',5],
+          ['ShotgunChain',2],
+          ['PlusMedic',2],
+          ['BigParaRocketLauncher',1],
+          ['PushPistol',4],
+          ['RadiusRocketLauncher',2],
+          ['PlusMedic',2],
+          ['BigLongFlamethrower',1],
+          ['PistolVulnerable',2],
+          ['Sniper',2],
+          ['Punch',2],
+          ['RapidPushPistol',3],
+        ],[
+          ['Tank',1],
+          ['LongFlamethrower',4],
+          ['RocketLauncher',2],
+          ['MachineGun',2],
+          ['PlusMedic',2],
+          ['RapidPushPistol',6],
+          ['Baller',6],
+          ['BigSpamRocketLauncher',2],
+          ['CritPunch',7],
+          ['ParaRocketLauncher',5],
+          ['BigMachineGunStop',1],
+          ['PlusMedic',2],
+        ],[
+          ['RocketLauncherBuff',3],
+          ['Shotgun',4],
+          ['Pistol',4],
+          ['LongFlamethrower',4],
+          ['PushPistol',6],
+          ['BigBaller',1],
+          ['PlusMedic',2],
+          ['BigFastPunch',1],
+          ['PlusMedic',1],
+          ['BigFastPistol',3],
+          ['Baller',4],
+          ['PlusMedic',4],
+          ['MachineGunFocus',2],
+          ['BigBaller',1],
+          ['PlusMedic',2],
+          ['PistolVulnerable',2],
+          ['Spy',2],
+          ['SpreadSniper',2],
+        ],[
+          ['BigDeflectorMachineGun',1],
+          ['PlusMedic',2],
+          ['CritPunch',3],
+          ['Pistol',6],
+          ['SpreadSniper',3],
+          ['HyperMedic',3],
+          ['MachineGunStop',2],
+          ['PlusMedic',4],
+          ['RocketLauncherStop',5],
+          ['BigBarrageRocketLauncher',1],
+          ['Sniper',2],
+          ['RapidPlusMedic',3],
+          ['RapidCritPushPistol',3],
+          ['ParaRocketLauncher',4],
+        ],[
+          ['Flamethrower',7],
+          ['ParaRocketLauncher',4],
+          ['BigShotgunChain',1],
+          ['HyperMedic',2],
+          ['RapidCritPunch',4],
+          ['PhaseRocketLauncher',4],
+          ['RocketLauncherBuff',1],
+          ['BigRapidRocketLauncher',1],
+          ['PlusMedic',2],
+          ['Sniper',2],
+          ['MachineGun',3],
+          ['LongFlamethrower',3],
+          ['Pistol',4],
+          ['BigCritParaRocketLauncher',1],
+        ],
+      ],
+      },{
+        name:`Duck Alluvion`,
+        sendTime:3,
+        difficulty:3,
+        wave:[
+        [
+          ['NapalmFlamethrower',12],
+          ['BigHeavyPushPistol',3],
+          ['HeavyPunch',4],
+          ['FastPunch',4],
+          ['RapidSpreadSniper',2],
+          ['BigMachineGun',1],
+          ['Shotgun',6],
+        ],[
+          ['Punch',10],
+          ['RocketLauncherBuff',5],
+          ['RocketLauncherHeal',5],
+          ['BigCritRocketLauncher',2],
+          ['HyperMedic',4],
+          ['Pistol',6],
+          ['Baller',3],
+          ['BigFastPunch',2],
+          ['BigFlamethrower',1],
+        ],[
+          ['LightTank',2],
+          ['BigHeavyRocketLauncher',2],
+          ['BigCritApplyMedic',2],
+          ['HeavyPunchStop',9],
+          ['AssaultRifle',9],
+          ['HeavyPlusMedic',3],
+          ['DeflectorMachineGun',6],
+          ['BigShotgun',3],
+          ['HeavyPlusMedic',3],
+        ],[
+          ['RapidRocketLauncherHealSelf',7],
+          ['RapidRadiusRocketLauncher',7],
+          ['BigRocketLauncherBuff',1],
+          ['HyperPistol',4],
+          ['HyperCaffeinePistol',4],
+          ['BigMachineGun',1],
+          ['BigCritBaller',1],
+          ['RocketLauncher',8],
+          ['SpreadSniper',2],
+          ['BigLongFlamethrower',1],
+          ['NapalmFlamethrower',6],
+        ],[
+          ['BigCritFlamethrower',2],
+          ['HyperMedic',6],
+          ['Shotgun',3],
+          ['RocketLauncherDefendBuff',2],
+          ['BigPullPistol',3],
+          ['FlameBaller',10],
+          ['HeavyPunch',3],
+          ['BigGrenadier',3],
+          ['CritMachineGun',3],
+          ['PistolJump',3],
+          ['HyperPistol',5],
+        ],[
+          ['Tank',1],
+          ['BigCritDeflectorMachineGun',1],
+          ['BigMedic',1],
+          ['FastPunch',3],
+          ['BigFastHyperPistol',5],
+          ['SmokeRocketLauncher',5],
+          ['BigFlamethrowerHealSelf',2],
+          ['Shotgun',4],
+          ['Pistol',4],
+          ['HeavyTank',1],
+          ['BigRapidRocketLauncher',3],
+          ['BigRapidBaller',3],
+          ['CritPistol',10],
+        ],
+      ],
+    },{
+      name:`Duck Defragment`,
+      sendTime:30,
+      difficulty:1,
+      wave:[
+        [
+          ['LongPushFlamethrower',3],
+          ['BigSpreadSniper',1],
+          ['SpreadSniper',4],
+          ['CritLongPushFlamethrower',2],
+          ['BigSpreadSniper',1],
+          ['Pistol',4],
+          ['BigRocketLauncher',1],
+          ['FastPistol',4],
+          ['Sniper',1],
+        ],[
+          ['Flamethrower',4],
+          ['BigSpreadRocketLauncher',2],
+          ['Shotgun',3],
+          ['PushPistol',5],
+          ['BigFastPistol',1],
+          ['Pistol',2],
+          ['Spy',1],
+          ['Punch',4],
+        ],[
+          ['HeavyPunch',3],
+          ['Tank',1],
+          ['BigRocketLauncher',2],
+          ['SpreadSniper',4],
+          ['Pistol',4],
+          ['CritLongPushFlamethrower',3],
+          ['Punch',2],
+          ['Spy',2],
+        ],[
+          ['AssaultRifle',6],
+          ['RocketLauncher',2],
+          ['BigMachineGun',1],
+          ['Medic',3],
+          ['LongBaller',4],
+          ['BigShotgun',1],
+          ['Shotgun',2],
+          ['Spy',1],
+        ],[
+          ['BigRapidSpreadRocketLauncher',1],
+          ['FastPunch',4],
+          ['PushPistol',4],
+          ['BigBaller',1],
+          ['HyperMedic',1],
+          ['BigFlamethrower',1],
+          ['HyperMedic',1],
+          ['RocketLauncher',5],
+          ['MachineGun',2],
+          ['Sniper',2],
+          ['Spy',1],
+        ],[
+          ['Tank',1],
+          ['BigSpreadSniper',1],
+          ['HyperMedic',1],
+          ['CritApplyMedic',3],
+          ['BigDeflectorMachineGun',1],
+          ['Baller',3],
+          ['BigDeflectorMachineGun',1],
+          ['Baller',3],
+          ['Tank',1],
+          ['BigSpreadSniper',1],
+          ['HyperMedic',1],
+          ['CritApplyMedic',3],
+          ['BigDeflectorMachineGun',1],
+          ['CritPistol',1],
+          ['Spy',1],
+        ],
+      ],
+    },{
+      name:`Cash Ducks`,
+      sendTime:45,
+      difficulty:1,
+      wave:[
+        [
+          ['LongPunch',4],
+          ['Punch',5],
+          ['MachineGun',2],
+          ['PlusMedic',2],
+          ['BigFlamethrower',1],
+          ['PlusMedic',3],
+          ['HeavyPunch',2],
+          ['PlusMedic',2],
+        ],[
+          ['HyperPistol',4],
+          ['MachineGun',3],
+          ['PlusMedic',3],
+          ['BigFlamethrower',1],
+          ['PlusMedic',3],
+          ['Pistol',5],
+          ['Baller',3],
+        ],[
+          ['BigDirectRocketLauncher',1],
+          ['BigMedic',1],
+          ['BigRapidRadiusRocketLauncher',1],
+          ['Punch',6],
+          ['Baller',6],
+          ['SpreadSniper',1],
+          ['FastPistol',2],
+        ],[
+          ['BigFlamethrower',1],
+          ['CritShotgun',6],
+          ['BigShotgun',1],
+          ['BigMedic',1],
+          ['LightTank',2],
+          ['BigRocketLauncher',2],
+          ['RapidSpreadSniper',1],
+        ],[
+          ['MachineGunHealSelf',5],
+          ['BigCritRapidRocketLauncher',2],
+          ['Tank',1],
+          ['Kamikaze',5],
+          ['BigPushPistol',2],
+          ['RadiusRocketLauncher',4],
+        ],[
+          ['Pistol',11],
+          ['PushFlamethrower',4],
+          ['BigBaller',1],
+          ['RocketLauncher',3],
+          ['BigLongFlamethrower',1],
+          ['HyperMedic',1],
+        ],[
+          ['RocketLauncherBuff',2],
+          ['RocketLauncherDefendBuff',2],
+          ['HeavyPunch',2],
+          ['Pistol',4],
+          ['BigRocketLauncher',1],
+          ['BigBaller',1],
+          ['PlusMedic',10],
+        ],
+      ],
+    },{
+      name:`Duckocracy`,
+      sendTime:45,
+      difficulty:4,
+      wave:[
+        [
+          ['BigHeavyFlamethrower',2],
+          ['HeavyTank',1],
+
+          ['Wait',5],
+
+          ['PhaseCritRocketLauncher',3],
+          ['RocketLauncherStop',5],
+          ['PhaseFlamethrower',5],
+          ['HeavyRocketLauncher',2],
+          ['BigRapidRadiusRocketLauncher',2],
+          ['EngineerShield',4],
+          ['BigMultiHyperMedic',2],
+          ['CritPistol',3],
+          ['Sniper',2],
+          ['Spy',1],
+
+          ['Wait',5],
+
+          ['BigCritRapidRocketLauncher',1],
+          ['HyperMedic',1],
+          ['BigRapidCritBaller',1],
+          ['HyperMedic',1],
+          ['PhasePistol',4],
+          //40
+
+          ['Wait',10],
+
+          ['BigBaller',2],
+          ['HyperMedic',2],
+          ['BigFlamethrower',2],
+          ['HyperMedic',2],
+
+          ['Wait',5],
+
+          ['BigFastFlamethrower',2],
+          ['HyperMedic',2],
+
+          ['Wait',5],
+
+          ['Tank',2],
+          ['CritSpreadSniper',3],
+          ['RapidBaller',3],
+          ['RocketLauncherBuff',2],
+          ['BigCritRocketLauncher',2],
+          ['BigMedicShield',1],
+          ['BigMedicAura',1],
+
+          ['Wait',5],
+
+          ['RocketLauncherHeal',2],
+          ['BigRapidGrenadier',2],
+          ['BigHyperMedic',2],
+
+          ['Wait',5],
+
+          ['BigPushFlamethrower',2],
+          ['BigDefendApplyMedic',2],
+
+          ['Wait',5],
+
+          ['BigRapidRocketLauncher',2],
+          ['BigDefendApplyMedic',2],
+          //40
+
+          ['Wait',20],
+
+          ['RapidPistol',4],
+          ['CritPistol',4],
+          ['CritShotgun',4],
+          ['CritRocketLauncher',4],
+          ['CritFlamethrower',4],
+
+          ['Wait',5],
+
+          ['RapidBaller',4],
+          ['CritBaller',4],
+          ['CritSniper',4],
+          ['CritMachineGun',4],
+          ['CritSpy',4],
+          //40
+
+          ['Wait',10],
+
+          ['BigCritShotgun',2],
+          ['BigCritPushPistol',2],
+
+          ['Wait',5],
+
+          ['BigCritRocketLauncherHealSelf',2],
+          ['BigLongCritFlamethrower',2],
+
+          ['Wait',5],
+
+          ['BigLongBaller',2],
+          ['BigMedic',2],
+
+          ['Wait',5],
+
+          ['BigCritAssaultRifle',2],
+          ['BigMachineGunCritSelf',2],
+
+          ['Wait',5],
+
+          ['BigCritRocketLauncherDefendBuff',2],
+          ['BigCritHeavyPistol',2],
+          //20
+
+          ['Wait',10],
+
+          ['NapalmFlamethrower',5],
+          ['PaperTank',1],
+          ['LightTank',1],
+          ['Tank',1],
+          ['HeavyTank',1],
+          ['MegaTank',1],
+          //10
+
+          ['Wait',10],
+
+          ['PistolingTank',1],
+          ['RocketLaunchingTank',1],
+          ['BallingTank',1],
+          ['FlamethrowingTank',1],
+          ['EngineeringTank',1],
+          ['AutoTank',1],
+          ['TankSpawner',1],
+          ['HyperTank',1],
+          ['SpyTank',1],
+          //9
+
+          ['Wait',10],
+
+          ['SegmentationBoss',1],
+          //1
+        ],
+      ],
+    },{
+      name:`Choir of Ducks`,
+      sendTime:45,
+      difficulty:3,
+      wave:[
+        [
+          ['BigCritRocketLauncher',2],
+          ['HeavyPunch',5],
+          ['Shotgun',8],
+          ['Medic',8],
+          ['BigBaller',2],
+          //25
+
+          ['Wait',15],
+
+          ['BigShotgun',2],
+          ['LightTank',1],
+          ['Flamethrower',6],
+          ['RocketLauncher',7],
+          ['BigCritBaller',3],
+          ['HeavyPunch',6],
+          //25
+
+          ['Wait',15],
+
+          ['CritHeavyPunch',5],
+          ['Shotgun',5],
+          ['BigRapidRocketLauncher',2],
+          ['Medic',6],
+          ['SpreadSniper',3],
+          ['Baller',4],
+          //25
+
+          ['Wait',15],
+
+          ['CritSpreadSniper',4],
+          ['CritRocketLauncher',4],
+          ['CritFlamethrower',4],
+          ['LightTank',1],
+          ['CritRocketLauncher',4],
+          ['LightTank',1],
+          ['BigShotgun',3],
+          ['CritPistol',4],
+          //25
+
+          ['Wait',15],
+
+          ['BigCritRocketLauncher',1],
+          ['BigMedic',1],
+          ['BigCritFlamethrower',1],
+          ['CritPistol',4],
+          ['BigDeflectorMachineGun',1],
+          ['CritSpreadSniper',2],
+          ['RapidCritBaller',4],
+          ['CritMachineGun',2],
+          ['BigSpamCritRocketLauncher',1],
+          ['Tank',1],
+          ['BigCritShotgun',1],
+          ['LightTank',2],
+          ['Sniper',2],
+          ['Engineer',1],
+          ['RocketLauncherBuff',1],
+          //25
+        ],
+      ],
+    },{
+      name:`Duckstorm`,
+      sendTime:30,
+      difficulty:1,
+      wave:[
+        [
+          ['Punch',1],
+          ['HeavyPunchDefendBuff',4],
+          ['Punch',7],
+          ['HyperPistol',2],
+          ['PistolHealSelf',4],
+          ['RapidPushPistol',5],
+        ],[
+          ['HyperPistol',3],
+          ['PistolHealSelfJump',3],
+          ['LightTank',1],
+          ['FastPunch',6],
+          ['BigMachineGun',1],
+          ['BigMedic',1],
+          ['BigDamageOverTimeMachineGun',1],
+          ['BigMedic',1],
+          ['Spy',2],
+          ['Sniper',2],
+        ],[
+          ['BigFastPistol',3],
+          ['PistolJump',4],
+          ['RocketLauncherDefendBuff',2],
+          ['Shotgun',2],
+          ['BigSpamRocketLauncher',1],
+          ['HyperMedic',4],
+          ['TinyFlamethrower',5],
+        ],[
+          ['RocketLauncherHealSelf',6],
+          ['FastPunch',3],
+          ['Tank',1],
+          ['BigBarrageRocketLauncher',1],
+          ['HyperMedic',2],
+          ['DamageOverTimeMachineGunBuff',3],
+          ['RocketLauncherDefendBuff',2],
+          ['RocketLauncher',4],
+        ],[
+          ['BigShotgun',2],
+          ['Flamethrower',4],
+          ['Baller',4],
+          ['BigHyperPistol',1],
+          ['BigMachineGun',1],
+          ['HyperMedic',6],
+          ['SpreadSniper',3],
+          ['Spy',1],
+        ],[
+          ['BigDeflectorMachineGun',1],
+          ['BigRocketLauncherDefendBuff',1],
+          ['BigDeflectorMachineGun',1],
+          ['BigRocketLauncherBuff',1],
+          ['BigDeflectorMachineGun',1],
+          ['BigCritApplyMedic',1],
+          ['HeavyTank',1],
+          ['TinyFlamethrower',4],
+          ['Spy',2],
+        ],
+      ],
+    },{
+      name:`Duck Entourage`,
+      sendTime:30,
+      difficulty:2,
+      wave:[
+        [
+          ['Flamethrower',2],
+          ['LongFlamethrower',4],
+          ['BigBaller',2],
+          ['Baller',9],
+          ['BigCritFlamethrower',2],
+          ['LongFlamethrower',4],
+          ['Pistol',2],
+          ['Punch',6],
+          ['Spy',1],
+        ],[
+          ['Shotgun',4],
+          ['RocketLauncherDefendBuffWide',2],
+          ['RocketLauncherBuff',8],
+          ['Tank',1],
+          ['Shotgun',5],
+          ['HyperMedic',5],
+          ['FastPunch',4],
+          ['Engineer',1],
+        ],[
+          ['BigFastPushPistol',2],
+          ['Baller',8],
+          ['BigDirectRocketLauncher',1],
+          ['HyperPistol',4],
+          ['CritPushFlamethrower',6],
+          ['Pistol',5],
+          ['Sniper',2],
+          ['Spy',2],
+        ],[
+          ['PunchRegen',10],
+          ['Pistol',7],
+          ['BigSpamRocketLauncher',1],
+          ['SpreadSniper',2],
+          ['RocketLauncher',4],
+          ['BigCritRocketLauncher',1],
+          ['Flamethrower',6],
+        ],[
+          ['BigBaller',1],
+          ['HyperMedic',1],
+          ['HeavyShotgun',6],
+          ['Baller',4],
+          ['HeavyPunch',3],
+          ['BigBaller',1],
+          ['HyperMedic',1],
+          ['BigRapidBaller',1],
+          ['HyperMedic',1],
+          ['MachineGun',4],
+          ['BigShotgun',1],
+          ['HyperMedic',3],
+          ['Flamethrower',2],
+          ['Sniper',2],
+        ],[
+          ['BigFastShotgun',2],
+          ['BigPushPistol',1],
+          ['BigRapidBaller',1],
+          ['PistolVulnerable',3],
+          ['RapidBaller',6],
+          ['BigShotgun',3],
+          ['FlamethrowingTank',1],
+          ['Spy',2],
+          ['Engineer',2],
+          ['Baller',6],
+        ],[
+          ['Spy',7],
+          ['Engineer',3],
+          ['BigFastHeavyPistol',1],
+          ['RocketMachineGunBoss',1],
+        ],
+      ],
+    },{
+      name:`Duck Construction`,
+      sendTime:30,
+      difficulty:1,
+      wave:[
+        [
+          ['Engineer',4],
+          ['BigEngineer',1],
+          ['RocketLauncher',6],
+          ['Pistol',4],
+        ],[
+          ['HeavyEngineer',2],
+          ['Punch',4],
+          ['EngineerDefendBuff',2],
+          ['Sniper',2],
+          ['Spy',2],
+          ['PushPistol',4],
+        ],[
+          ['EngineerSpawner',8],
+          ['Baller',8],
+        ],[
+          ['BallerEngineer',2],
+          ['RocketEngineer',2],
+          ['EngineerNode',2],
+          ['Baller',4],
+          ['RocketLauncher',4],
+        ],[
+          ['Shotgun',4],
+          ['Flamethrower',2],
+          ['BigRapidRadiusRocketLauncher',2],
+          ['EngineerShield',4],
+          ['BigMultiHyperMedic',2],
+          ['EngineeringTank',1],
+        ],
+      ],
+    },{
+      name:`Ducks Down Under`,
+      sendTime:30,
+      difficulty:2,
+      wave:[
+        [
+          ['DamageOverTimePunch',4],
+          ['BigDamageOverTimeMachineGun',2],
+          ['DamageOverTimePistol',9],
+          ['DamageOverTimeMachineGunDefendBuff',1],
+          ['DamageOverTimeSpreadSniper',4],//22
+          ['HeavyDamageOverTimePistol',4],
+          ['CritDamageOverTimePistol',3],
+          ['DamageOverTimeSniper',3],
+        ],[
+          ['BigMachineGunDamaged',4],
+          ['MachineGunDamaged',12],
+          ['HyperMedic',2],
+          ['PlusMedic',2],
+          ['BigCritRocketLauncherDamaged',4],
+          ['PistolJumpDamaged',4],
+          ['HyperMedic',2],
+          ['PlusMedic',2],
+          ['HeavyShotgunDamaged',5],
+          ['TankDamaged',1],
+          ['HyperMedic',2],
+          ['PlusMedic',2],
+        ],[
+          ['TinyFastPunch',8],
+          ['FastFlamethrower',4],
+          ['FastFlipPistol',4],
+          ['FastPunch',6],
+          ['BigFastMachineGunStop',1],
+          ['FastMedic',3],
+          ['FastPushPistol',4],
+          ['FastEngineer',1],
+        ],[
+          ['PistolConfuse',8],
+          ['HyperMedic',4],
+          ['FastPistol',2],
+          ['CritPhasePistol',2],
+          ['PhasePistol',4],
+          ['HeavyPistolConfuse',4],
+          ['PlusMedic',6],
+          ['HyperTank',1],
+        ],[
+          ['FlameBaller',8],
+          ['BigFlameBaller',1],
+          ['LongFlamethrower',6],
+          ['BigLongCritFlamethrower',1],
+          ['FlamethrowerHealSelf',4],
+          ['TinyFlamethrower',4],
+          ['LongPushFlamethrower',6],
+          ['FlamethrowingTank',1],
+        ],[
+          ['CritRadiusRocketLauncher',2],
+          ['RadiusGrenadier',8],
+          ['BigRadiusRocketLauncher',2],
+          ['BigCritRadiusRocketLauncher',1],
+          ['BigRapidRadiusGrenadier',1],
+          ['BigRapidRadiusRocketLauncher',1],
+          ['RapidRadiusRocketLauncher',8],
+          ['BigBarrageRadiusRocketLauncher',2],
+        ],
+      ],
+    },{
+      name:`Duck's Doom`,
+      sendTime:30,
+      difficulty:1,
+      wave:[
+        [
+          ['Pistol',16],
+          ['BigRocketLauncher',1],
+          ['Flamethrower',4],
+        ],[
+          ['Tank',1],
+          ['Baller',10],
+          ['MachineGun',8],
+          ['BigFastPistol',1],
+        ],[
+          ['PushPistol',1],
+          ['SpreadSniper',4],
+          ['RocketLauncher',8],
+          ['Flamethrower',1],
+          ['SpreadSniper',4],
+          ['Spy',2],
+        ],[
+          ['HeavyPunch',1],
+          ['LongCritFlamethrower',2],
+          ['RocketLauncherDefendBuff',1],
+          ['FastPunch',4],
+          ['BigCritRocketLauncher',1],
+          ['LongCritFlamethrower',2],
+          ['RocketLauncherDefendBuff',1],
+          ['FastPunch',4],
+          ['BigDamageOverTimeMachineGun',1],
+          ['LongCritFlamethrower',2],
+          ['RocketLauncherDefendBuff',1],
+        ],[
+          ['Flamethrower',2],
+          ['BigSpamRocketLauncher',2],
+          ['PlusMedic',4],
+          ['Flamethrower',1],
+          ['RocketLauncher',5],
+          ['Pistol',3],
+          ['PushPistol',1],
+          ['Sniper',1],
+        ],[
+          ['Pistol',11],
+          ['MachineGun',6],
+          ['Baller',4],
+          ['Sniper',2],
+          ['Spy',2],
+        ],[
+          ['Tank',1],
+          ['RapidPunch',2],
+          ['MachineGun',4],
+          ['Tank',1],
+          ['BigMachineGun',1],
+          ['PlusMedic',5],
+          ['Spy',2],
+          ['Pistol',3],
+        ],
+      ],
+    },{
+      name:`Duck Gambit`,
+      sendTime:30,
+      difficulty:0,
+      wave:[
+        [
+          ['BigFastPistol',1],
+          ['Baller',9],
+        ],[
+          ['BigFlamethrower',1],
+          ['BigPunch',1],
+          ['HyperPistol',5],
+          ['Flamethrower',3],
+        ],[
+          ['BigShotgun',1],
+          ['BigFlipPistol',1],
+          ['BigFlamethrower',1],
+          ['BigBaller',1],
+          ['HyperMedic',2],
+        ],[
+          ['BigHeavyPushPistol',2],
+          ['RocketLauncherBuff',1],
+          ['BigFastPistol',1],
+          ['DeflectorMachineGun',4],
+          ['RocketLauncherDefendBuff',1],
+        ],[
+          ['Shotgun',7],
+          ['BigRocketLauncherBuff',1],
+          ['MedicShield',1],
+        ],[
+          ['Tank',1],
+          ['BigShotgun',1],
+          ['BigFlipPistol',1],
+          ['BigFlamethrower',1],
+          ['BigBaller',1],
+        ],[
+          ['BigPushFlamethrower',1],
+          ['BigRapidBaller',1],
+          ['BigHyperPistol',1],
+          ['BigRocketLauncher',1],
+        ],[
+          ['BigPistolJump',1],
+          ['BigRocketLauncherHeal',1],
+          ['BigRadiusRocketLauncher',1],
+          ['BigRocketLauncherHealSelf',1],
+          ['BigDeflectorMachineGun',1],
+        ],
+      ],
+    },{
+      name:`Ruined Ducks`,
+      sendTime:45,
+      difficulty:2,
+      wave:[
+        [
+          ['Pistol',6],
+          ['RocketLauncher',3],
+          ['Flamethrower',2],
+          ['Baller',4],
+          ['BigSpamRocketLauncher',1],
+          ['FastPunch',6],
+          ['AssaultRifle',2],
+          ['MachineGun',4],
+          ['BigPistolJump',1],
+          ['CritFlamethrower',1],
+          ['SpreadSniper',6],
+          ['BigShotgun',1],
+          ['Engineer',1],
+          ['Spy',3],
+        ],[
+          ['Tank',2],
+          ['BigMachineGun',1],
+          ['RocketLauncherBuff',2],
+          ['PushFlamethrower',2],
+          ['FastHeavyPunch',4],
+          ['BigSingleBaller',2],
+          ['MachineGun',4],
+          ['RocketLauncherDefendBuff',2],
+          ['Shotgun',10],
+          ['BigRapidSpreadRocketLauncher',1],
+          ['RapidBaller',2],
+          ['Flamethrower',2],
+          ['Engineer',1],
+          ['Sniper',2],
+          ['Spy',3],
+        ],[
+          ['MachineGunFirework',6],
+          ['Flamethrower',4],
+          ['BigCritDeflectorMachineGun',1],
+          ['HyperMedic',2],
+          ['RapidBaller',4],
+          ['HeavyPunch',2],
+          ['BigRocketLauncherDefendBuff',2],
+          ['Shotgun',4],
+          ['SingleBaller',11],
+          ['BigCritFlamethrower',1],
+          ['BigRapidCritBaller',1],
+          ['HeavyTank',1],
+          ['BigSpamRocketLauncher',1],
+          ['HyperMedic',1],
+          ['Engineer',1],
+        ],
+      ],
+    },{
+      name:`Dawn of Ducks`,
+      sendTime:30,
+      difficulty:1,
+      wave:[
+        [
+          ['BigRocketLauncher',2],
+          ['Punch',9],
+          ['RocketLauncher',2],
+          ['PushShotgun',3],
+          ['TinyPunch',3],
+          ['Sniper',1],
+        ],[
+          ['BigFastLongPunch',2],
+          ['BigBaller',2],
+          ['AutoTank',1],
+          ['Pistol',6],
+          ['Baller',4],
+          ['RocketLauncher',4],
+          ['Spy',2],
+        ],[
+          ['Flamethrower',6],
+          ['PushFlamethrower',3],
+          ['FastPunch',4],
+          ['BigSpamRocketLauncher',2],
+          ['HyperMedic',1],
+          ['MachineGun',2],
+          ['Baller',2],
+          ['Sniper',1],
+        ],[
+          ['BigMachineGun',1],
+          ['BigSpamRocketLauncher',1],
+          ['TinyPunch',4],
+          ['RocketLauncher',5],
+          ['FlameSphere',5],
+          ['LightTank',2],
+          ['FastPunch',3],
+          ['Sniper',1],
+        ],[
+          ['BigRapidBaller',1],
+          ['BigFlamethrower',2],
+          ['BigRapidRocketLauncher',2],
+          ['CritShotgun',6],
+          ['AssaultRifle',3],
+          ['Baller',5],
+          ['HyperMedic',2],
+          ['Pistol',4],
+          ['Sniper',1],
+        ],[
+          ['PushFlamethrower',4],
+          ['BigPushShotgun',2],
+          ['LightTank',4],
+          ['HyperMedic',2],
+          ['BigRapidCritBaller',2],
+          ['BigBarrageCritRocketLauncher',1],
+          ['BigCritDeflectorMachineGun',1],
+          ['MachineGun',3],
+          ['Spy',1],
+          ['Sniper',1],
+        ],
+      ],
+    },{
+      name:`Trial of the 25`,
+      sendTime:30,
+      difficulty:5,
+      wave:[
+        [
+          ['Pistol',5],
+          ['Punch',5],
+          ['Flamethrower',5],
+          ['MachineGun',5],
+          ['Sniper',5],
+        ],[
+          ['TinyPunch',5],
+          ['BarrageRocketLauncher',5],
+          ['Sniper',5],
+          ['Baller',5],
+          ['PushPistol',5],
+        ],[
+          ['LongPelletBaller',5],
+          ['RocketLauncher',5],
+          ['FastPistol',5],
+          ['Spy',5],
+          ['Flamethrower',5],
+        ],[
+          ['RadiusRocketLauncher',5],
+          ['LongFlamethrower',5],
+          ['PistolJump',5],
+          ['CritBaller',5],
+          ['ShotgunChain',5],
+        ],[
+          ['BigCritRocketLauncher',5],
+          ['Sniper',5],
+          ['ShotgunWeak',5],
+          ['DeflectorMachineGun',5],
+          ['HyperPistol',5],
+        ],[
+          ['HeavyPunch',5],
+          ['Baller',5],
+          ['PlusMedic',5],
+          ['RocketLauncher',5],
+          ['LongFlamethrower',5],
+        ],[
+          ['RocketLauncherDefendBuff',5],
+          ['FastShotgun',5],
+          ['PushPistol',5],
+          ['RapidRocketLauncher',5],
+          ['BigCritFlamethrower',5],
+        ],[
+          ['MachineGun',5],
+          ['TobaccoFlamethrower',5],
+          ['HyperTank',5],
+          ['Baller',5],
+          ['CritApplyMedic',5],
+        ],[
+          ['BigGrenadierFuse',5],
+          ['Medic',5],
+          ['RocketLauncherDefendBuff',5],
+          ['Shotgun',5],
+          ['SpreadSniper',5],
+        ],[
+          ['BigRocketLauncherDoubleBuff',5],
+          ['Shotgun',5],
+          ['Flamethrower',5],
+          ['Baller',5],
+          ['PistolWeak',5],
+        ],[
+          ['SpreadSniper',5],
+          ['BigSpamRocketLauncher',5],
+          ['BigFastPistol',5],
+          ['HyperMedic',5],
+          ['MachineGun',5],
+        ],[
+          ['Grenadier',5],
+          ['FastFlamethrower',5],
+          ['BigRapidSlowRocketLauncherStop',5],
+          ['HyperMedic',5],
+          ['RapidBaller',5],
+        ],[
+          ['TinyCritPunch',5],
+          ['BigFastSpreadSniper',5],
+          ['PushShotgun',5],
+          ['HeavyPunch',5],
+          ['Pistol',5],
+        ],[
+          ['PaperTank',5],
+          ['BigGrenadier',5],
+          ['PistolHealSelf',5],
+          ['BigCritMedic',5],
+          ['CritPistol',5],
+        ],[
+          ['EngineerWeak',5],
+          ['PullPistol',5],
+          ['CritAssaultRifle',5],
+          ['RevolverSpy',5],
+          ['BigDeflectorMachineGun',5],
+        ],[
+          ['RocketLauncherBuff',5],
+          ['CritPistol',5],
+          ['MachineGun',5],
+          ['BigFastPunch',5],
+          ['HyperPistol',5],
+        ],[
+          ['HeavyShotgun',5],
+          ['BigPunch',5],
+          ['Baller',5],
+          ['Engineer',5],
+          ['BigRapidRadiusRocketLauncher',5],
+        ],[
+          ['BigKamikaze',5],
+          ['HeavyPunch',5],
+          ['GrenadierFuse',5],
+          ['BigGrenadier',5],
+          ['FastPunch',5],
+        ],[
+          ['CritSniper',5],
+          ['CritPistol',5],
+          ['BigCritFlamethrower',5],
+          ['BigSpamRocketLauncher',5],
+          ['Flamethrower',5],
+        ],[
+          ['TankSpawner',5],
+          ['BigDeflectorMachineGun',5],
+          ['BigCritApplyMedic',5],
+          ['HyperMedic',5],
+          ['Kamikaze',5],
+        ],[
+          ['BigMachineGun',5],
+          ['RemoverSniper',5],
+          ['HyperMedic',5],
+          ['Tank',5],
+          ['BigFastPistol',5],
+        ],[
+          ['BigNapalmFlamethrower',5],
+          ['HyperShotgun',5],
+          ['FastLongFlamethrower',5],
+          ['RapidRocketLauncherHealSelf',5],
+          ['RemoverSniper',5],
+        ],[
+          ['MedicShield',5],
+          ['HyperCaffeinePistol',5],
+          ['LightTank',5],
+          ['BigShotgun',5],
+          ['PhaseCritRocketLauncher',5],
+        ],[
+          ['BigEngineer',5],
+          ['FlameSphere',5],
+          ['PlusMedic',5],
+          ['BigRapidBaller',5],
+          ['Shotgun',5],
+        ],[
+          ['BigCritPunch',5],
+          ['BigCritRocketLauncher',5],
+          ['BigMachineGun',5],
+          ['BigRapidBaller',5],
+          ['AutoTank',4],
+          ['SpawnerBoss',1],
+        ],
+      ],
     },
   ],player:[
     {
@@ -1573,22 +2885,22 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'PlayerPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'PlayerMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:2,
     },{
-      name:'PlayerRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:3,
+      name:'PlayerRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:3,
     },{
       name:'PlayerSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:6,
     },{
       name:'PlayerBaller',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:7,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:7,
     },{
       name:'PlayerFlamethrower',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:8,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:8,
     },{
       name:'PlayerEngineer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:10,
@@ -1596,113 +2908,806 @@ types={
       name:'PlayerMedic',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1.25,crit:0,weapon:11,
     },
-
+    
     {
-      name:'PlayerShotgunBurst',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:22,
+      name:'PlayerSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:137,
     },{
-      name:'PlayerPushPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:15,
+      name:'PlayerAssaultRifle',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:4,
     },{
-      name:'PlayerSpamMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:34,
+      name:'PlayerGrenadier',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:36,
     },{
-      name:'PlayerClusterRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:3,crit:0,weapon:88,
+      name:'PlayerTrapper',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:197,
     },{
-      name:'PlayerSpreadSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:12,
+      name:'PlayerDestroyer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:212,
     },{
-      name:'PlayerBombBaller',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:36,
+      name:'PlayerSunburst',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:234,
     },{
-      name:'PlayerFlamethrower',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:19,
+      name:'PlayerStealth',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:240,
     },{
-      name:'PlayerBallerEngineer',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:35,
+      name:'PlayerBonker',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:242,
     },{
-      name:'PlayerCritApplyMedic',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:44,
+      name:'PlayerParachutist',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:279,
+    },
+    
+    {
+      name:'PlayerHelix',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:258,
+    },{
+      name:'PlayerDirector',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:202,
+    },{
+      name:'PlayerMotorizer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:191,
+    },{
+      name:'PlayerSwarmer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:284,
+    },{
+      name:'PlayerSidekick',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:227,
+    },{
+      name:'PlayerSoftware',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:222,
+    },{
+      name:'PlayerSpreadling',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:309,
+    },{
+      name:'PlayerDasher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:319,
+    },{
+      name:'PlayerEmplacement',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:320,
+    },
+    
+    {
+      name:'PlayerGunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:176,
+    },{
+      name:'PlayerRevolver',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:136,
+    },{
+      name:'PlayerInspector',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:153,
+    },{
+      name:'PlayerElectrifyer',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:133,
+    },{
+      name:'PlayerRearguard',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:190,
+    },{
+      name:'PlayerBallista',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:231,
     },
 
     {
       name:'PlayerSniperShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:1,crit:0,weapon:89,
     },{
+      name:'PlayerBallerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:90,
+    },{
+      name:'PlayerDroneShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:224,
+    },{
+      name:'PlayerPanicShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:167,
+    },{
+      name:'PlayerShotgunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:177,
+    },
+    
+    {
+      name:'PlayerPushierPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:130,
+    },{
+      name:'PlayerPistolQuadrupleJump',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:131,
+    },{
       name:'PlayerPistolVulnerable',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:53,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:53,
     },{
-      name:'PlayerMachineGunCritSelf',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:42,
+      name:'PlayerPistolOfficer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:142,
     },{
-      name:'PlayerPushRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:3,crit:0,weapon:20,
+      name:'PlayerPistolception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:178,
+    },
+    
+    {
+      name:'PlayerSaturationMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:161,
+    },{
+      name:'PlayerMachineGunFirework',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:124,
+    },{
+      name:'PlayerMachineHybrid',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:219,
+    },{
+      name:'PlayerSprayerMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:175,
+    },{
+      name:'PlayerMachineGunception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:179,
+    },
+    
+    {
+      name:'PlayerClusterRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:88,
+    },{
+      name:'PlayerVolleyRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:128,
+    },{
+      name:'PlayerGarbageLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:3,crit:0,weapon:144,
+    },{
+      name:'PlayerRocketLauncherception',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:180,
+    },{
+      name:'PlayerRocketBattery',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:162,
+    },
+    
+    {
+      name:'PlayerShootist',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:249,
     },{
       name:'PlayerMachineSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
       damageBuff:1.5,reloadBuff:2,crit:0,weapon:92,
     },{
+      name:'PlayerSharpSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:93,
+    },{
+      name:'PlayerFreezeSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:299,
+    },{
+      name:'PlayerSniperception',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:181,
+    },
+    
+    {
+      name:'PlayerSnowballer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:164,
+    },{
       name:'PlayerBarrageBaller',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:65,
+      damageBuff:1.5,reloadBuff:3,crit:0,weapon:65,
+    },{
+      name:'PlayerBoulderBaller',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2,reloadBuff:3,crit:0,weapon:148,
+    },{
+      name:'PlayerFattener',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:218,
+    },{
+      name:'PlayerBallerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:182,
+    },
+    
+    {
+      name:'PlayerFlameSphere',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:125,
     },{
       name:'PlayerFlamethrowerDual',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:97,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:97,
+    },{
+      name:'PlayerFlamethrowerPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:98,
+    },{
+      name:'PlayerTobaccoFlamethrower',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:281,
+    },{
+      name:'PlayerFlamethrowerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:183,
+    },
+    
+    {
+      name:'PlayerBallerEngineer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:35,
     },{
       name:'PlayerRocketEngineer',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:95,
     },{
-      name:'PlayerDefendApplyMedic',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:83,
-    },
-
-    {
-      name:'PlayerBallerShotgun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:90,
-    },{
-      name:'PlayerPistolConfuse',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:91,
-    },{
-      name:'PlayerDeflectorMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:16,
-    },{
-      name:'PlayerRocketLauncherHealSelf',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:3,crit:0,weapon:26,
-    },{
-      name:'PlayerSharpSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
-      damageBuff:1.5,reloadBuff:2,crit:0,weapon:93,
-    },{
-      name:'PlayerStraightBaller',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:94,
-    },{
-      name:'PlayerFlamethrowerPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:98,
-    },{
       name:'PlayerEngineerNode',sizeBuff:1,lifeBuff:4,speedBuff:1,
       damageBuff:1,reloadBuff:2,crit:0,weapon:96,
     },{
-      name:'PlayerMedicDoubleJump',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:100,
-    },
-
-    {
-      name:'PlayerAssaultRifle',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1.5,crit:0,weapon:4,
+      name:'PlayerEngineerMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:146,
     },{
-      name:'PlayerKamikaze',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:5,
-    },{
-      name:'PlayerAutoPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:99,
-    },{
-      name:'PlayerImmortal',sizeBuff:1,lifeBuff:4,speedBuff:1,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:101,
+      name:'PlayerEngineerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:184,
     },
     
     {
+      name:'PlayerCritApplyMedic',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:44,
+    },{
+      name:'PlayerMedicAura',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:127,
+    },{
+      name:'PlayerDefendApplyMedic',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:83,
+    },{
+      name:'PlayerAtrophy',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:250,
+    },{
+      name:'PlayerMedicception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:185,
+    },
+    
+    {
+      name:'PlayerRecursiveSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:138,
+    },{
+      name:'PlayerPropellerSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:139,
+    },{
+      name:'PlayerAssaultSlicer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:140,
+    },{
+      name:'PlayerSlicerLinger',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:147,
+    },{
+      name:'PlayerSlicerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:186,
+    },
+    
+    {
+      name:'PlayerStreamlinedRifle',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:149,
+    },{
+      name:'PlayerTwinAssaultRifle',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:156,
+    },{
+      name:'PlayerAssaultRiflePierce',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2,reloadBuff:1.25,crit:0,weapon:157,
+    },{
+      name:'PlayerAssaultRifleSplasher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2,reloadBuff:1.25,crit:0,weapon:168,
+    },{
+      name:'PlayerAssaultRifleception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:187,
+    },
+    
+    {
+      name:'PlayerMortar',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:151,
+    },{
+      name:'PlayerRadiusPushGrenadier',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:169,
+    },{
+      name:'PlayerShrapnelGrenadier',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:170,
+    },{
+      name:'PlayerGrenadierFuse',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:280,
+    },{
+      name:'PlayerGrenadierception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:188,
+    },
+
+    {
+      name:'PlayerMinelayer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:196,
+    },{
+      name:'PlayerGatekeeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:278,
+    },{
+      name:'PlayerAirhorn',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:199,
+    },{
+      name:'PlayerIcebox',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:200,
+    },{
+      name:'PlayerTrapperception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:201,
+    },
+
+    {
+      name:'PlayerSparkler',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:248,
+    },{
+      name:'PlayerScythe',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:214,
+    },{
+      name:'PlayerFieldcannon',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:215,
+    },{
+      name:'PlayerDonut',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:216,
+    },{
+      name:'PlayerDestroyerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:217,
+    },
+
+    {
+      name:'PlayerTripleSunburst',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:221,
+    },{
+      name:'PlayerStarburst',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:235,
+    },{
+      name:'PlayerSunset',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.25,crit:0,weapon:236,
+    },{
+      name:'PlayerMoonbeam',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:239,
+    },{
+      name:'PlayerSunburstception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:238,
+    },
+    
+    {
+      name:'PlayerHuntress',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:237,
+    },{
+      name:'PlayerGriefer',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:213,
+    },{
+      name:'PlayerFog',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:244,
+    },{
+      name:'PlayerSurprise',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:245,
+    },{
+      name:'PlayerStealthception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:241,
+    },
+    
+    {
+      name:'PlayerRecoiler',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:194,
+    },{
+      name:'PlayerBorder',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:246,
+    },{
+      name:'PlayerThrasher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:247,
+    },{
+      name:'PlayerDisappointment',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:253,
+    },{
+      name:'PlayerIceberg',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:243,
+    },
+
+    {
+      name:'PlayerParaRocketLauncher',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:3,crit:0,weapon:107,
+    },{
+      name:'PlayerParaGrenadier',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:166,
+    },{
+      name:'PlayerDropship',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:282,
+    },{
+      name:'PlayerStratofortress',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:271,
+    },{
+      name:'PlayerApache',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:289,
+    },
+
+    {
+      name:'PlayerHistone',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1.5,crit:0,weapon:223,
+    },{
+      name:'PlayerEdge',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:290,
+    },{
+      name:'PlayerDeacetylase',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:291,
+    },{
+      name:'PlayerTubular',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:292,
+    },{
+      name:'PlayerHelixception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:286,
+    },
+
+    {
+      name:'PlayerSuzerain',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:267,
+    },{
+      name:'PlayerPrimeDirector',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:205,
+    },{
+      name:'PlayerComplexDirector',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:287,
+    },{
+      name:'PlayerKinoko',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:211,
+    },{
+      name:'PlayerDirectorception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:206,
+    },
+
+    {
+      name:'PlayerAnimator',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:226,
+    },{
+      name:'PlayerSolarSystem',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:230,
+    },{
+      name:'PlayerTanuki',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:265,
+    },{
+      name:'PlayerMilitia',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:266,
+    },{
+      name:'PlayerMotorizerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:228,
+    },
+
+    {
+      name:'PlayerCarrier',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:203,
+    },{
+      name:'PlayerSovereign',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:302,
+    },{
+      name:'PlayerDial',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:220,
+    },{
+      name:'PlayerTempest',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:294,
+    },{
+      name:'PlayerSwarmerception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:285,
+    },
+
+    {
+      name:'PlayerSubordinate',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:256,
+    },{
+      name:'PlayerQuisling',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:257,
+    },{
+      name:'PlayerChrome',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:259,
+    },{
+      name:'PlayerCoadjutor',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:300,
+    },{
+      name:'PlayerMafia',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:254,
+    },
+
+    {
+      name:'PlayerHardware',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:225,
+    },{
+      name:'PlayerStuxnet',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:274,
+    },{
+      name:'PlayerAirtag',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:275,
+    },{
+      name:'PlayerHaunted',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:276,
+    },{
+      name:'PlayerSoftwareception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:277,
+    },
+
+    {
+      name:'PlayerPrism',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:316,
+    },{
+      name:'PlayerUnfurler',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:313,
+    },{
+      name:'PlayerCrescent',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:317,
+    },{
+      name:'PlayerCentrist',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:207,
+    },{
+      name:'PlayerSpreadlingception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:318,
+    },
+
+    {
+      name:'PlayerShootingStar',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:268,
+    },{
+      name:'PlayerHeron',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:306,
+    },{
+      name:'PlayerPitohui',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:307,
+    },{
+      name:'PlayerRipple',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:308,
+    },{
+      name:'PlayerDasherception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:321,
+    },
+
+    {
+      name:'PlayerImpeachment',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:204,
+    },{
+      name:'PlayerEntrapment',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:303,
+    },{
+      name:'PlayerReplacement',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:304,
+    },{
+      name:'PlayerEmbattlement',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:305,
+    },{
+      name:'PlayerEmplacementception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:322,
+    },
+
+    {
+      name:'PlayerGaslighter',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:195,
+    },{
+      name:'PlayerSingleRevolver',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:150,
+    },{
+      name:'PlayerOpticalInspector',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:154,
+    },{
+      name:'PlayerFlakZone',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:165,
+    },{
+      name:'PlayerRotary',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:208,
+    },{
+      name:'PlayerRibbon',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:232,
+    },
+    
+    {
+      name:'PlayerDeployerM',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:152,
+    },{
+      name:'PlayerDeployerR',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:159,
+    },{
+      name:'PlayerDeployerS',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:173,
+    },{
+      name:'PlayerDeployerF',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:174,
+    },{
+      name:'PlayerDeployerME',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:192,
+    },{
+      name:'PlayerDeployerG',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:273,
+    },
+    
+    {
+      name:'PlayerConglomeration',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:158,
+    },{
+      name:'PlayerFreezeRay',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:283,
+    },{
+      name:'PlayerBooster',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:114,
+    },{
+      name:'PlayerCursor',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1,crit:0,weapon:251,
+    },{
+      name:'PlayerBulletHell',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:261,
+    },{
+      name:'PlayerRho',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:315,
+    },{
+      name:'PlayerRocketMasher',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:210,
+    },{
+      name:'PlayerDiabolist',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:262,
+    },{
+      name:'PlayerSpy',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:171,
+    },{
+      name:'PlayerPizzaria',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:229,
+    },{
+      name:'PlayerDegausser',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:312,
+    },{
+      name:'PlayerDispenser',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:293,
+    },{
+      name:'PlayerGlove',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:295,
+    },{
+      name:'PlayerXenon',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:296,  
+    },{
+      name:'PlayerGroundwire',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:297,
+    },{
+      name:'PlayerDivision',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:298,
+    },{
+      name:'PlayerMacro',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:314,
+    },{
+      name:'PlayerBattlerock',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:323,
+    },{
+      name:'PlayerPortafortress',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:324,
+    },{
+      name:'PlayerIsthmus',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:325,
+    },
+
+    {
+      name:'PlayerMinesweeper',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:189,
+    },{
+      name:'PlayerTripleAuto',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:155,
+    },{
+      name:'PlayerAutoPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:99,
+    },{
+      name:'PlayerDoublePushPunchArmored',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:134,
+    },{
+      name:'PlayerHexadecimalPistol',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:135,
+    },{
+      name:'PlayerImmortal',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:101,
+    },{
+      name:'PlayerUpdraft',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:193,
+    },{
+      name:'PlayerKamikaze',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:5,reloadBuff:1,crit:0,weapon:5,
+    },{
+      name:'PlayerGunceptionception',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:252,
+    },{
+      name:'PlayerDullahan',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:263,
+    },{
+      name:'PlayerGenerator',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:209,
+    },{
+      name:'PlayerStraightBaller',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2,reloadBuff:4,crit:0,weapon:94,
+    },{
+      name:'PlayerPushMachineGun',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:163,
+    },{
+      name:'PlayerShotgunChain',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:22,
+    },{
+      name:'PlayerBombSniper',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:132,
+    },{
+      name:'PlayerMedicArmored',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:129,
+    },{
+      name:'PlayerNapalmFlamethrower',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:2,reloadBuff:1,crit:0,weapon:109,
+    },{
+      name:'PlayerSplitter',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:260,
+    },{
+      name:'PlayerSniperStop',sizeBuff:1,lifeBuff:4,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:145,
+    },{
+      name:'PlayerAdjunct',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:288,
+    },{
+      name:'PlayerDoubleAuto',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:255,
+    },{
+      name:'PlayerGlassCannon',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:160,
+    },{
+      name:'PlayerDeployerD',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:310,
+    },{
+      name:'PlayerDeployerA',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:311,
+    },{
+      name:'PlayerTrapguard',sizeBuff:1,lifeBuff:4,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:198,
+    },
+
+    {
+      name:'ConstructMachineGun',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:2,
+    },{
+      name:'ConstructRocketLauncher',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:3,
+    },{
+      name:'ConstructSniper',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:6,
+    },{
+      name:'ConstructFlamethrower',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:8,
+    },{
+      name:'ConstructMedic',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:11,
+    },{
+      name:'ConstructGuard',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1.25,crit:0,weapon:272,
+    },{
+      name:'ConstructDestroyer',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:212,
+    },{
+      name:'ConstructAuto',sizeBuff:1,lifeBuff:3,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:99,
+    },
+
+    {
+      name:'SidekickGun',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:233,
+    },{
+      name:'SidekickDoubleAuto',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:255,
+    },{
+      name:'SidekickTrapper',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:264,
+    },{
+      name:'SidekickShotgun',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+    },{
+      name:'SidekickHelix',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:258,
+    },{
+      name:'SidekickSniper',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:6,
+    },{
+      name:'SidekickRocketLauncher',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1.5,reloadBuff:2.5,crit:0,weapon:3,
+    },{
+      name:'SidekickShootist',sizeBuff:0.8,lifeBuff:2,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:249,
+    },{
+      name:'SidekickMachineSniper',sizeBuff:0.8,lifeBuff:2,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:92,
+    },{
+      name:'SidekickSharpSniper',sizeBuff:0.8,lifeBuff:2,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:93,
+    },{
+      name:'SidekickFreezeSniper',sizeBuff:0.8,lifeBuff:2,speedBuff:1.25,
+      damageBuff:1.5,reloadBuff:2,crit:0,weapon:299,
+    },{
+      name:'SidekickMachineGun',sizeBuff:0.8,lifeBuff:2,speedBuff:1,
+      damageBuff:1.25,reloadBuff:1.5,crit:0,weapon:2,
+    },{
+      name:'SidekickLight',sizeBuff:0.6,lifeBuff:1,speedBuff:1,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:233,
+    },
+
+    {
+      name:'Buster',sizeBuff:1.1,lifeBuff:6,speedBuff:0.75,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },
+    
+    {
+      name:'Wait',sizeBuff:0,lifeBuff:0,speedBuff:0,
+      damageBuff:0,reloadBuff:0,crit:0,weapon:-1,
+    },{
       name:'Pistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'MachineGun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:2,
+    },{
+      name:'MachineGunDamaged',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:2,
     },{
       name:'RocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -1714,8 +3719,23 @@ types={
       name:'BigCritRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:3,
     },{
+      name:'BigCritRocketLauncherDamaged',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:3,
+    },{
       name:'Engineer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:10,
+    },{
+      name:'EngineerDefendBuff',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:10,
+    },{
+      name:'HeavyEngineer',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:10,
+    },{
+      name:'BigEngineer',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:10,
+    },{
+      name:'BigCritEngineer',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:10,
     },{
       name:'Punch',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:9,
@@ -1723,13 +3743,25 @@ types={
       name:'CritPunch',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:9,
     },{
+      name:'TinyCritPunch',sizeBuff:0.8,lifeBuff:0.5,speedBuff:0.9,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:9,
+    },{
       name:'RapidPunch',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:2,crit:0,weapon:9,
+    },{
+      name:'RapidCritPunch',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:2,crit:1,weapon:9,
+    },{
+      name:'PunchRegen',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:9,
     },{
       name:'FastPunch',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:9,
     },{
-      name:'HeavyPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:9,
+    },{
+      name:'HeavyPunchDefendBuff',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1.5,reloadBuff:1,crit:0,weapon:9,
     },{
       name:'BigRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -1741,10 +3773,25 @@ types={
       name:'BigFlamethrower',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:8,
     },{
+      name:'BigHeavyFlamethrower',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:8,
+    },{
+      name:'FastFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:8,
+    },{
+      name:'BigFastFlamethrower',sizeBuff:2,lifeBuff:3,speedBuff:0.75,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:8,
+    },{
       name:'BigCritFlamethrower',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:8,
     },{
       name:'Sniper',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:6,
+    },{
+      name:'SniperDamaged',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:6,
+    },{
+      name:'BigSniper',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:6,
     },{
       name:'Medic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -1759,17 +3806,44 @@ types={
       name:'PlusMedic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:13,
     },{
+      name:'HeavyPlusMedic',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:13,
+    },{
+      name:'RapidPlusMedic',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:13,
+    },{
       name:'Spy',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
-      name:'LightTank',sizeBuff:1.5,lifeBuff:6,speedBuff:0.4,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:5,
+      name:'RevolverSpy',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:136,
     },{
-      name:'Tank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.4,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:5,
+      name:'CritSpy',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:1,
     },{
-      name:'HeavyTank',sizeBuff:1.5,lifeBuff:15,speedBuff:0.4,
-      damageBuff:1,reloadBuff:1,crit:0,weapon:5,
+      name:'PaperTank',sizeBuff:1.5,lifeBuff:4,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'LightTank',sizeBuff:1.5,lifeBuff:6,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'Tank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'TankDamaged',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'TankSpawner',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'SpyTank',sizeBuff:1,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'HeavyTank',sizeBuff:1.5,lifeBuff:15,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'MegaTank',sizeBuff:1.75,lifeBuff:25,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
     },{
       name:'Baller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:7,
@@ -1783,8 +3857,17 @@ types={
       name:'BigMachineGun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:2,
     },{
+      name:'BigMachineGunDamaged',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:2,
+    },{
+      name:'BigSpamMachineGun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:34,
+    },{
       name:'SpreadSniper',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:12,
+    },{
+      name:'CritSniper',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:6,
     },{
       name:'CritSpreadSniper',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:12,
@@ -1792,11 +3875,17 @@ types={
       name:'BigFastPunch',sizeBuff:2,lifeBuff:5,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:9,
     },{
+      name:'BigFastPunchJump',sizeBuff:2,lifeBuff:5,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:9,
+    },{
       name:'CritFastPunch',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:1,weapon:9,
     },{
       name:'BigCritFastPunch',sizeBuff:2,lifeBuff:5,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:9,
+    },{
+      name:'RapidRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:3,
     },{
       name:'BigRapidRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:0,weapon:3,
@@ -1810,10 +3899,16 @@ types={
       name:'BigFastPistol',sizeBuff:2,lifeBuff:3,speedBuff:0.75,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
+      name:'BigFastHyperPistol',sizeBuff:2,lifeBuff:3,speedBuff:0.75,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'FastPistol',sizeBuff:1,lifeBuff:0.6,speedBuff:1.5,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
       name:'BigCritFastPistol',sizeBuff:2,lifeBuff:3,speedBuff:0.75,
       damageBuff:1,reloadBuff:1,crit:1,weapon:1,
     },{
-      name:'HeavyRocketLauncher',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyRocketLauncher',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:3,
     },{
       name:'PushPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -1821,6 +3916,9 @@ types={
     },{
       name:'RapidPushPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.5,reloadBuff:2,crit:0,weapon:15,
+    },{
+      name:'RapidCritPushPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:0.5,reloadBuff:2,crit:1,weapon:15,
     },{
       name:'RocketLauncherBuff',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:3,
@@ -1838,7 +3936,16 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:16,
     },{
       name:'BigMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:3,reloadBuff:1,crit:0,weapon:11,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:11,
+    },{
+      name:'BigCritMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:11,
+    },{
+      name:'BigMedicShield',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:11,
+    },{
+      name:'BigMedicAura',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:11,
     },{
       name:'BigCritRapidRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:1,weapon:3,
@@ -1849,7 +3956,7 @@ types={
       name:'BigSpamRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:4,crit:0,weapon:18,
     },{
-      name:'PunchBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:1.2,
+      name:'PunchBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:1.2,
       damageBuff:2,reloadBuff:2,crit:1,weapon:9,
     },{
       name:'LongFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -1876,16 +3983,34 @@ types={
       name:'BigCritDeflectorMachineGun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:16,
     },{
-      name:'RocketLauncherBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:0.3,
+      name:'RocketLauncherBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:1,reloadBuff:6,crit:1,weapon:18,
     },{
-      name:'BallerBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:0.3,
+      name:'RocketMachineGunBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
+      damageBuff:1,reloadBuff:6,crit:1,weapon:117,
+    },{
+      name:'BallerBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:1,reloadBuff:3,crit:1,weapon:21,
     },{
       name:'Shotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:0,
     },{
-      name:'ShotgunBurst',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      name:'ShotgunWeak',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:0.6,crit:0,weapon:0,
+    },{
+      name:'PushShotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:126,
+    },{
+      name:'BigPushShotgun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:126,
+    },{
+      name:'HeavyShotgun',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+    },{
+      name:'HeavyShotgunDamaged',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+    },{
+      name:'ShotgunChain',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:22,
     },{
       name:'CritShotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -1906,23 +4031,38 @@ types={
       name:'PullPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.5,reloadBuff:1,crit:0,weapon:24,
     },{
+      name:'BigPullPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:24,
+    },{
       name:'BigDamageOverTimeMachineGun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:25,
     },{
       name:'RocketLauncherHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:26,
     },{
+      name:'RapidRocketLauncherHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:26,
+    },{
       name:'BigRocketLauncherHealSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:26,
+    },{
+      name:'BigCritRocketLauncherHealSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:26,
     },{
       name:'EngineerWeak',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:0.6,crit:0,weapon:10,
     },{
-      name:'BigShotgunBurst',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      name:'BigMachineGunStopWeak',sizeBuff:2,lifeBuff:5,speedBuff:0.6,
+      damageBuff:1,reloadBuff:0.6,crit:0,weapon:57,
+    },{
+      name:'BigShotgunChain',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:22,
     },{
       name:'RadiusRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:27,
+    },{
+      name:'RapidRadiusRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:27,
     },{
       name:'CritRadiusRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:27,
@@ -1930,10 +4070,19 @@ types={
       name:'BigRadiusRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:27,
     },{
+      name:'BigCritRadiusRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:27,
+    },{
       name:'BigRapidRadiusRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:0,weapon:27,
     },{
       name:'BigShotgun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+    },{
+      name:'BigCritShotgun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:0,
+    },{
+      name:'BigFastShotgun',sizeBuff:2,lifeBuff:5,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:0,
     },{
       name:'FastPunchHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
@@ -1945,7 +4094,7 @@ types={
       name:'RapidCritBaller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:2,crit:1,weapon:7,
     },{
-      name:'BigCritRapidBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      name:'BigRapidCritBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:1,weapon:7,
     },{
       name:'BigRapidBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -1957,16 +4106,25 @@ types={
       name:'CritPullPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.5,reloadBuff:1,crit:1,weapon:24,
     },{
-      name:'CritHeavyPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'CritHeavyPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1.5,reloadBuff:1,crit:1,weapon:9,
     },{
       name:'BigHyperPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
-      name:'MachineGunBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:0.3,
+      name:'MachineGunBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:1.5,reloadBuff:1.5,crit:1,weapon:29,
     },{
+      name:'LongPunch',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:30,
+    },{
+      name:'LongPunchJump',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:30,
+    },{
       name:'FastLongPunch',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:30,
+    },{
+      name:'BigFastLongPunch',sizeBuff:2,lifeBuff:5,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:30,
     },{
       name:'BigPushRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -1975,8 +4133,14 @@ types={
       name:'PistolJump',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
+      name:'BigPistolJump',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'PistolJumpDamaged',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
       name:'BigBarrageRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:4,crit:0,weapon:31,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:31,
     },{
       name:'BigPushRadiusRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:32,
@@ -1984,11 +4148,20 @@ types={
       name:'RapidBaller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:2,crit:0,weapon:7,
     },{
+      name:'LongBaller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:33,
+    },{
       name:'BigLongBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:33,
     },{
+      name:'FastPushPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:0.5,reloadBuff:1,crit:0,weapon:15,
+    },{
       name:'BigPushPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:0.5,reloadBuff:1,crit:0,weapon:15,
+    },{
+      name:'BigCritPushPistol',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:0.5,reloadBuff:1,crit:1,weapon:15,
     },{
       name:'BigRapidSlowRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:4,crit:0,weapon:37,
@@ -1996,17 +4169,29 @@ types={
       name:'PhaseRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:38,
     },{
+      name:'PhaseCritRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:38,
+    },{
       name:'FlamethrowerHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:39,
+    },{
+      name:'BigFlamethrowerHealSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:39,
     },{
       name:'PelletBaller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:40,
+    },{
+      name:'LongPelletBaller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:301,
     },{
       name:'BigPelletBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:40,
     },{
       name:'RapidBallerHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:2,crit:0,weapon:41,
+    },{
+      name:'HeavySniper',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:6,
     },{
       name:'MachineGunCritSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:42,
@@ -2020,19 +4205,28 @@ types={
       name:'SniperHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:45,
     },{
-      name:'BigBombBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      name:'BigGrenadier',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:36,
+    },{
+      name:'BigRapidGrenadier',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:36,
     },{
       name:'BigMachineGunCritSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:42,
+    },{
+      name:'MachineGunHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:29,
     },{
       name:'BigMachineGunHealSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:29,
     },{
       name:'BigHyperMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:3,reloadBuff:1,crit:0,weapon:14,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:14,
     },{
       name:'BigSpreadSniper',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:12,
+    },{
+      name:'BigFastSpreadSniper',sizeBuff:2,lifeBuff:5,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:12,
     },{
       name:'BigCritSpreadSniper',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -2041,13 +4235,16 @@ types={
       name:'BigRapidSpreadSniper',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:0,weapon:12,
     },{
-      name:'PushRocketLauncherBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:0.6,
+      name:'PushRocketLauncherBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.6,
       damageBuff:1,reloadBuff:3,crit:1,weapon:51,
     },{
-      name:'BarrageBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:1.2,
+      name:'BarrageBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:1.2,
       damageBuff:1,reloadBuff:4,crit:1,weapon:87,
     },{
-      name:'Kamikaze',sizeBuff:1,lifeBuff:1,speedBuff:1,
+      name:'Kamikaze',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:5,
+    },{
+      name:'BigKamikaze',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:5,
     },{
       name:'BigRocketLauncherBuff',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -2062,7 +4259,13 @@ types={
       name:'BigRocketLauncherHeal',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:3,
     },{
+      name:'CritDamageOverTimePistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:46,
+    },{
       name:'DamageOverTimePistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:46,
+    },{
+      name:'HeavyDamageOverTimePistol',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:46,
     },{
       name:'RapidPushRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -2078,7 +4281,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:47,
     },{
       name:'BigPlusMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:3,reloadBuff:1,crit:0,weapon:13,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:13,
+    },{
+      name:'BigCleanMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:118,
     },{
       name:'SpyHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:48,
@@ -2086,11 +4292,23 @@ types={
       name:'DamageOverTimeMachineGun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:25,
     },{
+      name:'DamageOverTimeMachineGunBuff',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:25,
+    },{
+      name:'DamageOverTimeMachineGunDefendBuff',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:25,
+    },{
       name:'DirectRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:49,
     },{
-      name:'BallingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.4,
+      name:'BigDirectRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:49,
+    },{
+      name:'BallingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
       damageBuff:1,reloadBuff:0.5,crit:0,weapon:50,
+    },{
+      name:'FlamethrowingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:0.5,crit:0,weapon:115,
     },{
       name:'BigCritDamageOverTimeMachineGun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:25,
@@ -2107,14 +4325,26 @@ types={
       name:'RocketLauncherDefendBuff',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:3,
     },{
+      name:'RocketLauncherDefendBuffWide',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:3,
+    },{
       name:'BigRocketLauncherDefendBuff',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:3,
+    },{
+      name:'BigCritRocketLauncherDefendBuff',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:3,
     },{
       name:'AssaultRifle',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:4,
     },{
+      name:'CritAssaultRifle',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:4,
+    },{
       name:'BigAssaultRifle',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:4,
+    },{
+      name:'BigCritAssaultRifle',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:4,
     },{
       name:'LightEngineer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:52,
@@ -2143,8 +4373,20 @@ types={
       name:'BigMachineGunStop',sizeBuff:2,lifeBuff:5,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:57,
     },{
+      name:'BigFastMachineGunStop',sizeBuff:2,lifeBuff:5,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:57,
+    },{
       name:'BigHeavyPistol',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'BigFastHeavyPistol',sizeBuff:2,lifeBuff:6,speedBuff:0.5,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'BigCritHeavyPistol',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:1,
+    },{
+      name:'BigHeavyRocketLauncher',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:3,
     },{
       name:'RapidEngineer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:2,crit:0,weapon:10,
@@ -2165,7 +4407,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:59,
     },{
       name:'BarrageRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:4,crit:0,weapon:31,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:31,
     },{
       name:'ShortHyperMedic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:14,
@@ -2173,23 +4415,32 @@ types={
       name:'BigFlameRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:58,
     },{
-      name:'HeavyPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
-      damageBuff:.51,reloadBuff:1,crit:0,weapon:1,
+      name:'HeavyPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
     },{
       name:'FlipPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:23,
     },{
+      name:'FastFlipPistol',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:23,
+    },{
       name:'RapidPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:2,crit:0,weapon:1,
+      damageBuff:1,reloadBuff:1.5,crit:0,weapon:1,
     },{
       name:'FastEngineer',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:10,
     },{
-      name:'BallerEngineerBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:0.3,
+      name:'BallerEngineerBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:1,weapon:35,
     },{
-      name:'BombBaller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      name:'Grenadier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:36,
+    },{
+      name:'GrenadierFuse',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:280,
+    },{
+      name:'BigGrenadierFuse',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:280,
     },{
       name:'RapidSpy',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:2,crit:0,weapon:1,
@@ -2200,7 +4451,13 @@ types={
       name:'MedicShield',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:62,
     },{
-      name:'BigPistolHealSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.6,
+      name:'PistolHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:48,
+    },{
+      name:'PistolHealSelfJump',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:48,
+    },{
+      name:'BigPistolHealSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:48,
     },{
       name:'PushRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
@@ -2210,7 +4467,7 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:63,
     },{
       name:'BigCritApplyMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:3,reloadBuff:1,crit:0,weapon:44,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:44,
     },{
       name:'RapidShortSniper',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:2,crit:0,weapon:54,
@@ -2218,11 +4475,17 @@ types={
       name:'BigCritMachineGun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:2,
     },{
+      name:'BigCritRapidMachineGun',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:2,crit:1,weapon:2,
+    },{
       name:'BigPunch',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:0,weapon:9,
     },{
       name:'BigRapidPunch',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:0,weapon:9,
+    },{
+      name:'BigCritPunch',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:9,
     },{
       name:'CritShortPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:56,
@@ -2240,10 +4503,10 @@ types={
       damageBuff:1,reloadBuff:1,crit:0,weapon:53,
     },{
       name:'BigBarrageBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:4,crit:0,weapon:65,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:65,
     },{
       name:'BigBarrageCritRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:4,crit:1,weapon:31,
+      damageBuff:1,reloadBuff:2,crit:1,weapon:31,
     },{
       name:'FastLongFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
       damageBuff:1,reloadBuff:1,crit:0,weapon:19,
@@ -2257,8 +4520,8 @@ types={
       name:'CritDeflectorPunch',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:47,
     },{
-      name:'HeavyPushPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
-      damageBuff:0.5,reloadBuff:1,crit:0,weapon:15,
+      name:'HeavyPushPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
+      damageBufff:0.5,reloadBuff:1,crit:0,weapon:15,
     },{
       name:'BigHeavyPushPistol',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
       damageBuff:0.5,reloadBuff:1,crit:0,weapon:15,
@@ -2272,14 +4535,14 @@ types={
       name:'AnnoyingRemoverSniper',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.1,reloadBuff:3,crit:0,weapon:17,
     },{
-      name:'RemoverSniperBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:0.3,
+      name:'RemoverSniperBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:0.5,reloadBuff:5,crit:0,weapon:17,
     },{
       name:'HyperMedicShield',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:66,
     },{
       name:'BigBarrageRocketLauncherHealSelf',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:4,crit:0,weapon:67,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:67,
     },{
       name:'TinyCritPistolStop',sizeBuff:0.8,lifeBuff:0.6,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:1,weapon:68,
@@ -2287,14 +4550,26 @@ types={
       name:'CritDamageOverTimeSpreadSniper',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:69,
     },{
-      name:'HeavyDamageOverTimeSpreadSniper',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'DamageOverTimeSpreadSniper',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:69,
+    },{
+      name:'DamageOverTimeSniper',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:120,
+    },{
+      name:'BigHeavyDamageOverTimeSpreadSniper',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:69,
+    },{
+      name:'HeavyDamageOverTimeSpreadSniper',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:0,weapon:69,
     },{
       name:'BigBarrageFlameRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:4,crit:0,weapon:70,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:70,
     },{
-      name:'VampireBallerBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:0.3,
+      name:'VampireBallerBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:1,reloadBuff:3,crit:1,weapon:71,
+    },{
+      name:'TinyPunch',sizeBuff:0.8,lifeBuff:0.5,speedBuff:0.9,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:9,
     },{
       name:'TinyFastPunch',sizeBuff:0.8,lifeBuff:0.5,speedBuff:1.8,
       damageBuff:1,reloadBuff:1,crit:0,weapon:9,
@@ -2305,7 +4580,7 @@ types={
       name:'BigCritPushierRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:72,
     },{
-      name:'PushierRocketLauncherBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:0.3,
+      name:'PushierRocketLauncherBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:1,weapon:73,
     },{
       name:'BigCritPistolJump',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
@@ -2320,7 +4595,7 @@ types={
       name:'CritPunchHealSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:1,weapon:28,
     },{
-      name:'HeavyPullPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavyPullPistol',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:0.5,reloadBuff:1,crit:0,weapon:24,
     },{
       name:'BigHeavyPullPistol',sizeBuff:2,lifeBuff:10,speedBuff:0.2,
@@ -2338,44 +4613,206 @@ types={
       name:'AnnoyingSwapperSniper',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:0.1,reloadBuff:3,crit:0,weapon:75,
     },{
-      name:'SwapperSniperBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:0.3,
+      name:'SwapperSniperBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:0.5,reloadBuff:5,crit:0,weapon:75,
     },{
       name:'CritApplyMedicShield',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:76,
     },{
       name:'BigBarrageRadiusRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
-      damageBuff:1,reloadBuff:4,crit:0,weapon:77,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:77,
     },{
       name:'TinyPistolStopVulnerable',sizeBuff:0.8,lifeBuff:0.6,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:0,weapon:78,
     },{
+      name:'TinyPistolVulnerable',sizeBuff:0.8,lifeBuff:0.6,speedBuff:0.9,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:53,
+    },{
+      name:'TinyFlamethrower',sizeBuff:0.8,lifeBuff:0.6,speedBuff:0.9,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:8,
+    },{
       name:'TinyCritPistolStopVulnerable',sizeBuff:0.8,lifeBuff:0.6,speedBuff:0.9,
       damageBuff:1,reloadBuff:1,crit:1,weapon:78,
     },{
-      name:'HeavySpreadSniperHealSelf',sizeBuff:1,lifeBuff:2,speedBuff:0.4,
+      name:'HeavySpreadSniperHealSelf',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
       damageBuff:1,reloadBuff:1,crit:1,weapon:79,
     },{
       name:'BigRapidFlameBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:2,crit:0,weapon:80,
     },{
-      name:'FairyBallerBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:0.3,
+      name:'BigFlameBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:80,
+    },{
+      name:'FlameBaller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:80,
+    },{
+      name:'FairyBallerBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:1,reloadBuff:3,crit:1,weapon:81,
     },{
       name:'BarragePelletBaller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:1,reloadBuff:4,crit:0,weapon:82,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:82,
     },{
       name:'DefendApplyMedic',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
       damageBuff:1,reloadBuff:1,crit:0,weapon:83,
     },{
-      name:'PistolHurtSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
-      damageBuff:2,reloadBuff:1,crit:0,weapon:84,
+      name:'BigDefendApplyMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:83,
     },{
-      name:'SpreadMachineGunBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:0.3,
+      name:'PistolHurtSelf',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:84,
+    },{
+      name:'SpreadMachineGunBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
       damageBuff:1,reloadBuff:1,crit:1,weapon:85,
     },{
       name:'BigRapidSlowRocketLauncherConfuse',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
       damageBuff:1,reloadBuff:4,crit:0,weapon:86,
+    },{
+      name:'LongPushFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:102,
+    },{
+      name:'CritLongPushFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:102,
+    },{
+      name:'ParaPistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:1,
+    },{
+      name:'MachineGunFocus',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:103,
+    },{
+      name:'BigMachineGunFocus',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:103,
+    },{
+      name:'HeavyPunchStop',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:104,
+    },{
+      name:'HeavyPushPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.25,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:105,
+    },{
+      name:'PistolingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:106,
+    },{
+      name:'ParaRocketLauncher',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:107,
+    },{
+      name:'BigParaRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:107,
+    },{
+      name:'BigCritParaRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:107,
+    },{
+      name:'RocketLauncherStop',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:108,
+    },{
+      name:'NapalmFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:109,
+    },{
+      name:'BigNapalmFlamethrower',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:109,
+    },{
+      name:'BigSpreadRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:110,
+    },{
+      name:'BigRapidSpreadRocketLauncher',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:110,
+    },{
+      name:'BigMultiHyperMedic',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:14,
+    },{
+      name:'PhaseFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:111,
+    },{
+      name:'EngineerShield',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:10,
+    },{
+      name:'EngineeringTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:0.5,crit:0,weapon:112,
+    },{
+      name:'SegmentationBoss',sizeBuff:2.5,lifeBuff:50,speedBuff:0.5,
+      damageBuff:1,reloadBuff:4,crit:0,weapon:113,
+    },{
+      name:'PushFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:116,
+    },{
+      name:'BigPushFlamethrower',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:116,
+    },{
+      name:'BigFastPushPistol',sizeBuff:2,lifeBuff:3,speedBuff:0.75,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:15,
+    },{
+      name:'CritPushFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:116,
+    },{
+      name:'BallerEngineer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:35,
+    },{
+      name:'RocketEngineer',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:95,
+    },{
+      name:'EngineerNode',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:95,
+    },{
+      name:'HyperTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:-1,
+    },{
+      name:'RocketLaunchingTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:119,
+    },{
+      name:'AutoTank',sizeBuff:1.5,lifeBuff:10,speedBuff:0.25,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:99,
+    },{
+      name:'RadiusGrenadier',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:121,
+    },{
+      name:'BigRadiusGrenadier',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:121,
+    },{
+      name:'BigRapidRadiusGrenadier',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:2,crit:0,weapon:121,
+    },{
+      name:'PistolConfuse',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:91,
+    },{
+      name:'HeavyPistolConfuse',sizeBuff:1,lifeBuff:2,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:91,
+    },{
+      name:'PhasePistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:122,
+    },{
+      name:'CritPhasePistol',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:1,weapon:122,
+    },{
+      name:'FastHeavyPunch',sizeBuff:1,lifeBuff:2,speedBuff:0.8,
+      damageBuff:1.5,reloadBuff:1,crit:0,weapon:9,
+    },{
+      name:'SingleBaller',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:3,reloadBuff:1,crit:0,weapon:123,
+    },{
+      name:'BigSingleBaller',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:3,reloadBuff:1,crit:0,weapon:123,
+    },{
+      name:'MachineGunFirework',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:124,
+    },{
+      name:'FlameSphere',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:125,
+    },{
+      name:'HyperShotgun',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+    },{
+      name:'FastShotgun',sizeBuff:1,lifeBuff:1,speedBuff:1.2,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:0,
+    },{
+      name:'SpawnerBoss',sizeBuff:2.5,lifeBuff:25,speedBuff:0.3,
+      damageBuff:1,reloadBuff:2,crit:1,weapon:18,
+    },{
+      name:'BigRocketLauncherDoubleBuff',sizeBuff:2,lifeBuff:5,speedBuff:0.3,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:3,
+    },{
+      name:'PistolWeak',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:0.6,crit:0,weapon:1,
+    },{
+      name:'TobaccoFlamethrower',sizeBuff:1,lifeBuff:1,speedBuff:0.6,
+      damageBuff:1,reloadBuff:1,crit:0,weapon:281,
     },
   ],weapon:[
 		{
@@ -2413,7 +4850,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Assault Rifle',
 			ammo:18,
@@ -2427,15 +4864,15 @@ types={
 			name:'Kamikaze',
 			ammo:1,
 			damage:200,
-			cooldown:999,
-			stop:999,
-			reload:999,
+			cooldown:600,
+			stop:600,
+			reload:600,
 			speed:1.5,
       uses:1,
 		},{
 			name:'Sniper',
 			ammo:1,
-			damage:105,
+			damage:100,
 			cooldown:120,
 			stop:120,
 			reload:120,
@@ -2449,7 +4886,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Flamethrower',
 			ammo:50,
@@ -2472,11 +4909,11 @@ types={
 			name:'Engineer',
 			ammo:1,
 			damage:120,
-			cooldown:240,
-			stop:240,
-			reload:240,
+			cooldown:480,
+			stop:480,
+			reload:480,
 			speed:0.975,
-      uses:8,
+      uses:4,
 		},{
 			name:'Medic',
 			ammo:10,
@@ -2491,7 +4928,7 @@ types={
     {
 			name:'Spread Sniper',
 			ammo:1,
-			damage:105,
+			damage:100,
 			cooldown:120,
 			stop:120,
 			reload:120,
@@ -2536,7 +4973,7 @@ types={
 		},{
 			name:'Remover Sniper',
 			ammo:1,
-			damage:105,
+			damage:100,
 			cooldown:120,
 			stop:120,
 			reload:120,
@@ -2550,7 +4987,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Long Flamethrower',
 			ammo:50,
@@ -2568,7 +5005,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Spray Baller',
 			ammo:3,
@@ -2577,9 +5014,9 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
-			name:'Shotgun Burst',
+			name:'Shotgun Chain',
 			ammo:4,
 			damage:20,
 			cooldown:15,
@@ -2622,7 +5059,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Radius Rocket Launcher',
 			ammo:1,
@@ -2631,7 +5068,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Punch Heal Self',
 			ammo:1,
@@ -2676,7 +5113,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Long Baller',
 			ammo:3,
@@ -2685,13 +5122,13 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Spam Machine Gun',
 			ammo:50,
-			damage:25,
+			damage:30,
 			cooldown:3,
-			stop:240,
+			stop:180,
 			reload:2,
 			speed:0.9,
       uses:250,
@@ -2699,13 +5136,13 @@ types={
 			name:'Baller Engineer',
 			ammo:1,
 			damage:120,
-			cooldown:300,
-			stop:300,
-			reload:300,
+			cooldown:480,
+			stop:480,
+			reload:480,
 			speed:0.975,
-      uses:5,
+      uses:8,
 		},{
-			name:'Bomb Baller',
+			name:'Grenadier',
 			ammo:2,
 			damage:120,
 			cooldown:30,
@@ -2721,7 +5158,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Phase Rocket Launcher',
 			ammo:1,
@@ -2730,7 +5167,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Flamethrower Heal Self',
 			ammo:50,
@@ -2748,7 +5185,7 @@ types={
 			stop:90,
 			reload:15,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Baller Heal Self',
 			ammo:3,
@@ -2757,7 +5194,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Machine Gun Crit Self',
 			ammo:30,
@@ -2788,7 +5225,7 @@ types={
 		},{
 			name:'Sniper Heal Self',
 			ammo:1,
-			damage:105,
+			damage:100,
 			cooldown:120,
 			stop:120,
 			reload:120,
@@ -2829,7 +5266,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Baller Dualic',
 			ammo:1,
@@ -2838,7 +5275,7 @@ types={
 			stop:120,
 			reload:120,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Push Spam Rocket Launcher',
 			ammo:1,
@@ -2847,16 +5284,16 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Light Engineer',
 			ammo:1,
 			damage:60,
-			cooldown:90,
-			stop:90,
-			reload:90,
+			cooldown:180,
+			stop:180,
+			reload:180,
 			speed:0.975,
-      uses:5,
+      uses:8,
 		},{
 			name:'Pistol Vulnerable',
 			ammo:10,
@@ -2869,7 +5306,7 @@ types={
 		},{
 			name:'Short Sniper',
 			ammo:1,
-			damage:105,
+			damage:100,
 			cooldown:120,
 			stop:120,
 			reload:120,
@@ -2883,7 +5320,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Short Pistol',
 			ammo:10,
@@ -2910,7 +5347,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Remover Punch',
 			ammo:1,
@@ -2928,7 +5365,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Smoke Rocket Launcher',
 			ammo:1,
@@ -2937,7 +5374,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Medic Shield',
 			ammo:10,
@@ -2967,13 +5404,13 @@ types={
       uses:120,
 		},{
 			name:'Barrage Baller',
-			ammo:15,
+			ammo:18,
 			damage:60,
-			cooldown:30,
+			cooldown:20,
 			stop:120,
-			reload:20,
+			reload:15,
 			speed:1.05,
-      uses:9,
+      uses:54,
 		},{
 			name:'Hyper Medic Shield',
 			ammo:10,
@@ -3004,7 +5441,7 @@ types={
 		},{
 			name:'Damage Over Time Spread Sniper',
 			ammo:1,
-			damage:105,
+			damage:100,
 			cooldown:120,
 			stop:120,
 			reload:120,
@@ -3027,7 +5464,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Pushier Rocket Launcher',
 			ammo:1,
@@ -3036,7 +5473,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Spread Pushier Rocket Launcher',
 			ammo:1,
@@ -3045,7 +5482,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Slow Rocket Launcher Flip',
 			ammo:1,
@@ -3054,11 +5491,11 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Remover Sniper',
 			ammo:1,
-			damage:105,
+			damage:100,
 			cooldown:120,
 			stop:120,
 			reload:120,
@@ -3094,7 +5531,7 @@ types={
 		},{
 			name:'Spread Sniper Heal Self',
 			ammo:1,
-			damage:105,
+			damage:100,
 			cooldown:120,
 			stop:120,
 			reload:120,
@@ -3108,7 +5545,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Baller Heal Self Stop',
 			ammo:3,
@@ -3117,7 +5554,7 @@ types={
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Barrage Pellet Baller',
 			ammo:5,
@@ -3126,7 +5563,7 @@ types={
 			stop:90,
 			reload:15,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Defend Apply Medic',
 			ammo:10,
@@ -3162,7 +5599,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Barrage Rocket Launcher Spread',
 			ammo:10,
@@ -3180,7 +5617,7 @@ types={
 			stop:180,
 			reload:0,
 			speed:0.8,
-      uses:5,
+      uses:8,
 		},{
 			name:'Sniper Shotgun',
 			ammo:2,
@@ -3211,9 +5648,9 @@ types={
 		},{
 			name:'Machine Sniper',
 			ammo:2,
-			damage:105,
+			damage:100,
 			cooldown:30,
-			stop:60,
+			stop:90,
 			reload:40,
 			speed:0.85,
       uses:20,
@@ -3225,34 +5662,34 @@ types={
 			stop:180,
 			reload:180,
 			speed:0.85,
-      uses:6,
+      uses:8,
 		},{
 			name:'Straight Baller',
-			ammo:3,
+			ammo:6,
 			damage:60,
 			cooldown:30,
 			stop:120,
 			reload:20,
 			speed:1.05,
-      uses:9,
+      uses:18,
 		},{
 			name:'Rocket Engineer',
 			ammo:1,
 			damage:120,
-			cooldown:300,
-			stop:300,
-			reload:300,
+			cooldown:480,
+			stop:480,
+			reload:480,
 			speed:0.975,
-      uses:5,
+      uses:8,
 		},{
 			name:'Engineer Node',
 			ammo:1,
 			damage:120,
-			cooldown:300,
-			stop:300,
-			reload:300,
+			cooldown:480,
+			stop:480,
+			reload:480,
 			speed:0.975,
-      uses:5,
+      uses:8,
 		},{
 			name:'Flamethrower Dual',
 			ammo:50,
@@ -3279,7 +5716,7 @@ types={
 			stop:30,
 			reload:10,
 			speed:1.4,
-      uses:40,
+      uses:60,
 		},{
 			name:'Medic Double Jump',
 			ammo:10,
@@ -3298,6 +5735,2022 @@ types={
 			reload:0,
 			speed:1.3,
       uses:1,
+		},{
+			name:'Long Flamethrower Push',
+			ammo:50,
+			damage:25,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:0.95,
+      uses:100,
+		},{
+			name:'Machine Gun Focus',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'Punch Stop',
+			ammo:1,
+			damage:60,
+			cooldown:15,
+			stop:15,
+			reload:15,
+			speed:1.35,
+      uses:40,
+		},{
+			name:'Push Punch',
+			ammo:1,
+			damage:60,
+			cooldown:15,
+			stop:15,
+			reload:15,
+			speed:1.35,
+      uses:40,
+		},{
+			name:'Pistol Quadral',
+			ammo:10,
+			damage:45,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Para Rocket Launcher',
+			ammo:10,
+			damage:150,
+			cooldown:15,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:30,
+		},{
+			name:'Rocket Launcher Stop',
+			ammo:1,
+			damage:150,
+			cooldown:20,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:8,
+		},{
+			name:'Napalm Flamethrower',
+			ammo:50,
+			damage:25,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:0.95,
+      uses:100,
+		},{
+			name:'Spread Rocket Launcher',
+			ammo:1,
+			damage:150,
+			cooldown:20,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:8,
+		},{
+			name:'Phase Flamethrower',
+			ammo:50,
+			damage:25,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:0.95,
+      uses:100,
+		},{
+			name:'Engineer Dualic',
+			ammo:1,
+			damage:120,
+			cooldown:480,
+			stop:480,
+			reload:240,
+			speed:0.975,
+      uses:8,
+		},{
+			name:'Auto Rocket Launcher',
+			ammo:10,
+			damage:150,
+			cooldown:30,
+			stop:120,
+			reload:0,
+			speed:0.8,
+      uses:8,
+		},{
+			name:'Booster',
+			ammo:60,
+			damage:75,
+			cooldown:2,
+			stop:45,
+			reload:1,
+			speed:1.05,
+      uses:120,
+		},{
+			name:'Flamethrower Dualic',
+			ammo:50,
+			damage:25,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:0.95,
+      uses:100,
+		},{
+			name:'Flamethrower Push',
+			ammo:50,
+			damage:25,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:0.95,
+      uses:100,
+		},{
+			name:'Rocket Machine Gun',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'Clean Medic',
+			ammo:10,
+			damage:30,
+			cooldown:10,
+			stop:30,
+			reload:8,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Rocket Launcher Quadral',
+			ammo:1,
+			damage:150,
+			cooldown:20,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:8,
+		},{
+			name:'Damage Over Time Sniper',
+			ammo:1,
+			damage:100,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:0.85,
+      uses:4
+		},{
+			name:'Radius Grenadier',
+			ammo:2,
+			damage:120,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:8,
+		},{
+			name:'Phase Pistol',
+			ammo:10,
+			damage:45,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Single Baller',
+			ammo:1,
+			damage:60,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:1.05,
+      uses:6,
+		},{
+			name:'Machine Gun Firework',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'Flame Sphere',
+			ammo:1,
+			damage:125,
+			cooldown:300,
+			stop:300,
+			reload:300,
+			speed:0.975,
+      uses:4,
+		},{
+			name:'Push Shotgun',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Medic Aura',
+			ammo:10,
+			damage:30,
+			cooldown:10,
+			stop:30,
+			reload:8,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Volley Rocket Launcher',
+			ammo:1,
+			damage:150,
+			cooldown:20,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:8,
+		},{
+			name:'Medic Armored',
+			ammo:10,
+			damage:30,
+			cooldown:10,
+			stop:30,
+			reload:8,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Pushier Pistol',
+			ammo:10,
+			damage:45,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:30,
+		},{
+			name:'Pistol Quadruple Jump',
+			ammo:10,
+			damage:45,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:30,
+		},{
+			name:'Bomb Sniper',
+			ammo:1,
+			damage:180,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:0.85,
+      uses:4,
+		},{
+			name:'Electrifyer',
+			ammo:1,
+			damage:1,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.875,
+      uses:3,
+		},{
+			name:'Double Push Punch Armored',
+			ammo:2,
+			damage:60,
+			cooldown:5,
+			stop:15,
+			reload:15,
+			speed:1.35,
+      uses:60,
+		},{
+			name:'Hexadecimal Pistol',
+			ammo:10,
+			damage:45,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:60,
+		},{
+			name:'Revolver',
+			ammo:3,
+			damage:175,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.35,
+      uses:12,
+		},{
+			name:'Slicer',
+			ammo:4,
+			damage:80,
+			cooldown:30,
+			stop:60,
+			reload:45,
+			speed:1.4,
+      uses:20,
+		},{
+			name:'Recursive Slicer',
+			ammo:4,
+			damage:80,
+			cooldown:30,
+			stop:60,
+			reload:45,
+			speed:1.4,
+      uses:20,
+		},{
+			name:'Propeller Slicer',
+			ammo:4,
+			damage:80,
+			cooldown:30,
+			stop:60,
+			reload:45,
+			speed:1.4,
+      uses:20,
+		},{
+			name:'Assault Slicer',
+			ammo:10,
+			damage:80,
+			cooldown:20,
+			stop:90,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Shotgun Vulnerable',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Pistol Officer',
+			ammo:10,
+			damage:45,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Auto Machine Gun',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'Garbage Launcher',
+			ammo:1,
+			damage:150,
+			cooldown:10,
+			stop:120,
+			reload:0,
+			speed:0.8,
+      uses:7,
+		},{
+			name:'Sniper Stop',
+			ammo:1,
+			damage:100,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:0.85,
+      uses:8,
+		},{
+			name:'Engineer Machine Gun',
+			ammo:1,
+			damage:120,
+			cooldown:480,
+			stop:480,
+			reload:480,
+			speed:0.975,
+      uses:8,
+		},{
+			name:'Slicer Linger',
+			ammo:4,
+			damage:80,
+			cooldown:30,
+			stop:60,
+			reload:45,
+			speed:1.4,
+      uses:20,
+		},{
+			name:'Boulder Baller',
+			ammo:1,
+			damage:400,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:1.05,
+      uses:6,
+		},{
+			name:'Streamlined Rifle',
+			ammo:60,
+			damage:30,
+			cooldown:15,
+			stop:90,
+			reload:2,
+			speed:1.1,
+      uses:90,
+		},{
+			name:'Single Revolver',
+			ammo:3,
+			damage:800,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.35,
+      uses:3,
+		},{
+			name:'Mortar',
+			ammo:1,
+			damage:500,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:1.05,
+      uses:10,
+		},{
+			name:'Deployer M',
+			ammo:1,
+			damage:0,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:1.1,
+      uses:2,
+		},{
+			name:'Inspector',
+			ammo:4,
+			damage:70,
+			cooldown:15,
+			stop:60,
+			reload:15,
+			speed:1.25,
+      uses:12,
+		},{
+			name:'Optical Inspector',
+			ammo:4,
+			damage:120,
+			cooldown:15,
+			stop:60,
+			reload:15,
+			speed:1.25,
+      uses:12,
+		},{
+			name:'Triple Auto',
+			ammo:1,
+			damage:50,
+			cooldown:0,
+			stop:0,
+			reload:0,
+			speed:1.2,
+      uses:1,
+		},{
+			name:'Twin Assault Rifle',
+			ammo:18,
+			damage:25,
+			cooldown:20,
+			stop:90,
+			reload:5,
+			speed:1.1,
+      uses:54,
+		},{
+			name:'Assault Rifle Pierce',
+			ammo:18,
+			damage:25,
+			cooldown:20,
+			stop:90,
+			reload:5,
+			speed:1.1,
+      uses:54,
+		},{
+			name:'Conglomeration',
+			ammo:1,
+			damage:0,
+			cooldown:9999,
+			stop:9999,
+			reload:9999,
+			speed:1,
+      uses:3,
+		},{
+			name:'Deployer R',
+			ammo:1,
+			damage:0,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:1.1,
+      uses:2,
+		},{
+			name:'Glass Cannon',
+			ammo:3,
+			damage:110,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.25,
+      uses:15,
+		},{
+			name:'Saturation Machine Gun',
+			ammo:60,
+			damage:25,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:240,
+		},{
+			name:'Rocket Battery',
+			ammo:4,
+			damage:600,
+			cooldown:45,
+			stop:240,
+			reload:60,
+			speed:0.65,
+      uses:4,
+		},{
+			name:'Push Machine Gun',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'Snowballer',
+			ammo:3,
+			damage:90,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Flak Zone',
+			ammo:1,
+			damage:1,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.875,
+      uses:3,
+		},{
+			name:'Para Grenadier',
+			ammo:6,
+			damage:160,
+			cooldown:20,
+			stop:150,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Panic Shotgun',
+			ammo:8,
+			damage:25,
+			cooldown:20,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:24,
+		},{
+			name:'Assault Rifle Splasher',
+			ammo:24,
+			damage:25,
+			cooldown:15,
+			stop:90,
+			reload:5,
+			speed:1.1,
+      uses:72,
+		},{
+			name:'Radius Push Grenadier',
+			ammo:2,
+			damage:180,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:8,
+		},{
+			name:'Shrapnel Grenadier',
+			ammo:2,
+			damage:180,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:8,
+		},{
+			name:'Spy',
+			ammo:10,
+			damage:1500,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Pistol Heal Self Over',
+			ammo:10,
+			damage:45,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:30,
+		},{
+			name:'Deployer S',
+			ammo:1,
+			damage:0,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:1.1,
+      uses:2,
+		},{
+			name:'Deployer F',
+			ammo:1,
+			damage:0,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:1.1,
+      uses:2,
+		},{
+			name:'Sprayer Machine Gun',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'Gunception',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Shotgunception',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Pistolception',
+			ammo:10,
+			damage:45,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Machine Gunception',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'Rocket Launcherception',
+			ammo:1,
+			damage:150,
+			cooldown:20,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:8,
+		},{
+			name:'Sniperception',
+			ammo:1,
+			damage:100,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:0.85,
+      uses:8,
+		},{
+			name:'Ballerception',
+			ammo:3,
+			damage:60,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Flamethrowerception',
+			ammo:50,
+			damage:25,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:0.95,
+      uses:100,
+		},{
+			name:'Engineerception',
+			ammo:1,
+			damage:120,
+			cooldown:480,
+			stop:480,
+			reload:480,
+			speed:0.975,
+      uses:4,
+		},{
+			name:'Medicception',
+			ammo:10,
+			damage:30,
+			cooldown:10,
+			stop:30,
+			reload:8,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Slicerception',
+			ammo:4,
+			damage:80,
+			cooldown:30,
+			stop:60,
+			reload:45,
+			speed:1.4,
+      uses:20,
+		},{
+			name:'Assault Rifleception',
+			ammo:18,
+			damage:25,
+			cooldown:20,
+			stop:90,
+			reload:5,
+			speed:1.1,
+      uses:54,
+		},{
+			name:'Grenadierception',
+			ammo:2,
+			damage:120,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:8,
+		},{
+			name:'Minesweeper',
+			ammo:5,
+			damage:120,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Rearguard',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Motorizer',
+			ammo:1,
+			damage:120,
+			cooldown:360,
+			stop:360,
+			reload:360,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Deployer ME',
+			ammo:1,
+			damage:0,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:1.1,
+      uses:2,
+		},{
+			name:'Updraft',
+			ammo:5,
+			damage:25,
+			cooldown:30,
+			stop:90,
+			reload:10,
+			speed:1.2,
+      uses:25,
+		},{
+			name:'Recoiler',
+			ammo:1,
+			damage:100,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:0.85,
+      uses:4,
+		},{
+			name:'Gaslighter',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Minelayer',
+			ammo:3,
+			damage:250,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Trapper',
+			ammo:3,
+			damage:150,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Trapguard',
+			ammo:3,
+			damage:150,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Airhorn',
+			ammo:3,
+			damage:150,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Icebox',
+			ammo:3,
+			damage:200,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Trapperception',
+			ammo:3,
+			damage:150,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Director',
+			ammo:1,
+			damage:180,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Carrier',
+			ammo:3,
+			damage:60,
+			cooldown:10,
+			stop:60,
+			reload:10,
+			speed:0.975,
+      uses:48,
+		},{
+			name:'Impeachment',
+			ammo:1,
+			damage:300,
+			cooldown:720,
+			stop:720,
+			reload:720,
+			speed:0.975,
+      uses:3,
+		},{
+			name:'Prime Director',
+			ammo:1,
+			damage:180,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Directorception',
+			ammo:1,
+			damage:180,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Centrist',
+			ammo:5,
+			damage:30,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Rotary',
+			ammo:11,
+			damage:80,
+			cooldown:2,
+			stop:30,
+			reload:2,
+			speed:1.2,
+      uses:88,
+		},{
+			name:'Generator',
+			ammo:1,
+			damage:180,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:0.975,
+      uses:9,
+		},{
+			name:'Rocket Masher',
+			ammo:20,
+			damage:150,
+			cooldown:90,
+			stop:90,
+			reload:3,
+			speed:0.8,
+      uses:40,
+		},{
+			name:'Kinoko',
+			ammo:5,
+			damage:80,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Destroyer',
+			ammo:1,
+			damage:600,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:1.2,
+      uses:5,
+		},{
+			name:'Griefer',
+			ammo:1,
+			damage:900,
+			cooldown:150,
+			stop:150,
+			reload:150,
+			speed:1.2,
+      uses:5,
+		},{
+			name:'Scythe',
+			ammo:1,
+			damage:600,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:1.2,
+      uses:5,
+		},{
+			name:'Fieldcannon',
+			ammo:10,
+			damage:600,
+			cooldown:10,
+			stop:180,
+			reload:5,
+			speed:1.2,
+      uses:20,
+		},{
+			name:'Donut',
+			ammo:1,
+			damage:400,
+			cooldown:90,
+			stop:90,
+			reload:90,
+			speed:1.2,
+      uses:8,
+		},{
+			name:'Destroyerception',
+			ammo:1,
+			damage:600,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:1.2,
+      uses:5,
+		},{
+			name:'Fattener',
+			ammo:3,
+			damage:60,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Machine Hybrid',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'Dial',
+			ammo:5,
+			damage:50,
+			cooldown:8,
+			stop:60,
+			reload:10,
+			speed:0.975,
+      uses:48,
+		},{
+			name:'Triple Sunburst',
+			ammo:30,
+			damage:40,
+			cooldown:3,
+			stop:60,
+			reload:2,
+			speed:1.15,
+      uses:90,
+		},{
+			name:'Software',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Histone',
+			ammo:3,
+			damage:60,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Drone Shotgun',
+			ammo:1,
+			damage:70,
+			cooldown:360,
+			stop:360,
+			reload:360,
+			speed:1.15,
+      uses:4,
+		},{
+			name:'Hardware',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Animator',
+			ammo:4,
+			damage:120,
+			cooldown:60,
+			stop:720,
+			reload:120,
+			speed:0.975,
+      uses:8,
+		},{
+			name:'Sidekick',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Motorizerception',
+			ammo:1,
+			damage:120,
+			cooldown:360,
+			stop:360,
+			reload:360,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Pizzaria',
+			ammo:1,
+			damage:200,
+			cooldown:150,
+			stop:150,
+			reload:150,
+			speed:1.05,
+      uses:6,
+		},{
+			name:'Solar System',
+			ammo:1,
+			damage:240,
+			cooldown:360,
+			stop:360,
+			reload:360,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Ballista',
+			ammo:15,
+			damage:80,
+			cooldown:10,
+			stop:60,
+			reload:10,
+			speed:0.95,
+      uses:60,
+		},{
+			name:'Ribbon',
+			ammo:15,
+			damage:100,
+			cooldown:10,
+			stop:60,
+			reload:10,
+			speed:0.95,
+      uses:60,
+		},{
+			name:'Gun',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Sunburst',
+			ammo:10,
+			damage:40,
+			cooldown:9,
+			stop:60,
+			reload:6,
+			speed:1.15,
+      uses:30,
+		},{
+			name:'Starburst',
+			ammo:28,
+			damage:40,
+			cooldown:2,
+			stop:60,
+			reload:1,
+			speed:1.15,
+      uses:84,
+		},{
+			name:'Sunset',
+			ammo:10,
+			damage:40,
+			cooldown:9,
+			stop:60,
+			reload:6,
+			speed:1.15,
+      uses:30,
+		},{
+			name:'Huntress',
+			ammo:1,
+			damage:150,
+			cooldown:105,
+			stop:105,
+			reload:105,
+			speed:0.85,
+      uses:8,
+		},{
+			name:'Sunburstception',
+			ammo:10,
+			damage:40,
+			cooldown:9,
+			stop:60,
+			reload:6,
+			speed:1.15,
+      uses:30,
+		},{
+			name:'Moonbeam',
+			ammo:10,
+			damage:60,
+			cooldown:9,
+			stop:60,
+			reload:6,
+			speed:1.15,
+      uses:30,
+		},{
+			name:'Stealth',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Stealthception',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Bonker',
+			ammo:1,
+			damage:0,
+			cooldown:0,
+			stop:0,
+			reload:0,
+			speed:0.85,
+      uses:1,
+		},{
+			name:'Iceberg',
+			ammo:1,
+			damage:60,
+			cooldown:0,
+			stop:0,
+			reload:0,
+			speed:0.85,
+      uses:1,
+		},{
+			name:'Fog',
+			ammo:50,
+			damage:10,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:0.95,
+      uses:100,
+		},{
+			name:'Surprise',
+			ammo:1,
+			damage:0,
+			cooldown:0,
+			stop:0,
+			reload:0,
+			speed:0.85,
+      uses:1,
+		},{
+			name:'Border',
+			ammo:1,
+			damage:0,
+			cooldown:0,
+			stop:0,
+			reload:0,
+			speed:0.85,
+      uses:1,
+		},{
+			name:'Thrasher',
+			ammo:1,
+			damage:180,
+			cooldown:320,
+			stop:320,
+			reload:320,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Sparkler',
+			ammo:1,
+			damage:600,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:1.2,
+      uses:5,
+		},{
+			name:'Shootist',
+			ammo:1,
+			damage:150,
+			cooldown:90,
+			stop:90,
+			reload:90,
+			speed:0.85,
+      uses:10,
+		},{
+			name:'Atrophy',
+			ammo:10,
+			damage:15,
+			cooldown:10,
+			stop:30,
+			reload:8,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Cursor',
+			ammo:6,
+			damage:55,
+			cooldown:20,
+			stop:90,
+			reload:8,
+			speed:1.3,
+      uses:24,
+		},{
+			name:'Gunceptionception',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Disappointment',
+			ammo:1,
+			damage:0,
+			cooldown:0,
+			stop:0,
+			reload:0,
+			speed:0.85,
+      uses:1,
+		},{
+			name:'Mafia',
+			ammo:8,
+			damage:60,
+			cooldown:10,
+			stop:30,
+			reload:5,
+			speed:1.2,
+      uses:48,
+		},{
+			name:'Double Auto',
+			ammo:8,
+			damage:60,
+			cooldown:10,
+			stop:30,
+			reload:5,
+			speed:1.2,
+      uses:48,
+		},{
+			name:'Subordinate',
+			ammo:3,
+			damage:150,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Quisling',
+			ammo:2,
+			damage:20,
+			cooldown:30,
+			stop:60,
+			reload:20,
+			speed:1.15,
+      uses:12,
+		},{
+			name:'Helix',
+			ammo:3,
+			damage:60,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Chrome',
+			ammo:3,
+			damage:60,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Splitter',
+			ammo:1,
+			damage:0,
+			cooldown:9999,
+			stop:9999,
+			reload:9999,
+			speed:1.2,
+      uses:3,
+		},{
+			name:'Bullet Hell',
+			ammo:6,
+			damage:40,
+			cooldown:20,
+			stop:90,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Diabolist',
+			ammo:2,
+			damage:250,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Dullahan',
+			ammo:1,
+			damage:180,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Light Trapper',
+			ammo:3,
+			damage:150,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Tanuki',
+			ammo:1,
+			damage:120,
+			cooldown:360,
+			stop:360,
+			reload:360,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Militia',
+			ammo:1,
+			damage:180,
+			cooldown:480,
+			stop:480,
+			reload:480,
+			speed:0.975,
+      uses:4,
+		},{
+			name:'Suzerain',
+			ammo:1,
+			damage:180,
+			cooldown:90,
+			stop:90,
+			reload:90,
+			speed:0.975,
+      uses:10,
+		},{
+			name:'Shooting Star',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'',
+			ammo:10,
+			damage:45,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'',
+			ammo:10,
+			damage:45,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Stratofortress',
+			ammo:3,
+			damage:150,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Guard',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Deployer G',
+			ammo:1,
+			damage:0,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:1.1,
+      uses:2,
+		},{
+			name:'Stuxnet',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Airtag',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:10,
+		},{
+			name:'Haunted',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Softwareception',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Gatekeeper',
+			ammo:1,
+			damage:70,
+			cooldown:360,
+			stop:360,
+			reload:360,
+			speed:1.15,
+      uses:4,
+		},{
+			name:'Parachutist',
+			ammo:8,
+			damage:80,
+			cooldown:10,
+			stop:30,
+			reload:6,
+			speed:1.2,
+      uses:40,
+		},{
+			name:'Grenadier Fuse',
+			ammo:2,
+			damage:120,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:8,
+		},{
+			name:'Tobacco Flamethrower',
+			ammo:50,
+			damage:25,
+			cooldown:3,
+			stop:75,
+			reload:2,
+			speed:0.95,
+      uses:100,
+		},{
+			name:'Dropship',
+			ammo:6,
+			damage:60,
+			cooldown:15,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:54,
+		},{
+			name:'Freeze Ray',
+			ammo:120,
+			damage:10,
+			cooldown:1,
+			stop:150,
+			reload:1,
+			speed:0.875,
+      uses:720,
+		},{
+			name:'Swarmer',
+			ammo:1,
+			damage:60,
+			cooldown:10,
+			stop:60,
+			reload:10,
+			speed:0.975,
+      uses:18,
+		},{
+			name:'Swarmerception',
+			ammo:1,
+			damage:60,
+			cooldown:10,
+			stop:60,
+			reload:10,
+			speed:0.975,
+      uses:18,
+		},{
+			name:'Helixception',
+			ammo:3,
+			damage:60,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Complex Director',
+			ammo:1,
+			damage:180,
+			cooldown:180,
+			stop:180,
+			reload:180,
+			speed:0.975,
+      uses:6,
+		},{
+			name:'Adjunct',
+			ammo:1,
+			damage:100,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:0.85,
+      uses:8,
+		},{
+			name:'Apache',
+			ammo:10,
+			damage:75,
+			cooldown:5,
+			stop:60,
+			reload:3,
+			speed:1.2,
+      uses:80,
+		},{
+			name:'Edge',
+			ammo:3,
+			damage:60,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Deacetylase',
+			ammo:3,
+			damage:60,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Tubular',
+			ammo:4,
+			damage:60,
+			cooldown:30,
+			stop:120,
+			reload:20,
+			speed:1.05,
+      uses:40,
+		},{
+			name:'Dispenser',
+			ammo:1,
+			damage:120,
+			cooldown:75,
+			stop:75,
+			reload:75,
+			speed:0.85,
+      uses:10,
+		},{
+			name:'Tempest',
+			ammo:10,
+			damage:120,
+			cooldown:8,
+			stop:60,
+			reload:10,
+			speed:0.975,
+      uses:60,
+		},{
+			name:'Glove',
+			ammo:10,
+			damage:60,
+			cooldown:12,
+			stop:30,
+			reload:10,
+			speed:1.4,
+      uses:40,
+		},{
+			name:'Xenon',
+			ammo:1,
+			damage:150,
+			cooldown:20,
+			stop:180,
+			reload:0,
+			speed:0.8,
+      uses:10,
+		},{
+			name:'Groundwire',
+			ammo:9,
+			damage:25,
+			cooldown:40,
+			stop:120,
+			reload:10,
+			speed:1.1,
+      uses:27,
+		},{
+			name:'Division',
+			ammo:1,
+			damage:0,
+			cooldown:9999,
+			stop:9999,
+			reload:9999,
+			speed:0.85,
+      uses:3,
+		},{
+			name:'Freeze Sniper',
+			ammo:1,
+			damage:200,
+			cooldown:120,
+			stop:120,
+			reload:120,
+			speed:0.85,
+      uses:8,
+		},{
+			name:'Coadjutor',
+			ammo:30,
+			damage:20,
+			cooldown:4,
+			stop:120,
+			reload:3,
+			speed:0.9,
+      uses:120,
+		},{
+			name:'Long Pellet Baller',
+			ammo:5,
+			damage:40,
+			cooldown:15,
+			stop:90,
+			reload:15,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Sovereign',
+			ammo:12,
+			damage:60,
+			cooldown:4,
+			stop:180,
+			reload:6,
+			speed:0.975,
+      uses:48,
+		},{
+			name:'Entrapment',
+			ammo:1,
+			damage:300,
+			cooldown:720,
+			stop:720,
+			reload:720,
+			speed:0.975,
+      uses:3,
+		},{
+			name:'Replacement',
+			ammo:1,
+			damage:300,
+			cooldown:720,
+			stop:720,
+			reload:720,
+			speed:0.975,
+      uses:3,
+		},{
+			name:'Embattlement',
+			ammo:1,
+			damage:300,
+			cooldown:720,
+			stop:720,
+			reload:720,
+			speed:0.975,
+      uses:3,
+		},{
+			name:'Heron',
+			ammo:1,
+			damage:100,
+			cooldown:45,
+			stop:45,
+			reload:45,
+			speed:0.95,
+      uses:20,
+		},{
+			name:'Pitohui',
+			ammo:1,
+			damage:75,
+			cooldown:45,
+			stop:45,
+			reload:45,
+			speed:0.95,
+      uses:20,
+		},{
+			name:'Ripple',
+			ammo:1,
+			damage:60,
+			cooldown:45,
+			stop:45,
+			reload:45,
+			speed:0.95,
+      uses:20,
+		},{
+			name:'Spreadling',
+			ammo:5,
+			damage:30,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Deployer D',
+			ammo:1,
+			damage:0,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:1.1,
+      uses:2,
+		},{
+			name:'Deployer A',
+			ammo:1,
+			damage:0,
+			cooldown:240,
+			stop:240,
+			reload:240,
+			speed:1.1,
+      uses:2,
+		},{
+			name:'Degausser',
+			ammo:1,
+			damage:300,
+			cooldown:150,
+			stop:150,
+			reload:150,
+			speed:1.05,
+      uses:6,
+		},{
+			name:'Unfurler',
+			ammo:5,
+			damage:30,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Macro',
+			ammo:20,
+			damage:75,
+			cooldown:10,
+			stop:105,
+			reload:8,
+			speed:0.875,
+      uses:80,
+		},{
+			name:'Rho',
+			ammo:5,
+			damage:60,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Prism',
+			ammo:5,
+			damage:45,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Crescent',
+			ammo:5,
+			damage:25,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Spreadlingception',
+			ammo:5,
+			damage:30,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:1.2,
+      uses:30,
+		},{
+			name:'Dasher',
+			ammo:1,
+			damage:60,
+			cooldown:45,
+			stop:45,
+			reload:45,
+			speed:0.95,
+      uses:20,
+		},{
+			name:'Emplacement',
+			ammo:1,
+			damage:300,
+			cooldown:720,
+			stop:720,
+			reload:720,
+			speed:0.975,
+      uses:3,
+		},{
+			name:'Dasherception',
+			ammo:1,
+			damage:60,
+			cooldown:45,
+			stop:45,
+			reload:45,
+			speed:0.95,
+      uses:20,
+		},{
+			name:'Emplacementception',
+			ammo:1,
+			damage:300,
+			cooldown:720,
+			stop:720,
+			reload:720,
+			speed:0.975,
+      uses:3,
+		},{
+			name:'Battlerock',
+			ammo:4,
+			damage:50,
+			cooldown:15,
+			stop:45,
+			reload:10,
+			speed:0.975,
+      uses:12,
+		},{
+			name:'Portafortress',
+			ammo:3,
+			damage:150,
+			cooldown:15,
+			stop:90,
+			reload:10,
+			speed:1.05,
+      uses:18,
+		},{
+			name:'Isthmus',
+			ammo:1,
+			damage:900,
+			cooldown:360,
+			stop:360,
+			reload:360,
+			speed:1.2,
+      uses:3,
 		},
 	],
 }
@@ -4428,7 +8881,7 @@ rooms=[
     "#          ###  #",
     "#           #   #",
     "#           #   #",
-    "#   #       #   #",
+    "#      #    #   #",
     "#################",
   ],[
     "#################",

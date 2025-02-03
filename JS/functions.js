@@ -24,6 +24,9 @@ function randSign(){
 function sign(value){
     return value>=0?1:-1
 }
+function range(start,end){
+    return [...Array(end-start).keys()].map(a=>a+start)
+}
 //calculatory
 function inPointBox(point,box){
     return point.position.x>box.position.x-box.width/2&&point.position.x<box.position.x+box.width/2&&point.position.y>box.position.y-box.height/2&&point.position.y<box.position.y+box.height/2
@@ -670,7 +673,7 @@ function generateLevel(level,layer){
         }
         for(let c=0,lc=game.players;c<lc;c++){
             if(game.hunt==-1){
-                entities.players.push(new player(layer,c%2==0?255:game.edge[0]-255,c%2<=1?705:game.edge[1]-255,c+1,0,[],true,0,game.index))
+                entities.players.push(new player(layer,c%2==0?255:game.edge[0]-255,c<=1?705:game.edge[1]-255,c+1,0,[],true,0,game.index))
             }else{
                 entities.players.push(new player(layer,game.edge[0]/2-200+c*20,900,c+1,0,[],true,0,game.index))
             }
@@ -1151,4 +1154,26 @@ function initialGraphics(){
         setupLayer(graphics.main[a])
         graphics.main[a].index=a
     }
-} 
+}
+function setupTrig(){
+	for(let a=0,la=360;a<la;a++){
+		constants.trig[0].push(sin(a/2))
+		constants.trig[1].push(cos(a/2))
+		if(abs(constants.trig[0][a])<0.001){
+			constants.trig[0][a]=0
+		}
+		if(abs(constants.trig[1][a])<0.001){
+			constants.trig[1][a]=0
+		}
+	}
+	for(let a=0,la=360;a<la;a++){
+		constants.trig[0].push(-constants.trig[0][a])
+		constants.trig[1].push(-constants.trig[1][a])
+	}
+}
+function lsin(direction){
+	return constants.trig[0][floor((direction%360+360)%360*2)]
+}
+function lcos(direction){
+	return constants.trig[1][floor((direction%360+360)%360*2)]
+}

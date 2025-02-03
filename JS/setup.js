@@ -1,6 +1,10 @@
 function setup(){
+    listing[0]=[...range(0,33),...range(0,9)]
+    listing[1]=range(33,200)
+    listing[2]=range(0,12)
     createCanvas(windowWidth-40,windowHeight-40)
     setupGraphics()
+    setupTrig()
 }
 function windowResized(){
     resizeCanvas(windowWidth-40,windowHeight-40)
